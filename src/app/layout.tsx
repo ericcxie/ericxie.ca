@@ -8,7 +8,10 @@ import "./globals.css";
 import Head from "next/head";
 
 const akkurat = local({
-  src: [{ path: "../../public/fonts/AkkuratPro.ttf", weight: "400" }],
+  src: [
+    { path: "../../public/fonts/AkkuratPro.ttf", weight: "400" },
+    { path: "../../public/fonts/AkkuratPro-Bold.otf", weight: "700" },
+  ],
   variable: "--font-akkurat",
 });
 

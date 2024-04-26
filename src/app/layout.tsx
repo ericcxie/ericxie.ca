@@ -8,7 +8,10 @@ import "./globals.css";
 import Head from "next/head";
 
 const akkurat = local({
-  src: [{ path: "../../public/fonts/AkkuratPro.ttf", weight: "400" }],
+  src: [
+    { path: "../../public/fonts/AkkuratPro.ttf", weight: "400" },
+    { path: "../../public/fonts/AkkuratPro-Bold.otf", weight: "700" },
+  ],
   variable: "--font-akkurat",
 });
 
@@ -35,7 +38,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Header />
-          <div className="mx-auto max-w-[700px] px-6 pb-24 pt-16 md:px-6 md:pb-44 md:pt-20">
+          <div className="mx-auto max-w-[700px] px-6 pb-24 pt-8 md:px-6 md:pb-44 md:pt-20">
             {children}
           </div>
           <Footer />

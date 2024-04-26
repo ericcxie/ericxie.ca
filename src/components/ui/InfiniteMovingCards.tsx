@@ -96,12 +96,16 @@ export const InfiniteMovingCards = ({
               <img
                 src={item.image}
                 alt={item.title}
-                className="h-full w-full object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-50"
+                className="h-full w-full object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-sm"
               />
-              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 transition-opacity duration-300 ease-in-out group-hover:bg-opacity-50">
+              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-0 transition-opacity duration-300 ease-in-out group-hover:bg-opacity-50 dark:bg-black dark:bg-opacity-0">
                 <div className="px-4 py-4 text-left text-white opacity-0 group-hover:opacity-100 md:px-8">
-                  <h2 className="hidden font-bold md:inline">{item.title}</h2>
-                  <p className="text-text-dark-body">{item.description}</p>
+                  <h2 className="text-text-light-headerLight hidden font-bold dark:text-text-dark-header md:inline">
+                    {item.title}
+                  </h2>
+                  <p className="text-text-light-headerLight text-sm dark:text-text-dark-body md:text-base">
+                    {item.description}
+                  </p>
                   <div className="hidden flex-wrap gap-2 md:flex">
                     {item.tools.map((tool, index) => (
                       <div
@@ -116,13 +120,13 @@ export const InfiniteMovingCards = ({
               </div>
             </div>
             <div className="mt-4 text-xs md:text-base">
-              <h2 className="mr-2 inline-block font-bold dark:text-white">
+              <h2 className="text-text-light-headerLight mr-2 inline-block font-bold dark:text-white">
                 {item.title}
               </h2>
-              <span className="inline-block align-middle dark:text-text-dark-body">
+              <span className="inline-block align-middle text-text-light-body dark:text-text-dark-body">
                 ⸺
               </span>
-              <p className="ml-2 inline-block dark:text-text-dark-body">
+              <p className="ml-2 inline-block text-text-light-body dark:text-text-dark-body">
                 {item.tag}
               </p>
             </div>

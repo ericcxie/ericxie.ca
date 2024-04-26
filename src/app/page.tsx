@@ -2,7 +2,7 @@ import Projects from "@/components/Sections/Projects";
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-14">
+    <main className="flex flex-col gap-10 md:gap-14">
       <div>
         <h1 className="font-system text-3xl font-bold">Eric Xie</h1>
         <p className="">

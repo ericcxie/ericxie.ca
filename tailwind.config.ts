@@ -13,6 +13,12 @@ module.exports = {
         akkurat: ["var(--font-akkurat)", "sans-serif"],
         system: ["-apple-system", "sans-serif"],
       },
+      colors: {
+        background: {
+          dark: "#0C0C0C",
+          light: "#FCFCFC",
+        },
+      },
     },
   },
   plugins: [],

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import local from "next/font/local";
 import "./globals.css";
@@ -30,6 +31,7 @@ export default function RootLayout({
           <div className="mx-auto max-w-[700px] px-6 pb-24 pt-16 md:px-6 md:pb-44 md:pt-20">
             {children}
           </div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -23,7 +23,7 @@ const autograf = local({
   variable: "--font-autograf",
 });
 
-export default function Navigation() {
+export default function Header() {
   const pathname = `/${usePathname().split("/")[1]}`;
 
   return (

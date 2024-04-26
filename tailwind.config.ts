@@ -18,6 +18,16 @@ module.exports = {
           dark: "#0C0C0C",
           light: "#FCFCFC",
         },
+        text: {
+          dark: {
+            header: "#E5E5EF",
+            body: "#E5E5E5",
+          },
+          light: {
+            header: "#0D0D0B",
+            body: "#6D6D6D",
+          },
+        },
       },
     },
   },

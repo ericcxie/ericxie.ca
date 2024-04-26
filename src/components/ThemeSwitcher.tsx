@@ -28,14 +28,14 @@ export default function ThemeSwitcher() {
       <Listbox value={theme} onChange={(value) => setTheme(value)}>
         {({ open }) => {
           const iconClassName = clsx(
-            "w-5 h-5 text-secondary hover:text-primary cursor-pointer transition-colors",
+            "w-4 h-4 text-secondary hover:text-primary cursor-pointer transition-colors",
             open ? "text-primary" : "text-secondary",
           );
           return (
             <div className="relative">
               <Listbox.Button
                 className={clsx(
-                  "relative flex h-8 w-8 cursor-default items-center justify-center rounded-lg border",
+                  "relative flex h-7 w-7 cursor-default items-center justify-center rounded-lg border",
                 )}
               >
                 {resolvedTheme === "dark" ? (

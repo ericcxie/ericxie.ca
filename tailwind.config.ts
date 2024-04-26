@@ -21,10 +21,12 @@ module.exports = {
         text: {
           dark: {
             header: "#E5E5EF",
+            headerDark: "#A0A0A0",
             body: "#E5E5E5",
           },
           light: {
             header: "#0D0D0B",
+            headerLight: "#363636",
             body: "#6D6D6D",
           },
         },

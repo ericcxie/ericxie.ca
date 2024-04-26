@@ -20,12 +20,6 @@ const links = [
   { label: "Photos", href: "/photos" },
 ];
 
-const navItems = [
-  { path: "/", label: "About" },
-  { path: "/blog", label: "Blog" },
-  { path: "/photos", label: "Photos" },
-];
-
 const autograf = local({
   src: [{ path: "../../../public/fonts/Autograf.ttf", weight: "400" }],
   variable: "--font-autograf",
@@ -40,7 +34,10 @@ export default function Header() {
   return (
     <header className="md:mt-6">
       <nav className="mx-auto flex max-w-[700px] items-center justify-between gap-3 px-4 py-3 md:px-6">
-        <Link href="/" className="text-primary shrink-0">
+        <Link
+          href="/"
+          className="dark:text-text-dark-headerDark ml-2 shrink-0 text-text-light-body md:ml-0"
+        >
           <h1 className={`${autograf.className} text-3xl`}>Eric</h1>
         </Link>
         {/* Main links */}
@@ -52,24 +49,26 @@ export default function Header() {
           ))}
         </ul> */}
         <div className="hidden gap-2 md:flex">
-          {navItems.map((item) => {
-            const isActive = item.path === pathname;
+          {links.map((item) => {
+            const isActive = item.href === pathname;
 
             return (
               <Link
-                key={item.path}
-                className={`relative rounded-md px-4 py-1.5 text-sm no-underline duration-300 ease-in lg:text-base ${
-                  isActive ? "text-zinc-100" : "text-zinc-400"
+                key={item.href}
+                className={`relative rounded-md px-4 py-1 text-sm no-underline duration-300 ease-in lg:text-base ${
+                  isActive
+                    ? "text-text-light-headerLight dark:text-text-dark-header"
+                    : "dark:text-text-dark-headerDark text-text-light-body"
                 }`}
                 data-active={isActive}
-                href={item.path}
-                onMouseOver={() => setHoveredPath(item.path)}
+                href={item.href}
+                onMouseOver={() => setHoveredPath(item.href)}
                 onMouseLeave={() => setHoveredPath(pathname)}
               >
                 <span>{item.label}</span>
-                {item.path === hoveredPath && (
+                {item.href === hoveredPath && (
                   <motion.div
-                    className="absolute bottom-0 left-0 -z-10 h-full rounded-md bg-stone-800/80"
+                    className="absolute bottom-0 left-0 -z-10 h-full rounded-md bg-stone-200 dark:bg-stone-800/80"
                     layoutId="navbar"
                     aria-hidden="true"
                     style={{
@@ -94,8 +93,8 @@ export default function Header() {
         </div>
 
         <Popover className="relative md:hidden">
-          <Popover.Button className="text-secondary flex h-8 w-8 items-center justify-center rounded-lg">
-            <Bars3Icon className="text-secondary hover:text-primary h-5 w-5 cursor-pointer transition-colors" />
+          <Popover.Button className="dark:text-text-dark-headerDark flex h-8 w-8 items-center justify-center rounded-lg text-text-light-body">
+            <Bars3Icon className="hover:text-primary dark:text-text-dark-headerDark h-8 w-8 cursor-pointer text-text-light-body transition-colors" />
           </Popover.Button>
           <Transition
             as={Fragment}
@@ -106,7 +105,7 @@ export default function Header() {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="border-secondary bg-primary absolute right-0 z-10 mt-2 w-40 origin-top-right overflow-auto rounded-xl border p-2 text-base shadow-lg focus:outline-none sm:text-sm">
+            <Popover.Panel className="border-secondary bg-primary absolute right-0 z-10 mt-2 w-40 origin-top-right overflow-auto rounded-xl border bg-background-light p-2 text-base shadow-lg focus:outline-none dark:bg-background-dark sm:text-sm">
               <div className="grid">
                 {links.map((link) => (
                   <Link
@@ -115,7 +114,7 @@ export default function Header() {
                     className={clsx(
                       "hover:text-primary rounded-md px-4 py-2 transition-colors",
                       pathname === link.href
-                        ? "bg-secondary font-medium"
+                        ? "bg-gray-200 font-medium dark:bg-stone-800/80"
                         : "font-normal",
                     )}
                   >

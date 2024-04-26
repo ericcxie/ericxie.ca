@@ -5,6 +5,7 @@ import Footer from "@/components/Footer/Footer";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import local from "next/font/local";
 import "./globals.css";
+import Head from "next/head";
 
 const akkurat = local({
   src: [{ path: "../../public/fonts/AkkuratPro.ttf", weight: "400" }],
@@ -23,6 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+      </Head>
       <body
         className={`${akkurat.className} bg-background-light dark:bg-background-dark`}
       >

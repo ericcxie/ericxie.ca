@@ -1,16 +1,14 @@
 "use client";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment } from "react";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { Fragment, useState } from "react";
 
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import NavLink from "@/components/ui/NavLink";
 
 import local from "next/font/local";
 
@@ -28,8 +26,6 @@ const autograf = local({
 export default function Header() {
   const pathname = `/${usePathname().split("/")[1]}`;
   const [hoveredPath, setHoveredPath] = useState(pathname);
-  console.log("pathname:", pathname);
-  console.log("hoveredPath:", hoveredPath);
 
   return (
     <header className="md:mt-6">

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import local from "next/font/local";
-import "./globals.css";
 import Head from "next/head";
+import "./globals.css";
 
 const akkurat = local({
   src: [

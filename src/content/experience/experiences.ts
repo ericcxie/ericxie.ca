@@ -1,5 +1,3 @@
-import { link } from "fs";
-
 export const experienceItems = [
   {
     company: "Lawbrokr",
@@ -39,6 +37,19 @@ export const experienceItems = [
     logo: "/img/logos/brookfield.png",
     color: "#103557",
     link: "https://www.brookfieldannuity.com/en/",
+    present: false,
+  },
+];
+
+export const schoolItems = [
+  {
+    company: "University of Waterloo",
+    position: "Computer Engineering",
+    location: "Waterloo, ON",
+    date: "09/2022 - 04/2027",
+    logo: "/img/logos/uwaterloo.svg",
+    color: "#666745",
+    link: "https://uwaterloo.ca/engineering/",
     present: false,
   },
 ];

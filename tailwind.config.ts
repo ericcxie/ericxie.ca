@@ -19,12 +19,22 @@ module.exports = {
       animation: {
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        in: "in .6s both",
+        "in-reverse": "in-reverse .6s both",
       },
       keyframes: {
         scroll: {
           to: {
             transform: "translate(calc(-50% - 0.5rem))",
           },
+        },
+        in: {
+          "0%": { transform: "translateY(18px)", opacity: 0 },
+          "100%": { transform: "translateY(0)", opacity: 1 },
+        },
+        "in-reverse": {
+          "0%": { transform: "translateY(-18px)", opacity: 0 },
+          "100%": { transform: "translateY(0px)", opacity: 1 },
         },
       },
       fontFamily: {

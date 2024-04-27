@@ -36,7 +36,7 @@ export const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
           <span className="text-[15px] font-bold md:text-lg">
             {item.company}
             {item.present && (
-              <span className="text-text-dark-headerDark ml-1 rounded-lg bg-[#252525] px-2 pb-1 pt-1.5 text-sm font-normal">
+              <span className="dark:text-text-dark-headerDark ml-1 rounded-lg bg-gray-200 px-2 pb-1 pt-1.5 text-sm font-normal text-text-light-body dark:bg-[#252525]">
                 Present
               </span>
             )}

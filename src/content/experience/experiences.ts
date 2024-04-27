@@ -1,0 +1,44 @@
+import { link } from "fs";
+
+export const experienceItems = [
+  {
+    company: "Lawbrokr",
+    position: "Software Developer Intern",
+    location: "Toronto, ON",
+    date: "05/2024 - 09/2024",
+    logo: "/img/logos/lawbrokr.png",
+    color: "#B6B2D3",
+    link: "https://lawbrokr.com",
+    present: true,
+  },
+  {
+    company: "Hack the North",
+    position: "Frontend Developer",
+    location: "Waterloo, ON",
+    date: "03/2024 - 10/2024",
+    logo: "/img/logos/hackthenorth.svg",
+    color: "#232323",
+    link: "https://hackthenorth.com",
+    present: false,
+  },
+  {
+    company: "BMO Financial Group",
+    position: "Software Engineer Intern",
+    location: "Toronto, ON",
+    date: "09/2023 - 12/2023",
+    logo: "/img/logos/bmo.svg",
+    color: "#0A75BB",
+    link: "https://bmo.com",
+    present: false,
+  },
+  {
+    company: "Brookfield Annuity",
+    position: "Software Developer Intern",
+    location: "Toronto, ON",
+    date: "01/2023 - 04/2023",
+    logo: "/img/logos/brookfield.png",
+    color: "#103557",
+    link: "https://www.brookfieldannuity.com/en/",
+    present: false,
+  },
+];

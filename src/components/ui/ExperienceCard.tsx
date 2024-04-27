@@ -30,7 +30,6 @@ export const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
             alt={`${item.company} logo`}
             width={40}
             height={40}
-            layout="fixed"
           />
         </div>
         <div className="ml-3 flex flex-grow flex-col justify-between">

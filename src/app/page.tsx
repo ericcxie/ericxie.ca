@@ -1,5 +1,6 @@
 import Projects from "@/components/Sections/Projects";
 import Experiences from "@/components/Sections/Experiences";
+import LatestPosts from "@/components/Sections/LatestPosts";
 
 export default function Home() {
   return (
@@ -32,6 +33,12 @@ export default function Home() {
         style={{ "--index": 4 } as React.CSSProperties}
       >
         <Experiences />
+      </div>
+      <div
+        className="animate-in"
+        style={{ "--index": 5 } as React.CSSProperties}
+      >
+        <LatestPosts />
       </div>
     </main>
   );

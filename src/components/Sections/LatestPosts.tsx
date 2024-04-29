@@ -16,7 +16,7 @@ export default function LatestPosts() {
         Latest Posts
         <ArrowUpRightIcon className="h-6 w-6 text-text-dark-headerDark transition-all hover:text-text-dark-body" />
       </Link>
-      <p className="mb-4 max-w-lg text-sm leading-relaxed text-text-dark-body md:text-base">
+      <p className="mb-4 max-w-lg text-sm leading-relaxed text-text-light-body dark:text-text-dark-body md:text-base">
         I occasionally write about programming, productivity, and more.
       </p>
       <PostList posts={posts} />

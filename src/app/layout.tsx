@@ -34,11 +34,11 @@ export default function RootLayout({
         />
       </Head>
       <body
-        className={`${akkurat.className} bg-background-light dark:bg-background-dark`}
+        className={`${akkurat.className} flex min-h-screen flex-col bg-background-light dark:bg-background-dark`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Header />
-          <div className="mx-auto max-w-[700px] px-6 pb-24 pt-8 md:px-6 md:pb-44 md:pt-20">
+          <div className="mx-auto w-full max-w-[700px] flex-grow px-6 pb-24 pt-8 md:px-6 md:pb-44 md:pt-20">
             {children}
           </div>
           <Footer />

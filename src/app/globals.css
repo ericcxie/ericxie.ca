@@ -27,3 +27,31 @@
 .animate-in {
   animation-delay: calc(var(--index) * 130ms);
 }
+
+.post {
+  @apply flex flex-col gap-5 tracking-wide;
+}
+
+.post > h1 {
+  @apply text-2xl tracking-tight;
+}
+
+.post > h2 {
+  @apply text-xl tracking-tight;
+}
+
+.post > ul {
+  @apply mx-10 flex list-disc flex-col gap-2;
+}
+
+.post > pre {
+  @apply overflow-scroll bg-neutral-950 p-5 text-neutral-50;
+}
+
+.post > blockquote {
+  @apply border-l-2 border-neutral-600 border-opacity-40 pl-5 italic;
+}
+
+.post > p > img {
+  @apply mx-auto w-1/2;
+}

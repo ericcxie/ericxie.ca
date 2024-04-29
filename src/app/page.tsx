@@ -47,7 +47,7 @@ export default function Home() {
           >
             I believe in creating software that is not only functional but also
             clean, beautiful, and enjoyable to use. Let’s build something
-            together that inspire.
+            together that inspires.
           </p>
         </div>
         <div className="mt-4 space-y-1">

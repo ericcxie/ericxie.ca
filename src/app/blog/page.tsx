@@ -5,14 +5,18 @@ export default function Blog() {
   const posts = getCategorizedPosts();
   return (
     <main className="flex flex-col gap-4">
-      <h1 className="font-system text-3xl font-bold">Blog</h1>
-      {/* <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.  Sit amet luctus
-        venenatis lectus magna fringilla. Iaculis at erat pellentesque
-        adipiscing commodo elit at imperdiet dui.
-      </p> */}
-      <PostList posts={posts} />
+      <h1
+        className="animate-in font-system text-3xl font-bold"
+        style={{ "--index": 1 } as React.CSSProperties}
+      >
+        Blog
+      </h1>
+      <div
+        className="animate-in"
+        style={{ "--index": 2 } as React.CSSProperties}
+      >
+        <PostList posts={posts} />
+      </div>
     </main>
   );
 }

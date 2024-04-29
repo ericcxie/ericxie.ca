@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { ArrowUpRightIcon } from "@heroicons/react/20/solid";
+import { getCategorizedPosts } from "@/lib/blogs";
+import Post from "@/app/blog/components/Post";
+import PostList from "@/app/blog/components/PostList";
 
 export default function LatestPosts() {
+  const posts = getCategorizedPosts();
+
   return (
     <div>
       <Link
@@ -15,6 +20,7 @@ export default function LatestPosts() {
         I occasionally write about programming, productivity, and more. Stayed
         tuned for more!
       </p>
+      <PostList posts={posts} />
     </div>
   );
 }

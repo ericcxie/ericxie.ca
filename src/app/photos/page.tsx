@@ -4,7 +4,7 @@ export default function Photos() {
   return (
     <main className="flex flex-col gap-4">
       <h1 className="font-system text-3xl font-bold">Photos</h1>
-      <p className="">
+      <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.  Sit amet luctus
         venenatis lectus magna fringilla. Iaculis at erat pellentesque

@@ -14,12 +14,22 @@ const PostList = ({ posts }: Props) => {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 
+  if (allPosts.length === 0) {
+    return (
+      <div className="italic text-text-light-body dark:text-text-dark-body">
+        Stay tuned!
+      </div>
+    );
+  }
+
   return (
-    <div className="mt-4 space-y-1">
+    <ul className="animated-list space-y-2">
       {allPosts.map((post, index) => (
-        <Post category={post.category} posts={[post]} key={index} />
+        <li key={index}>
+          <Post category={post.category} posts={[post]} key={index} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

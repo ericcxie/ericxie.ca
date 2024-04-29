@@ -1,7 +1,7 @@
 ---
 title: "Lessons from Steve Jobs"
 category: "business"
-date: "03-01-2024"
+date: "01-01-2023"
 ---
 
 # Lessons from Steve Jobs

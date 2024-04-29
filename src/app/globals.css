@@ -29,15 +29,15 @@
 }
 
 .post {
-  @apply flex flex-col gap-3 tracking-wide;
+  @apply flex flex-col gap-5 tracking-wide;
 }
 
 .post > h1 {
-  @apply text-4xl tracking-tight;
+  @apply text-2xl tracking-tight;
 }
 
 .post > h2 {
-  @apply text-3xl tracking-tight;
+  @apply text-xl tracking-tight;
 }
 
 .post > ul {

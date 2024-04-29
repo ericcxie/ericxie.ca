@@ -17,7 +17,7 @@ export default function Home() {
             className="max-w-2xl animate-in text-sm text-text-light-body dark:text-text-dark-body md:text-base"
             style={{ "--index": 2 } as React.CSSProperties}
           >
-            Currently, I'm a Computer Engineering student at the{" "}
+            Currently, I&apos;m a Computer Engineering student at the{" "}
             <span className="border-b-[2px] border-neutral-600">
               <a
                 href="https://uwaterloo.ca/engineering/"

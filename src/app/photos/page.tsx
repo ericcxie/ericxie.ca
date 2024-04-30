@@ -8,10 +8,7 @@ export default function Photos() {
         Photos
       </h1>
       <p className="animate-in" style={{ "--index": 2 } as React.CSSProperties}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.  Sit amet luctus
-        venenatis lectus magna fringilla. Iaculis at erat pellentesque
-        adipiscing commodo elit at imperdiet dui.
+        A glimpse into my life through the lens.
       </p>
     </main>
   );

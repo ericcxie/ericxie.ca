@@ -48,7 +48,10 @@ export default function Map({ lng, lat, zoom = 2.5, pitch = 25 }) {
 
   return (
     <div className="overflow-clip" style={{ height: "400px" }}>
-      <div ref={mapContainer} className="map-container h-full w-full" />
+      <div
+        ref={mapContainer}
+        className="map-container h-full w-full rounded-2xl"
+      />
     </div>
   );
 }

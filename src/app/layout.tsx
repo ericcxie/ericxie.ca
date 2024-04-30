@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
-
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import local from "next/font/local";
 import Head from "next/head";
 import "./globals.css";
+import type { Metadata } from "next";
 
 const akkurat = local({
   src: [
@@ -17,7 +16,7 @@ const akkurat = local({
 
 export const metadata: Metadata = {
   title: "Eric Xie",
-  description: "Eric Xie",
+  description: "Engineering student at the University of Waterloo",
 };
 
 export default function RootLayout({

@@ -1,12 +1,18 @@
-import Projects from "@/components/Sections/Projects";
+import Current from "@/components/Sections/Current";
 import Experiences from "@/components/Sections/Experiences";
 import LatestPosts from "@/components/Sections/LatestPosts";
-import Current from "@/components/Sections/Current";
+import Projects from "@/components/Sections/Projects";
+
+import { Spotlight } from "@/components/ui/Spotlight";
 
 export default function Home() {
   return (
     <main className="flex flex-col gap-10">
       <div>
+        <Spotlight
+          className="-left-10 -top-16 md:-top-20 md:left-60 2xl:hidden"
+          fill="white"
+        />
         <h1
           className="animate-in font-system text-3xl font-bold"
           style={{ "--index": 1 } as React.CSSProperties}

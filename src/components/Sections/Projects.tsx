@@ -1,5 +1,6 @@
 import { InfiniteMovingCards } from "../ui/InfiniteMovingCards";
 import { cardItems } from "@/content/project/projects";
+
 export default function Projects() {
   return (
     <>

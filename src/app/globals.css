@@ -55,3 +55,23 @@
 .post > p > img {
   @apply mx-auto w-1/2;
 }
+
+.mapboxgl-control-container {
+  display: none;
+}
+
+.map-marker {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--blue-10);
+  transform: translate(-50%, -50%);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+}

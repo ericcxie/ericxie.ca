@@ -21,6 +21,7 @@ module.exports = {
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
         in: "in .6s both",
         "in-reverse": "in-reverse .6s both",
+        spotlight: "spotlight 2s ease .75s 1 forwards",
       },
       keyframes: {
         scroll: {
@@ -35,6 +36,16 @@ module.exports = {
         "in-reverse": {
           "0%": { transform: "translateY(-18px)", opacity: 0 },
           "100%": { transform: "translateY(0px)", opacity: 1 },
+        },
+        spotlight: {
+          "0%": {
+            opacity: 0,
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: 1,
+            transform: "translate(-50%,-40%) scale(1)",
+          },
         },
       },
       fontFamily: {

@@ -1,6 +1,7 @@
 import Projects from "@/components/Sections/Projects";
 import Experiences from "@/components/Sections/Experiences";
 import LatestPosts from "@/components/Sections/LatestPosts";
+import Current from "@/components/Sections/Current";
 
 export default function Home() {
   return (
@@ -95,6 +96,12 @@ export default function Home() {
         style={{ "--index": 7 } as React.CSSProperties}
       >
         <LatestPosts />
+      </div>
+      <div
+        className="animate-in"
+        style={{ "--index": 8 } as React.CSSProperties}
+      >
+        <Current />
       </div>
     </main>
   );

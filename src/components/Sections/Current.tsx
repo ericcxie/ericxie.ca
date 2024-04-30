@@ -4,7 +4,7 @@ export default function Current() {
   return (
     <>
       <h1 className="mb-1 text-xl font-bold">Current</h1>
-      <p className="mb-3 text-text-light-body dark:text-text-dark-body">
+      <p className="mb-3 text-sm text-text-light-body dark:text-text-dark-body md:text-base">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </p>
@@ -22,8 +22,10 @@ export default function Current() {
             key={interest.title}
           >
             <span>{interest.title}</span>
-            <div className="mx-3 flex-grow border-t border-dashed"></div>
-            <span>{interest.content}</span>
+            <div className="mx-3 flex-grow border-t border-dashed border-text-light-body dark:border-text-dark-body"></div>
+            <span className="text-base text-text-light-body dark:text-text-dark-body">
+              {interest.content}
+            </span>
           </div>
         ))}
       </div>

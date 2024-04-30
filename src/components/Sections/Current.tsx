@@ -18,12 +18,14 @@ export default function Current() {
       <div className="space-y-2 rounded-lg py-4">
         {interestsData.map((interest) => (
           <div
-            className="flex items-start justify-between md:items-center"
+            className="flex items-start md:items-center"
             key={interest.title}
           >
-            <span>{interest.title}</span>
-            <div className="mx-3 flex-grow border-t border-dashed border-text-light-body dark:border-text-dark-body"></div>
-            <span className="text-base text-text-light-body dark:text-text-dark-body">
+            <span className="mr-2 min-w-[80px] md:min-w-fit">
+              {interest.title}
+            </span>
+            <div className="flex-grow border-t border-dashed border-text-light-body dark:border-text-dark-body"></div>
+            <span className="ml-2 block text-base text-text-light-body dark:text-text-dark-body">
               {interest.content}
             </span>
           </div>

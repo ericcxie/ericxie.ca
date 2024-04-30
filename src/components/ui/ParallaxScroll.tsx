@@ -31,7 +31,7 @@ export const ParallaxScroll = ({
   return (
     <div
       className={cn(
-        "hide-scrollbar h-[50rem] w-full items-start overflow-y-auto rounded-lg",
+        "hide-scrollbar h-full w-full items-start overflow-y-auto rounded-lg md:h-[50rem]",
         className,
       )}
       ref={gridRef}

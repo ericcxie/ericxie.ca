@@ -37,7 +37,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Header />
-          <div className="mx-auto w-full max-w-[700px] flex-grow px-6 pb-24 pt-8 md:px-6 md:pb-44 md:pt-20">
+          <div className="md:pb-30 mx-auto w-full max-w-[700px] flex-grow px-6 pb-20 pt-8 md:px-6 md:pt-20">
             {children}
           </div>
           <Footer />

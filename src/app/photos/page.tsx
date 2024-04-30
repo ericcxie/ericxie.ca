@@ -1,3 +1,5 @@
+import { ParallaxScroll } from "@/components/ui/ParallaxScroll";
+
 export default function Photos() {
   return (
     <main className="flex flex-col gap-4">
@@ -7,9 +9,33 @@ export default function Photos() {
       >
         Photos
       </h1>
-      <p className="animate-in" style={{ "--index": 2 } as React.CSSProperties}>
-        A glimpse into my life through the lens.
+      <p
+        className="animate-in text-text-light-body dark:text-text-dark-body"
+        style={{ "--index": 2 } as React.CSSProperties}
+      >
+        A glimpse into my life.
       </p>
+      <div
+        className="animate-in"
+        style={{ "--index": 3 } as React.CSSProperties}
+      >
+        <ParallaxScroll images={images} />
+      </div>
     </main>
   );
 }
+
+const images = [
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+  "/img/photos/newyork.jpg",
+];

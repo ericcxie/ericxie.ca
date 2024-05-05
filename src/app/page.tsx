@@ -25,7 +25,7 @@ export default function Home() {
             style={{ "--index": 2 } as React.CSSProperties}
           >
             Currently, I’m a Computer Engineering student at the{" "}
-            <span className="border-b-[2px] border-neutral-600">
+            <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
               <a
                 href="https://uwaterloo.ca/engineering/"
                 target="_blank"
@@ -35,7 +35,7 @@ export default function Home() {
               </a>
             </span>{" "}
             and a Software Developer Intern at{" "}
-            <span className="border-b-[2px] border-neutral-600">
+            <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
               <a
                 href="https://lawbrokr.com/"
                 target="_blank"
@@ -63,7 +63,7 @@ export default function Home() {
             style={{ "--index": 4 } as React.CSSProperties}
           >
             You can reach me on{" "}
-            <span className="border-b-[2px] border-neutral-600">
+            <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
               <a
                 href="https://www.linkedin.com/in/ericcxie/"
                 target="_blank"
@@ -76,7 +76,7 @@ export default function Home() {
             <span className="border-b-[2px] border-neutral-600">
               <a
                 href="mailto:pexie@uwaterloo.ca"
-                className="border-b-[2px] border-neutral-600"
+                className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500"
               >
                 pexie@uwaterloo.ca
               </a>

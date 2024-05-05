@@ -3,7 +3,7 @@ export const experienceItems = [
     company: "Lawbrokr",
     position: "Software Developer Intern",
     location: "Toronto, ON",
-    date: "05/2024 - 09/2024",
+    date: "05/2024 - Present",
     logo: "/img/logos/lawbrokr.svg",
     color: "#B6B2D3",
     link: "https://lawbrokr.com",

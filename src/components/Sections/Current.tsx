@@ -5,8 +5,8 @@ export default function Current() {
     <>
       <h1 className="mb-1 text-xl font-bold">Current</h1>
       <p className="mb-3 text-sm text-text-light-body dark:text-text-dark-body md:text-base">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+        I'm currently on a co-op term in Toronto and eager to explore the city's
+        cafe and food scene this summer. If you're around, let's connect!
       </p>
       <div className="relative">
         <Map lng={-79.347015} lat={43.65107} />
@@ -37,15 +37,15 @@ export default function Current() {
 
 const interestsData = [
   {
-    title: "Learning",
-    content: "Photography, snowboarding, storytelling",
+    title: "Interests",
+    content: "Design, investing, personal finance",
   },
   {
-    title: "Interests",
-    content: "Design, investing, mechanical keyboards",
+    title: "Learning",
+    content: "Open banking, photography, storytelling",
   },
   {
     title: "Listening",
-    content: "Motley Fool Money, Planet Money, Acquired",
+    content: "Motley Fool Money, Acquired, Planet Money",
   },
 ];

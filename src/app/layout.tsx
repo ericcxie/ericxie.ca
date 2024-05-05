@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import local from "next/font/local";
 import Head from "next/head";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 
 const akkurat = local({
@@ -42,6 +43,7 @@ export default function RootLayout({
           </div>
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

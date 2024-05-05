@@ -2,6 +2,7 @@
 
 import { cn } from "@/utils/cn";
 import React, { useEffect, useState } from "react";
+import { ArrowUpRightIcon } from "@heroicons/react/20/solid";
 
 export const InfiniteMovingCards = ({
   items,
@@ -89,12 +90,7 @@ export const InfiniteMovingCards = ({
         )}
       >
         {items.map((item, idx) => (
-          <a
-            key={item.title}
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <div key={item.title}>
             <div
               key={idx}
               className="group relative h-[150px] w-[250px] flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl md:h-[250px] md:w-[430px]"
@@ -105,6 +101,9 @@ export const InfiniteMovingCards = ({
                 className="h-full w-full object-cover transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-sm"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-0 transition-opacity duration-300 ease-in-out group-hover:bg-opacity-50 dark:bg-black dark:bg-opacity-0">
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  <ArrowUpRightIcon className="absolute right-1 top-1 h-9 w-9 p-1 opacity-0 duration-200 group-hover:opacity-70 md:h-10 md:w-10 md:hover:-translate-y-[1.5px] md:hover:translate-x-[1.5px]" />
+                </a>
                 <div className="px-4 py-4 text-left text-white opacity-0 group-hover:opacity-100 md:px-8">
                   <h2 className="hidden font-bold text-text-light-headerLight dark:text-text-dark-header md:inline">
                     {item.title}
@@ -136,7 +135,7 @@ export const InfiniteMovingCards = ({
                 {item.tag}
               </p>
             </div>
-          </a>
+          </div>
         ))}
       </ul>
     </div>

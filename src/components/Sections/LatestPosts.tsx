@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { ArrowUpRightIcon } from "@heroicons/react/20/solid";
-import { getCategorizedPosts } from "@/lib/blogs";
-import Post from "@/app/blog/components/Post";
 import PostList from "@/app/blog/components/PostList";
+import { getCategorizedPosts } from "@/lib/blogs";
+import { ArrowUpRightIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 export default function LatestPosts() {
   const posts = getCategorizedPosts();

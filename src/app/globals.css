@@ -53,7 +53,7 @@
 }
 
 .post > p > img {
-  @apply mx-auto w-1/2;
+  @apply mx-auto;
 }
 
 .mapboxgl-control-container {

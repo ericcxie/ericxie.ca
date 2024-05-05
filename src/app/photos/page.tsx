@@ -19,23 +19,16 @@ export default function Photos() {
         className="animate-in"
         style={{ "--index": 3 } as React.CSSProperties}
       >
-        <ParallaxScroll images={images} />
+        {images.length > 0 ? (
+          <ParallaxScroll images={images} />
+        ) : (
+          <p className="italic text-text-light-body dark:text-text-dark-body">
+            Stay tuned!
+          </p>
+        )}
       </div>
     </main>
   );
 }
 
-const images = [
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-  "/img/photos/newyork.jpg",
-];
+const images: string[] = [];

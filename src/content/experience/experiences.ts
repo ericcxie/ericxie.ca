@@ -13,7 +13,7 @@ export const experienceItems = [
     company: "Hack the North",
     position: "Frontend Developer",
     location: "Waterloo, ON",
-    date: "03/2024 - 10/2024",
+    date: "03/2024 - Present",
     logo: "/img/logos/hackthenorth.svg",
     color: "#232323",
     link: "https://hackthenorth.com",

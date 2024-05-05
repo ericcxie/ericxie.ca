@@ -9,6 +9,15 @@ export const cardItems = [
     link: "https://www.optiwealth.app/",
   },
   {
+    title: "AmaFind",
+    tag: "Amazon web scraper",
+    description:
+      "A web scraper application that captures item search results data from amazon.ca",
+    tools: ["Python", "Selenium", "BeautifulSoup4", "Pandas"],
+    image: "/img/projects/amafind.jpg",
+    link: "https://github.com/ericcxie/AmaFind",
+  },
+  {
     title: "CollaboraCart",
     tag: "Supply Ordering Application",
     description:
@@ -25,14 +34,5 @@ export const cardItems = [
     tools: ["Node.js", "Express.js", "Socket.io", "Firebase"],
     image: "/img/projects/pomoduo.jpg",
     link: "https://github.com/ericcxie/pomoduo-timer",
-  },
-  {
-    title: "AmaFind",
-    tag: "Amazon web scraper",
-    description:
-      "A web scraper application that captures item search results data from amazon.ca",
-    tools: ["Python", "Selenium", "BeautifulSoup4", "Pandas"],
-    image: "/img/projects/amafind.jpg",
-    link: "https://github.com/ericcxie/AmaFind",
   },
 ];

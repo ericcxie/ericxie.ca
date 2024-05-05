@@ -1,7 +1,11 @@
 <div align="center">
     <div id="user-content-toc">
       <ul>
-          <summary><h1 style="display: inline-block; margin-bottom:0px">ericxie.ca</h1></summary>
+        <summary>
+          <a href="https://ericxie.ca/">
+              <h1 style="display: inline-block; margin-bottom:0px">ericxie.ca</h1>
+          </a>
+        </summary>
       </ul>
     </div>
     <h3>Personal Website 2.0</h3>
@@ -17,6 +21,7 @@
 <img width="1490" alt="Screenshot 2024-05-04 at 9 58 56 PM" src="https://github.com/ericcxie/ericxie.ca/assets/66566975/d2d2374e-a3ff-471b-8a14-fb9ed5044bac">
 
 ## Getting Started
+
 _(localhost:3000 by default)_
 
 1. `npm install`

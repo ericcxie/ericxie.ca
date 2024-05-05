@@ -14,7 +14,7 @@ const PostList = ({ posts }: Props) => {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 
-  if (allPosts.length === 0) {
+  if (allPosts[0].id === ".gitkeep") {
     return (
       <div className="italic text-text-light-body dark:text-text-dark-body">
         Stay tuned!

@@ -1,4 +1,12 @@
 import { ParallaxScroll } from "@/components/ui/ParallaxScroll";
+import {
+  F1,
+  Garden,
+  Hyundai,
+  Wilcox,
+  Spring,
+  Mclaren,
+} from "../../../public/img";
 
 export default function Photos() {
   return (
@@ -31,4 +39,4 @@ export default function Photos() {
   );
 }
 
-const images: string[] = [];
+const images = [F1, Garden, Hyundai, Wilcox, Spring, Mclaren];

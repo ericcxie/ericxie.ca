@@ -4,12 +4,13 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/utils/cn";
+import { StaticImageData } from "next/image";
 
 export const ParallaxScroll = ({
   images,
   className,
 }: {
-  images: string[];
+  images: StaticImageData[];
   className?: string;
 }) => {
   const gridRef = useRef<any>(null);

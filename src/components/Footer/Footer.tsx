@@ -16,21 +16,21 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <IoLogoInstagram className="text-2xl" />
+            <IoLogoInstagram className="text-2xl hover:text-text-light-headerLight dark:hover:text-text-dark-headerDark" />
           </a>
           <a
             href="https://www.linkedin.com/in/ericcxie"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <IoLogoLinkedin className="text-2xl" />
+            <IoLogoLinkedin className="text-2xl transition duration-500 hover:text-text-light-headerLight dark:hover:text-text-dark-headerDark" />
           </a>
           <a
             href="https://github.com/ericcxie"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <IoLogoGithub className="text-2xl" />
+            <IoLogoGithub className="text-2xl transition duration-500 hover:text-text-light-headerLight dark:hover:text-text-dark-headerDark" />
           </a>
         </div>
       </div>

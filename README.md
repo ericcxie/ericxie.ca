@@ -14,7 +14,7 @@
     <br><br>
 </div>
 
-<img width="1490" alt="Screenshot 2024-05-04 at 9 58 56 PM" src="https://github.com/ericcxie/ericxie.ca/assets/66566975/d2d2374e-a3ff-471b-8a14-fb9ed5044bac">
+<img width="1488" alt="Screenshot 2024-05-04 at 9 58 56 PM" src="https://github.com/ericcxie/ericxie.ca/assets/66566975/be7e3e8d-e49e-42e9-bf3a-3c3e6ab06eae">
 
 ## Getting Started
 

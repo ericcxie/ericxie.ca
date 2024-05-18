@@ -3,9 +3,9 @@ import {
   F1,
   Garden,
   Hyundai,
-  Wilcox,
-  Spring,
   Mclaren,
+  Spring,
+  Wilcox,
 } from "../../../public/img";
 
 export default function Photos() {

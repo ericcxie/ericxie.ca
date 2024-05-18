@@ -2,9 +2,8 @@
 import { useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { cn } from "@/utils/cn";
-import { StaticImageData } from "next/image";
 
 export const ParallaxScroll = ({
   images,
@@ -15,8 +14,8 @@ export const ParallaxScroll = ({
 }) => {
   const gridRef = useRef<any>(null);
   const { scrollYProgress } = useScroll({
-    container: gridRef, // remove this if your container is not fixed height
-    offset: ["start start", "end start"], // remove this if your container is not fixed height
+    container: gridRef,
+    offset: ["start start", "end start"],
   });
 
   const translateFirst = useTransform(scrollYProgress, [0, 1], [0, -200]);
@@ -44,42 +43,63 @@ export const ParallaxScroll = ({
         <div className="grid gap-5">
           {firstPart.map((el, idx) => (
             <motion.div
-              style={{ y: translateFirst }} // Apply the translateY motion value here
+              style={{ y: translateFirst }}
               key={"grid-1" + idx}
+              initial={{ opacity: 0 }} // Start fully transparent
+              animate={{ opacity: 1 }} // Transition to fully opaque
+              transition={{ duration: 0.5, delay: idx * 0.1 }} // Duration is 0.5 seconds, staggered by 0.1 seconds
             >
-              <Image
-                src={el}
-                className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                height="400"
-                width="400"
-                alt="thumbnail"
-              />
+              <a href={el.src} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src={el}
+                  className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
+                  height="400"
+                  width="400"
+                  alt="thumbnail"
+                />
+              </a>
             </motion.div>
           ))}
         </div>
         <div className="grid gap-5">
           {secondPart.map((el, idx) => (
-            <motion.div style={{ y: translateSecond }} key={"grid-2" + idx}>
-              <Image
-                src={el}
-                className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                height="400"
-                width="400"
-                alt="thumbnail"
-              />
+            <motion.div
+              style={{ y: translateSecond }}
+              key={"grid-2" + idx}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+            >
+              <a href={el.src} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src={el}
+                  className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
+                  height="400"
+                  width="400"
+                  alt="thumbnail"
+                />
+              </a>
             </motion.div>
           ))}
         </div>
         <div className="grid gap-5">
           {thirdPart.map((el, idx) => (
-            <motion.div style={{ y: translateThird }} key={"grid-3" + idx}>
-              <Image
-                src={el}
-                className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                height="400"
-                width="400"
-                alt="thumbnail"
-              />
+            <motion.div
+              style={{ y: translateThird }}
+              key={"grid-3" + idx}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+            >
+              <a href={el.src} target="_blank" rel="noopener noreferrer">
+                <Image
+                  src={el}
+                  className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
+                  height="400"
+                  width="400"
+                  alt="thumbnail"
+                />
+              </a>
             </motion.div>
           ))}
         </div>

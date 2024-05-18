@@ -2,8 +2,9 @@
 import { useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { cn } from "@/utils/cn";
+import { StaticImageData } from "next/image";
 
 export const ParallaxScroll = ({
   images,
@@ -14,8 +15,8 @@ export const ParallaxScroll = ({
 }) => {
   const gridRef = useRef<any>(null);
   const { scrollYProgress } = useScroll({
-    container: gridRef,
-    offset: ["start start", "end start"],
+    container: gridRef, // remove this if your container is not fixed height
+    offset: ["start start", "end start"], // remove this if your container is not fixed height
   });
 
   const translateFirst = useTransform(scrollYProgress, [0, 1], [0, -200]);
@@ -43,11 +44,8 @@ export const ParallaxScroll = ({
         <div className="grid gap-5">
           {firstPart.map((el, idx) => (
             <motion.div
-              style={{ y: translateFirst }}
+              style={{ y: translateFirst }} // Apply the translateY motion value here
               key={"grid-1" + idx}
-              initial={{ opacity: 0 }} // Start fully transparent
-              animate={{ opacity: 1 }} // Transition to fully opaque
-              transition={{ duration: 0.5, delay: idx * 0.1 }} // Duration is 0.5 seconds, staggered by 0.1 seconds
             >
               <a href={el.src} target="_blank" rel="noopener noreferrer">
                 <Image
@@ -63,13 +61,7 @@ export const ParallaxScroll = ({
         </div>
         <div className="grid gap-5">
           {secondPart.map((el, idx) => (
-            <motion.div
-              style={{ y: translateSecond }}
-              key={"grid-2" + idx}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
+            <motion.div style={{ y: translateSecond }} key={"grid-2" + idx}>
               <a href={el.src} target="_blank" rel="noopener noreferrer">
                 <Image
                   src={el}
@@ -84,13 +76,7 @@ export const ParallaxScroll = ({
         </div>
         <div className="grid gap-5">
           {thirdPart.map((el, idx) => (
-            <motion.div
-              style={{ y: translateThird }}
-              key={"grid-3" + idx}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
+            <motion.div style={{ y: translateThird }} key={"grid-3" + idx}>
               <a href={el.src} target="_blank" rel="noopener noreferrer">
                 <Image
                   src={el}

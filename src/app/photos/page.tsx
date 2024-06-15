@@ -1,17 +1,20 @@
 import { ParallaxScroll } from "@/components/ui/ParallaxScroll";
 import {
-  Serenity,
-  PinkBlossoms,
-  Garden,
   Balcony,
   Birds,
+  Romance,
   Condo,
+  Corvette,
   DogWaterfront,
   FoodTruck,
+  Garden,
+  RBC,
   ManInSuit,
+  PinkBlossoms,
+  Seagull,
+  Serenity,
   ShipAirplane,
   TakeoutSign,
-  TakeoutSign2,
 } from "../../../public/img";
 
 export default function Photos() {
@@ -27,7 +30,14 @@ export default function Photos() {
         className="animate-in text-text-light-body dark:text-text-dark-body"
         style={{ "--index": 2 } as React.CSSProperties}
       >
-        📸 Fujifilm XT-30 ii
+        <a
+          href="https://www.instagram.com/ericxphoto/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          📸
+        </a>{" "}
+        Fujifilm XT-30 ii
       </p>
       <div
         className="animate-in"
@@ -47,14 +57,18 @@ export default function Photos() {
 
 const images = [
   TakeoutSign,
-  FoodTruck,
   ShipAirplane,
+  FoodTruck,
   ManInSuit,
+  Romance,
   DogWaterfront,
-  Condo,
-  Balcony,
-  Garden,
-  Serenity,
   Birds,
+  Corvette,
+  Balcony,
+  RBC,
+  Serenity,
+  Condo,
+  Seagull,
   PinkBlossoms,
+  Garden,
 ];

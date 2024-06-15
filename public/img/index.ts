@@ -10,4 +10,7 @@ export { default as FoodTruck } from "./photos/food_truck.jpg";
 export { default as ManInSuit } from "./photos/man_in_suit.jpg";
 export { default as ShipAirplane } from "./photos/ship_airplane.jpg";
 export { default as TakeoutSign } from "./photos/takeout_sign.jpg";
-export { default as TakeoutSign2 } from "./photos/takeout_sign_2.jpg";
+export { default as Romance } from "./photos/romance.jpg";
+export { default as Corvette } from "./photos/corvette.jpg";
+export { default as RBC } from "./photos/rbc.jpg";
+export { default as Seagull } from "./photos/seagull.jpg";

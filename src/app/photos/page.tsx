@@ -1,5 +1,18 @@
 import { ParallaxScroll } from "@/components/ui/ParallaxScroll";
-import { Serenity, PinkBlossoms, Garden } from "../../../public/img";
+import {
+  Serenity,
+  PinkBlossoms,
+  Garden,
+  Balcony,
+  Birds,
+  Condo,
+  DogWaterfront,
+  FoodTruck,
+  ManInSuit,
+  ShipAirplane,
+  TakeoutSign,
+  TakeoutSign2,
+} from "../../../public/img";
 
 export default function Photos() {
   return (
@@ -32,4 +45,16 @@ export default function Photos() {
   );
 }
 
-const images = [Serenity, PinkBlossoms, Garden];
+const images = [
+  TakeoutSign,
+  FoodTruck,
+  ShipAirplane,
+  ManInSuit,
+  DogWaterfront,
+  Condo,
+  Balcony,
+  Garden,
+  Serenity,
+  Birds,
+  PinkBlossoms,
+];

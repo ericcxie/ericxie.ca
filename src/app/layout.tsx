@@ -1,7 +1,6 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import { ThemeProvider } from "@/providers/ThemeProvider";
-import { GoogleAnalytics } from '@next/third-parties/google';
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import local from "next/font/local";
@@ -46,7 +45,6 @@ export default function RootLayout({
         </ThemeProvider>
         <Analytics />
       </body>
-      <GoogleAnalytics gaId="G-WHHV4MRJQH" />
     </html>
   );
 }

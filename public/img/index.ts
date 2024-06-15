@@ -2,3 +2,12 @@
 export { default as Garden } from "./photos/garden.jpg";
 export { default as PinkBlossoms } from "./photos/pink_blossoms.jpg";
 export { default as Serenity } from "./photos/serenity.jpg";
+export { default as Balcony } from "./photos/balcony.jpg";
+export { default as Birds } from "./photos/birds.jpg";
+export { default as Condo } from "./photos/condo.jpg";
+export { default as DogWaterfront } from "./photos/dog_waterfront.jpg";
+export { default as FoodTruck } from "./photos/food_truck.jpg";
+export { default as ManInSuit } from "./photos/man_in_suit.jpg";
+export { default as ShipAirplane } from "./photos/ship_airplane.jpg";
+export { default as TakeoutSign } from "./photos/takeout_sign.jpg";
+export { default as TakeoutSign2 } from "./photos/takeout_sign_2.jpg";

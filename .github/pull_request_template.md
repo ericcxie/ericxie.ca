@@ -1,20 +1,11 @@
 ### Changes
 
-- This is a
+**Details**
 
-  - [ ] New feature (adds functionality)
-  - [ ] Bug fix (resolves an issue)
-  - [ ] Chore (documentation, refactoring, etc)
+**Type**
 
-- This PR contains
-
-  - [ ] **Breaking** changes
-  - [ ] **Major** changes
-  - [ ] **Minor** changes
-  - [ ] **Patch**es
-
-### To do
-
-- [ ] Work in progress
+- [ ] New feature
+- [ ] Bug fix
+- [ ] Chore
 
 **Screenshots**

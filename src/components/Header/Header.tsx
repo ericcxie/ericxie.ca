@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef } from "react";
 
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/20/solid";
@@ -26,6 +26,13 @@ const autograf = local({
 export default function Header() {
   const pathname = `/${usePathname().split("/")[1]}`;
   const [hoveredPath, setHoveredPath] = useState(pathname);
+  const popoverButtonRef = useRef<HTMLButtonElement>(null);
+
+  const handleLinkClick = () => {
+    if (popoverButtonRef.current) {
+      popoverButtonRef.current.click();
+    }
+  };
 
   return (
     <header className="md:mt-6">
@@ -80,8 +87,12 @@ export default function Header() {
           <ThemeSwitcher />
         </div>
 
+        {/* Mobile menu bar */}
         <Popover className="relative md:hidden">
-          <Popover.Button className="flex h-8 w-8 items-center justify-center rounded-lg text-text-light-body dark:text-text-dark-headerDark">
+          <Popover.Button
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-text-light-body dark:text-text-dark-headerDark"
+            ref={popoverButtonRef}
+          >
             <Bars3Icon className="hover:text-primary h-8 w-8 cursor-pointer text-text-light-body transition-colors dark:text-text-dark-headerDark" />
           </Popover.Button>
           <Transition
@@ -105,6 +116,7 @@ export default function Header() {
                         ? "bg-gray-200 font-medium dark:bg-stone-800/80"
                         : "font-normal",
                     )}
+                    onClick={handleLinkClick}
                   >
                     {link.label}
                   </Link>

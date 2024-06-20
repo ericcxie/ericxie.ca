@@ -38,11 +38,11 @@ export default function Current() {
 const interestsData = [
   {
     title: "Interests",
-    content: "Design, investing, personal finance",
+    content: "Photography, investing, design",
   },
   {
     title: "Learning",
-    content: "Open banking, photography, storytelling",
+    content: "Open banking, longevity, storytelling",
   },
   {
     title: "Listening",

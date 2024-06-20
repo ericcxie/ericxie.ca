@@ -18,14 +18,14 @@ export default function Current() {
       <div className="space-y-2 rounded-lg py-4">
         {interestsData.map((interest) => (
           <div
-            className="flex items-start md:items-center"
+            className="flex items-start sm:items-center"
             key={interest.title}
           >
             <span className="mr-2 min-w-[80px] md:min-w-fit">
               {interest.title}
             </span>
-            <div className="flex-grow border-t border-dashed border-text-light-body dark:border-text-dark-body"></div>
-            <span className="ml-2 block text-base text-text-light-body dark:text-text-dark-body">
+            <div className="hidden flex-grow border-t border-dashed border-text-light-body dark:border-text-dark-body sm:inline"></div>
+            <span className="ml-2 block text-left text-base text-text-light-body dark:text-text-dark-body sm:text-center">
               {interest.content}
             </span>
           </div>
@@ -38,7 +38,7 @@ export default function Current() {
 const interestsData = [
   {
     title: "Interests",
-    content: "Photography, investing, design",
+    content: "Photography, investing, personal finance",
   },
   {
     title: "Learning",

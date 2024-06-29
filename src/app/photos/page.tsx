@@ -15,6 +15,9 @@ import {
   Serenity,
   ShipAirplane,
   TakeoutSign,
+  DogFriends,
+  Building,
+  WellCafe,
 } from "../../../public/img";
 
 export default function Photos() {
@@ -61,14 +64,17 @@ const images = [
   FoodTruck,
   ManInSuit,
   Romance,
-  DogWaterfront,
-  Birds,
   Corvette,
+  DogWaterfront,
+  DogFriends,
   Balcony,
   RBC,
-  Serenity,
-  Condo,
   Seagull,
   PinkBlossoms,
+  Serenity,
+  Condo,
+  Building,
+  Birds,
   Garden,
+  WellCafe,
 ];

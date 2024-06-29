@@ -14,3 +14,6 @@ export { default as Romance } from "./photos/romance.jpg";
 export { default as Corvette } from "./photos/corvette.jpg";
 export { default as RBC } from "./photos/rbc.jpg";
 export { default as Seagull } from "./photos/seagull.jpg";
+export { default as DogFriends } from "./photos/dog_friends.jpg";
+export { default as Building } from "./photos/building.jpg";
+export { default as WellCafe } from "./photos/well_cafe.jpg";

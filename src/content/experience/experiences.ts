@@ -15,7 +15,7 @@ export const experienceItems = [
     location: "Waterloo, ON",
     date: "03/2024 - Present",
     logo: "/img/logos/hackthenorth.svg",
-    color: "#232323",
+    color: "#162640",
     link: "https://hackthenorth.com",
     present: false,
   },

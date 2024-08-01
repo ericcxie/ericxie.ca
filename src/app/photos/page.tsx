@@ -1,19 +1,16 @@
 import { ParallaxScroll } from "@/components/ui/ParallaxScroll";
 import {
   Balcony,
-  Birds,
   Building,
   Condo,
-  Corvette,
   DogWaterfront,
   FoodTruck,
-  Garden,
+  LibraryStairs,
+  LibraryStudy,
   MallWalk,
   ManInSuit,
-  PinkBlossoms,
   RBC,
   Romance,
-  Seagull,
   Serenity,
   ShipAirplane,
   TakeoutSign,
@@ -38,9 +35,8 @@ export default function Photos() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          📸
-        </a>{" "}
-        Fujifilm XT-30 ii
+          📸 Fujifilm XT-30 ii
+        </a>
       </p>
       <div
         className="animate-in"
@@ -60,21 +56,18 @@ export default function Photos() {
 
 const images = [
   TakeoutSign,
-  ShipAirplane,
-  FoodTruck,
+  LibraryStudy,
+  Condo,
   ManInSuit,
   Romance,
-  Corvette,
   DogWaterfront,
   MallWalk,
   Balcony,
   RBC,
-  Seagull,
-  PinkBlossoms,
   Serenity,
-  Condo,
-  Building,
-  Birds,
-  Garden,
+  LibraryStairs,
+  FoodTruck,
   WellCafe,
+  ShipAirplane,
+  Building,
 ];

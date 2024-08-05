@@ -34,3 +34,5 @@ Add the following in the `.env` file and replace with your access token
 ```
 NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN="YOUR_ACCESS_TOKEN"
 ```
+
+[![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/viQidOk1Ohujendju5nR74/Personal-Website-2.0?node-id=0-1&t=yC1RJkEj4UPZuQ95-1)

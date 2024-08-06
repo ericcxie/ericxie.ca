@@ -32,6 +32,10 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
+        <meta
+          name="description"
+          content="Hi, I'm Eric! Currently, I’m a Computer Engineering student at the University of Waterloo and a Software Developer Intern at Lawbrokr."
+        />
       </Head>
       <body
         className={`${akkurat.className} flex min-h-screen flex-col bg-background-light dark:bg-background-dark`}

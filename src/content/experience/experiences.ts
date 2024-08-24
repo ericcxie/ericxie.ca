@@ -1,15 +1,5 @@
 export const experienceItems = [
   {
-    company: "Lawbrokr",
-    position: "Software Developer Intern",
-    location: "Toronto, ON",
-    date: "05/2024 - Present",
-    logo: "/img/logos/lawbrokr.svg",
-    color: "#B6B2D3",
-    link: "https://lawbrokr.com",
-    present: true,
-  },
-  {
     company: "Hack the North",
     position: "Frontend Developer",
     location: "Waterloo, ON",
@@ -17,6 +7,16 @@ export const experienceItems = [
     logo: "/img/logos/hackthenorth.svg",
     color: "#162640",
     link: "https://hackthenorth.com",
+    present: true,
+  },
+  {
+    company: "Lawbrokr",
+    position: "Software Developer Intern",
+    location: "Toronto, ON",
+    date: "05/2024 - 08/2024",
+    logo: "/img/logos/lawbrokr.svg",
+    color: "#B6B2D3",
+    link: "https://lawbrokr.com",
     present: false,
   },
   {

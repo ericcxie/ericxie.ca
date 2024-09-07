@@ -53,7 +53,7 @@ export default function Home() {
             style={{ "--index": 3 } as React.CSSProperties}
           >
             I believe in creating software that is not only functional but also
-            clean, beautiful, and enjoyable to use. Let’s build something
+            clean, beautiful, and enjoyable to use. Let's build something
             together that inspires.
           </p>
         </div>

@@ -24,7 +24,7 @@ export default function Home() {
             className="max-w-2xl animate-in text-sm text-text-light-body dark:text-text-dark-body md:text-base"
             style={{ "--index": 2 } as React.CSSProperties}
           >
-            Currently, I'm a Computer Engineering student at the{" "}
+            Currently, I&apos;m a Computer Engineering student at the{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
               <a
                 href="https://uwaterloo.ca/engineering/"
@@ -44,7 +44,8 @@ export default function Home() {
                 Hack the North
               </a>
             </span>
-            . I'm seeking for <b>Winter 2025</b> SWE internship opportunities!
+            . I&apos;m seeking for <b>Winter 2025</b> SWE internship
+            opportunities!
           </p>
         </div>
         <div className="mt-4 space-y-1">
@@ -53,7 +54,7 @@ export default function Home() {
             style={{ "--index": 3 } as React.CSSProperties}
           >
             I believe in creating software that is not only functional but also
-            clean, beautiful, and enjoyable to use. Let's build something
+            clean, beautiful, and enjoyable to use. Let&apos;s build something
             together that inspires.
           </p>
         </div>

@@ -12,12 +12,14 @@ import {
   LibraryStudy,
   MallWalk,
   ManInSuit,
-  RBC,
+  OldCar,
   Serenity,
   ShipAirplane,
+  SouthBeach,
   Stairs,
   Stairs2,
   TakeoutSign,
+  Umbrellas,
   VintageTV,
   WellCafe,
 } from "../../../public/img";
@@ -60,13 +62,15 @@ export default function Photos() {
 }
 
 const images = [
+  SouthBeach,
   VintageTV,
   Corridor,
+  DogWaterfront,
   Stairs2,
   MallWalk,
   ManInSuit,
-  DogWaterfront,
-  RBC,
+  ShipAirplane,
+  OldCar,
   Stairs,
   ChairArtGallery,
   TakeoutSign,
@@ -77,7 +81,7 @@ const images = [
   GalleryWall,
   LibraryStairs,
   LibraryStudy,
-  ShipAirplane,
+  Umbrellas,
   Balcony,
   Condo,
 ];

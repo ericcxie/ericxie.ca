@@ -11,7 +11,7 @@ export default function Current() {
       <div className="relative">
         <Map lng={-80.53950502292057} lat={43.4728353} /> {/* Waterloo, ON */}
         <div className="absolute bottom-4 left-4 flex items-center rounded-lg bg-neutral-100/75 px-4 py-1.5 backdrop-blur dark:bg-neutral-900/75 md:bottom-6 md:left-6">
-          <p className="text-primary text-sm font-medium">Toronto, ON</p>
+          <p className="text-primary text-sm font-medium">Waterloo, ON</p>
         </div>
       </div>
 

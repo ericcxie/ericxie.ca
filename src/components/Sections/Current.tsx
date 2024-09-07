@@ -5,11 +5,11 @@ export default function Current() {
     <>
       <h1 className="mb-1 text-xl font-bold">Current</h1>
       <p className="mb-3 text-sm text-text-light-body dark:text-text-dark-body md:text-base">
-        I’m currently on a co-op term in Toronto and eager to explore the city’s
-        cafe and food scene this summer. If you’re around, let’s connect!
+        I’m currently on a study term in Waterloo. If you’re around, let’s
+        connect!
       </p>
       <div className="relative">
-        <Map lng={-79.347015} lat={43.65107} />
+        <Map lng={-80.53950502292057} lat={43.4728353} /> {/* Waterloo, ON */}
         <div className="absolute bottom-4 left-4 flex items-center rounded-lg bg-neutral-100/75 px-4 py-1.5 backdrop-blur dark:bg-neutral-900/75 md:bottom-6 md:left-6">
           <p className="text-primary text-sm font-medium">Toronto, ON</p>
         </div>

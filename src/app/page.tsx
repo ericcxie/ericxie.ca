@@ -34,17 +34,17 @@ export default function Home() {
                 University of Waterloo
               </a>
             </span>{" "}
-            and a Software Developer Intern at{" "}
+            and a Frontend Developer at{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
               <a
-                href="https://lawbrokr.com/"
+                href="https://hackthenorth.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Lawbrokr
+                Hack the North
               </a>
             </span>
-            .
+            . I'm seeking for <b>Winter 2025</b> SWE internship opportunities!
           </p>
         </div>
         <div className="mt-4 space-y-1">

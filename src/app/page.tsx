@@ -2,6 +2,7 @@ import Current from "@/components/Sections/Current";
 import Experiences from "@/components/Sections/Experiences";
 import LatestPosts from "@/components/Sections/LatestPosts";
 import Projects from "@/components/Sections/Projects";
+import { LinkPreview } from "@/components/ui/LinkPreview";
 
 import { Spotlight } from "@/components/ui/Spotlight";
 
@@ -26,23 +27,15 @@ export default function Home() {
           >
             Currently, I&apos;m a Computer Engineering student at the{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
-              <a
-                href="https://uwaterloo.ca/engineering/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <LinkPreview url="https://uwaterloo.ca/engineering/">
                 University of Waterloo
-              </a>
+              </LinkPreview>
             </span>{" "}
             and a Frontend Developer at{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
-              <a
-                href="https://hackthenorth.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <LinkPreview url="https://hackthenorth.com/">
                 Hack the North
-              </a>
+              </LinkPreview>
             </span>
             . I&apos;m seeking for <b>Winter 2025</b> SWE internship
             opportunities!

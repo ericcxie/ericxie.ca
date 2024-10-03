@@ -37,8 +37,7 @@ export default function Home() {
                 Hack the North
               </LinkPreview>
             </span>
-            . I&apos;m seeking for <b>Winter 2025</b> SWE internship
-            opportunities!
+            .
           </p>
         </div>
         <div className="mt-4 space-y-1">

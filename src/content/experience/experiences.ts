@@ -61,7 +61,7 @@ export const schoolItems = [
     company: "University of Waterloo",
     position: "Computer Engineering",
     location: "Waterloo, ON",
-    date: "09/2022 - 04/2027",
+    date: "09/2022",
     logo: "/img/logos/uwaterloo.svg",
     color: "#666745",
     link: "https://uwaterloo.ca/engineering/",

@@ -11,6 +11,7 @@ type ExperienceItem = {
   color: string;
   link: string;
   present: boolean;
+  incoming: boolean;
 };
 
 export const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
@@ -36,8 +37,13 @@ export const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
           <span className="text-[15px] font-bold md:text-lg">
             {item.company}
             {item.present && (
-              <span className="dark:text-text-dark-headerDark ml-1 rounded-lg bg-gray-200 px-2 pb-1 pt-1.5 text-sm font-normal text-text-light-body dark:bg-[#252525]">
+              <span className="ml-1 rounded-lg bg-gray-200 px-2 pb-1 pt-1.5 text-sm font-normal text-text-light-body dark:bg-[#252525] dark:text-text-dark-headerDark">
                 Present
+              </span>
+            )}
+            {item.incoming && (
+              <span className="ml-1 rounded-lg bg-gray-200 px-2 pb-1 pt-1.5 text-sm font-normal text-text-light-body dark:bg-[#252525] dark:text-text-dark-headerDark">
+                Incoming
               </span>
             )}
           </span>

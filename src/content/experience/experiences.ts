@@ -1,13 +1,25 @@
 export const experienceItems = [
   {
+    company: "Shopify",
+    position: "Software Engineer Intern",
+    location: "Toronto, ON",
+    date: "01/2025 - 04/2025",
+    logo: "/img/logos/shopify.svg",
+    color: "#41623B",
+    link: "https://www.shopify.com/",
+    present: false,
+    incoming: true,
+  },
+  {
     company: "Hack the North",
     position: "Frontend Developer",
     location: "Waterloo, ON",
-    date: "03/2024 - Present",
+    date: "03/2024 - 10/2024",
     logo: "/img/logos/hackthenorth.svg",
     color: "#162640",
     link: "https://hackthenorth.com",
-    present: true,
+    present: false,
+    incoming: false,
   },
   {
     company: "Lawbrokr",
@@ -18,6 +30,7 @@ export const experienceItems = [
     color: "#B6B2D3",
     link: "https://lawbrokr.com",
     present: false,
+    incoming: false,
   },
   {
     company: "BMO Financial Group",
@@ -28,6 +41,7 @@ export const experienceItems = [
     color: "#0A75BB",
     link: "https://bmo.com",
     present: false,
+    incoming: false,
   },
   {
     company: "Brookfield Annuity",
@@ -38,6 +52,7 @@ export const experienceItems = [
     color: "#103557",
     link: "https://www.brookfieldannuity.com/en/",
     present: false,
+    incoming: false,
   },
 ];
 
@@ -51,5 +66,6 @@ export const schoolItems = [
     color: "#666745",
     link: "https://uwaterloo.ca/engineering/",
     present: false,
+    incoming: false,
   },
 ];

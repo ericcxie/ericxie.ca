@@ -1,15 +1,15 @@
 export const experienceItems = [
-  {
-    company: "Shopify",
-    position: "Software Engineer Intern",
-    location: "Toronto, ON",
-    date: "01/2025 - 04/2025",
-    logo: "/img/logos/shopify.svg",
-    color: "#41623B",
-    link: "https://www.shopify.com/",
-    present: false,
-    incoming: true,
-  },
+  // {
+  //   company: "Shopify",
+  //   position: "Software Engineer Intern",
+  //   location: "Toronto, ON",
+  //   date: "01/2025 - 04/2025",
+  //   logo: "/img/logos/shopify.svg",
+  //   color: "#41623B",
+  //   link: "https://www.shopify.com/",
+  //   present: false,
+  //   incoming: true,
+  // },
   {
     company: "Hack the North",
     position: "Frontend Developer",

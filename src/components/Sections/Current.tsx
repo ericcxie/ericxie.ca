@@ -42,10 +42,10 @@ const interestsData = [
   },
   {
     title: "Learning",
-    content: "Open banking, longevity, storytelling",
+    content: "Open banking, concurrency, design",
   },
   {
     title: "Listening",
-    content: "Motley Fool Money, Acquired, Planet Money",
+    content: "The Defining Decade, Motley Fool Money, Acquired",
   },
 ];

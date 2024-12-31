@@ -54,7 +54,7 @@ Backend made a change that saved bus information into a `BusStops` array as part
 
 This project was definitely more difficult as we had to build it from scratch. In past years, we used third-party software for our volunteers to sign up for shifts. However, this became rather costly and so this year, it was decided that we would attempt to build it in-house.
 
-Unfortunately, we were unable to launch the tool in time this year due to hiccups along the way and the tight timeline we were given. Nevertheless, I'm proud of the progress we made and it certainly sets the stage for the frontend team next year to take over! I'm looking forward to seeing this tool shipped and used by volunteers for years to come.
+Unfortunately, we were unable to launch the tool on time this year due to hiccups along the way and the tight timeline we had. Nevertheless, I'm proud of the progress we made and it certainly sets the stage for the frontend team next year to take over! I'm looking forward to seeing this tool shipped and used by volunteers for years to come.
 
 ![travel_tool](/img/blog/volunteer_dashboard.png)
 

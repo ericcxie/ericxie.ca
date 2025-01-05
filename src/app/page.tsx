@@ -31,7 +31,7 @@ export default function Home() {
                 University of Waterloo
               </LinkPreview>
             </span>{" "}
-            and an incoming Software Engineer Intern at{" "}
+            and a Software Engineer Intern at{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
               <LinkPreview url="https://www.shopify.com/">Shopify</LinkPreview>
             </span>

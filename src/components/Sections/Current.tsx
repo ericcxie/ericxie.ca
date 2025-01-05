@@ -5,13 +5,13 @@ export default function Current() {
     <>
       <h1 className="mb-1 text-xl font-bold">Current</h1>
       <p className="mb-3 text-sm text-text-light-body dark:text-text-dark-body md:text-base">
-        I’m currently on a study term in Waterloo. If you’re around, let’s
+        I’m currently on a co-op term in Toronto. If you’re around, let’s
         connect!
       </p>
       <div className="relative">
-        <Map lng={-80.53950502292057} lat={43.4728353} /> {/* Waterloo, ON */}
+        <Map lng={-79.400782} lat={43.644575} /> {/* Toronto, ON */}
         <div className="absolute bottom-4 left-4 flex items-center rounded-lg bg-neutral-100/75 px-4 py-1.5 backdrop-blur dark:bg-neutral-900/75 md:bottom-6 md:left-6">
-          <p className="text-primary text-sm font-medium">Waterloo, ON</p>
+          <p className="text-primary text-sm font-medium">Toronto, ON</p>
         </div>
       </div>
 
@@ -42,7 +42,7 @@ const interestsData = [
   },
   {
     title: "Learning",
-    content: "Open banking, concurrency, design",
+    content: "Snowboarding, open banking, design",
   },
   {
     title: "Listening",

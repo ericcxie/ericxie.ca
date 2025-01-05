@@ -6,7 +6,7 @@ export const cardItems = [
       "An all-in-one investment management platform that allows users to monitor, analyze and rebalance their portfolios.",
     tools: ["TypeScript", "React", "Flask", "PostgreSQL", "Firebase"],
     image: "/img/projects/optiwealth.jpg",
-    link: "https://www.optiwealth.app/",
+    link: "https://optiwealth.vercel.app/",
   },
   {
     title: "AmaFind",

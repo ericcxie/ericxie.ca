@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import local from "next/font/local";
 import Head from "next/head";
 import "./globals.css";
+import "@/styles/embla.css";
 
 const akkurat = local({
   src: [

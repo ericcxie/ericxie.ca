@@ -11,6 +11,17 @@ export const experienceItems = [
     incoming: false,
   },
   {
+    company: "Wat Street",
+    position: "Backend Developer",
+    location: "Waterloo, ON",
+    date: "01/2025 - Present",
+    logo: "/img/logos/watstreet.png",
+    color: "#1B1605",
+    link: "https://watstreet.netlify.app/",
+    present: true,
+    incoming: false,
+  },
+  {
     company: "Hack the North",
     position: "Frontend Developer",
     location: "Waterloo, ON",

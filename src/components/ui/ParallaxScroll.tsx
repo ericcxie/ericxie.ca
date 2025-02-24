@@ -15,19 +15,25 @@ export const ParallaxScroll = ({
 }) => {
   const gridRef = useRef<any>(null);
   const { scrollYProgress } = useScroll({
-    container: gridRef, // remove this if your container is not fixed height
-    offset: ["start start", "end start"], // remove this if your container is not fixed height
+    container: gridRef,
+    offset: ["start start", "end start"],
   });
 
   const translateFirst = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const translateSecond = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const translateThird = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
-  const third = Math.ceil(images.length / 3);
+  // Calculate how many images per column based on total images
+  const totalImages = images.length;
+  const imagesPerColumn = Math.ceil(totalImages / 3);
 
-  const firstPart = images.slice(0, third);
-  const secondPart = images.slice(third, 2 * third);
-  const thirdPart = images.slice(2 * third);
+  // Create arrays for each column maintaining left-to-right order
+  const columns: StaticImageData[][] = [[], [], []];
+  images.forEach((image, index) => {
+    const row = Math.floor(index / 3);
+    const col = index % 3;
+    columns[col].push(image);
+  });
 
   return (
     <div
@@ -42,11 +48,8 @@ export const ParallaxScroll = ({
         ref={gridRef}
       >
         <div className="grid gap-5">
-          {firstPart.map((el, idx) => (
-            <motion.div
-              style={{ y: translateFirst }} // Apply the translateY motion value here
-              key={"grid-1" + idx}
-            >
+          {columns[0].map((el, idx) => (
+            <motion.div style={{ y: translateFirst }} key={"grid-1" + idx}>
               <a href={el.src} target="_blank" rel="noopener noreferrer">
                 <Image
                   src={el}
@@ -60,7 +63,7 @@ export const ParallaxScroll = ({
           ))}
         </div>
         <div className="grid gap-5">
-          {secondPart.map((el, idx) => (
+          {columns[1].map((el, idx) => (
             <motion.div style={{ y: translateSecond }} key={"grid-2" + idx}>
               <a href={el.src} target="_blank" rel="noopener noreferrer">
                 <Image
@@ -75,7 +78,7 @@ export const ParallaxScroll = ({
           ))}
         </div>
         <div className="grid gap-5">
-          {thirdPart.map((el, idx) => (
+          {columns[2].map((el, idx) => (
             <motion.div style={{ y: translateThird }} key={"grid-3" + idx}>
               <a href={el.src} target="_blank" rel="noopener noreferrer">
                 <Image

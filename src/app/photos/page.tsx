@@ -1,4 +1,4 @@
-import { ParallaxScroll } from "@/components/ui/ParallaxScroll";
+import { PhotoGallery } from "@/components/ui/PhotoGallery";
 import {
   Balcony,
   Building,
@@ -52,7 +52,7 @@ export default function Photos() {
         style={{ "--index": 3 } as React.CSSProperties}
       >
         {images.length > 0 ? (
-          <ParallaxScroll images={images} />
+          <PhotoGallery images={images} />
         ) : (
           <p className="italic text-text-light-body dark:text-text-dark-body">
             Stay tuned!

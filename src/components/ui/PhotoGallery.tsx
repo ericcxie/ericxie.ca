@@ -6,7 +6,7 @@ import Image from "next/image";
 import { cn } from "@/utils/cn";
 import { StaticImageData } from "next/image";
 
-export const ParallaxScroll = ({
+export const PhotoGallery = ({
   images,
   className,
 }: {

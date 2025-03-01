@@ -1,10 +1,8 @@
 "use client";
-import { useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
 import { cn } from "@/utils/cn";
-import { StaticImageData } from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Image, { StaticImageData } from "next/image";
+import { useRef } from "react";
 
 export const PhotoGallery = ({
   images,
@@ -23,14 +21,8 @@ export const PhotoGallery = ({
   const translateSecond = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const translateThird = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
-  // Calculate how many images per column based on total images
-  const totalImages = images.length;
-  const imagesPerColumn = Math.ceil(totalImages / 3);
-
-  // Create arrays for each column maintaining left-to-right order
   const columns: StaticImageData[][] = [[], [], []];
   images.forEach((image, index) => {
-    const row = Math.floor(index / 3);
     const col = index % 3;
     columns[col].push(image);
   });

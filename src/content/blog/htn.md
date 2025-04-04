@@ -77,3 +77,5 @@ I'm grateful to have had the chance to work with such a talented group of people
 ![frontend team](/img/blog/htn/fe_team.jpg)
 
 ![htn team](/img/blog/htn/htn_team.jpg)
+
+Team: [Eugene Zhang](https://www.linkedin.com/in/eugene-ezzhang/), [Roselyn Huynh](https://www.linkedin.com/in/roselynhuynh/), [Dorian Chen](https://www.linkedin.com/in/dorianchen/), [Ishaan Dey](https://www.linkedin.com/in/ishaan1013/), [Megan Wu](https://www.linkedin.com/in/megan-bx-wu/), [Feng Zhang](https://www.linkedin.com/in/fengzhang12/)

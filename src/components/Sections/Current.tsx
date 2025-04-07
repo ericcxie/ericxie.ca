@@ -46,6 +46,6 @@ const interestsData = [
   },
   {
     title: "Listening",
-    content: "The Defining Decade, Motley Fool Money, Acquired",
+    content: "The Design of Everyday Things, Motley Fool Money, Acquired",
   },
 ];

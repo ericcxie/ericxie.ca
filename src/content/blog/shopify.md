@@ -22,11 +22,11 @@ As I wrap up my 4 months Software Engineering internship at Shopify, I wanted a 
 
 ## New York City Burst
 
-![burst](/img/blog/shopify/burst.jpg)
+![burst](/img/blog/shopify/burst.png)
 
 ## Shopify x Socratica Symposium
 
-![socratica](/img/blog/shopify/socratica.jpg)
+![socratica](/img/blog/shopify/socratica.png)
 
 # What I learned
 

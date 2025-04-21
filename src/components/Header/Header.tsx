@@ -1,8 +1,8 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useState, useRef, useEffect } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/20/solid";
@@ -28,7 +28,7 @@ export default function Header() {
   const [hoveredPath, setHoveredPath] = useState(pathname);
   const popoverButtonRef = useRef<HTMLButtonElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isChangingPage, setIsChangingPage] = useState(false);
+  const [disableAnimation, setDisableAnimation] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,14 +42,21 @@ export default function Header() {
 
   useEffect(() => {
     setHoveredPath(pathname);
-    setIsChangingPage(false);
+
+    // Disable animation briefly when pathname changes
+    setDisableAnimation(true);
+    const timer = setTimeout(() => {
+      setDisableAnimation(false);
+    }, 200);
+
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   const handleLinkClick = () => {
     if (popoverButtonRef.current) {
       popoverButtonRef.current.click();
     }
-    setIsChangingPage(true);
+    setDisableAnimation(true);
   };
 
   return (
@@ -64,7 +71,7 @@ export default function Header() {
         <Link
           href="/"
           className="ml-2 shrink-0 text-text-light-body dark:text-text-dark-headerDark md:ml-0"
-          onClick={() => setIsChangingPage(true)}
+          onClick={() => setDisableAnimation(true)}
         >
           <h1 className={`${autograf.className} text-3xl`}>Eric</h1>
         </Link>
@@ -82,12 +89,16 @@ export default function Header() {
                 }`}
                 data-active={isActive}
                 href={item.href}
-                onClick={() => setIsChangingPage(true)}
-                onMouseOver={() => !isChangingPage && setHoveredPath(item.href)}
-                onMouseLeave={() => !isChangingPage && setHoveredPath(pathname)}
+                onClick={() => setDisableAnimation(true)}
+                onMouseOver={() =>
+                  !disableAnimation && setHoveredPath(item.href)
+                }
+                onMouseLeave={() =>
+                  !disableAnimation && setHoveredPath(pathname)
+                }
               >
                 <span>{item.label}</span>
-                {!isChangingPage && item.href === hoveredPath && (
+                {item.href === hoveredPath && !disableAnimation && (
                   <motion.div
                     className="absolute bottom-0 left-0 -z-10 h-full rounded-md bg-stone-200 dark:bg-stone-800/80"
                     layoutId="navbar"

@@ -3,7 +3,7 @@ title: "Rebuilding Shopify Ventures"
 
 category: "Work"
 
-date: "04-30-2025"
+date: "04-25-2025"
 ---
 
 ![shopify ventures](/img/blog/shopify/shopify_ventures.webp)

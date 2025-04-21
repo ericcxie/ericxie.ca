@@ -74,6 +74,8 @@ Although I won't be returning to the team next year, I'm glad I got the opportun
 
 I'm grateful to have had the chance to work with such a talented group of people and I'm sure HTN 2025 will be even better!
 
+![htn team](/img/blog/htn/htn_team.webp)
+
 ![frontend team](/img/blog/htn/fe_team.webp)
 
-![htn team](/img/blog/htn/htn_team.webp)
+Team: [Eugene Zhang](https://www.linkedin.com/in/eugene-ezzhang/), [Roselyn Huynh](https://www.linkedin.com/in/roselynhuynh/), [Dorian Chen](https://www.linkedin.com/in/dorianchen/), [Ishaan Dey](https://www.linkedin.com/in/ishaan1013/), [Megan Wu](https://www.linkedin.com/in/megan-bx-wu/), [Feng Zhang](https://www.linkedin.com/in/fengzhang12/)

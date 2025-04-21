@@ -12,8 +12,26 @@ date: "04-30-2025"
 
 As I wrap up my 4 months Software Engineering internship at Shopify, I wanted a chance to reflect on my experience and share some of the things I learned along the way.
 
+# Shopify Ventures Rewrite
+
 ![landing page](/img/blog/shopify/landing.gif)
 
-![shopify x socratica](/img/blog/shopify/shopifyxsocratica.jpg)
+# My Intern Experience
 
-![team](/img/blog/shopify/creative_team.jpg)
+![office](/img/blog/shopify/office.jpg)
+
+## New York City Burst
+
+![burst](/img/blog/shopify/burst.jpg)
+
+## Shopify x Socratica Symposium
+
+![socratica](/img/blog/shopify/socratica.jpg)
+
+# What I learned
+
+## Ending Remarks
+
+And of course... all the amazing food and matcha!
+
+![food](/img/blog/shopify/food.png)

@@ -6,7 +6,7 @@ category: "Work"
 date: "04-30-2025"
 ---
 
-![shopify ventures](/img/blog/shopify/shopify_ventures.jpg)
+![shopify ventures](/img/blog/shopify/shopify_ventures.webp)
 
 # Background
 
@@ -18,15 +18,15 @@ As I wrap up my 4 months Software Engineering internship at Shopify, I wanted a 
 
 # My Intern Experience
 
-![office](/img/blog/shopify/office.jpg)
+![office](/img/blog/shopify/office.webp)
 
 ## New York City Burst
 
-![burst](/img/blog/shopify/burst.png)
+![burst](/img/blog/shopify/burst.webp)
 
 ## Shopify x Socratica Symposium
 
-![socratica](/img/blog/shopify/socratica.png)
+![socratica](/img/blog/shopify/socratica.webp)
 
 # What I learned
 
@@ -34,4 +34,4 @@ As I wrap up my 4 months Software Engineering internship at Shopify, I wanted a 
 
 And of course... all the amazing food and matcha!
 
-![food](/img/blog/shopify/food.png)
+![food](/img/blog/shopify/food.webp)

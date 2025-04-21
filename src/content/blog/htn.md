@@ -8,7 +8,7 @@ date: "12-30-2024"
 
 ![hackthenorth](/img/blog/htn/hackthenorth.jpg)
 
-# Overview
+# Background
 
 A year ago, I applied as a hacker to Canada's biggest hackathon—Hack the North. It was THE hackathon to attend for any aspiring student looking to pursue a career in tech and like many others, I dreamt of attending it one day. To my dismay, I was rejected.
 
@@ -62,9 +62,9 @@ Unfortunately, we were unable to launch the tool on time this year due to hiccup
 
 # What I learned
 
-When I joined, I never thought I’d learn as much as I have in the past eight months. Despite it being a hackathon, it's been surprising how much engineering principles are distilled. For me, the biggest takeaway is the importance of _shipping fast and iterate_.
+When I joined, I never thought I'd learn as much as I have in the past eight months. Despite it being a hackathon, it's been surprising how much engineering principles are distilled. For me, the biggest takeaway is the importance of _shipping fast and iterate_.
 
-Given the nature of organizing a hackathon, we are constantly under a strict timeline as the event date approaches much quicker than you'd expect. If we delay one project, the subsequent projects would also be affected and so because of this, I had to learn to let go of my perfectionist tendencies and to prioritize tasks to deliver projects on time. Minor issues can always be addressed later, so they shouldn’t become blockers.
+Given the nature of organizing a hackathon, we are constantly under a strict timeline as the event date approaches much quicker than you'd expect. If we delay one project, the subsequent projects would also be affected and so because of this, I had to learn to let go of my perfectionist tendencies and to prioritize tasks to deliver projects on time. Minor issues can always be addressed later, so they shouldn't become blockers.
 
 Honourable mention: QA is grossly overlooked. The amount of issues we could've avoided with users if someone had caught it in QA would've saved us so much time.
 

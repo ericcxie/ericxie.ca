@@ -82,7 +82,7 @@ Can't forget about all the food and matcha! If there's one thing I can walk away
 
 ## New York City Burst
 
-One of the highlights of my internship was getting to spend a week in New York City for a "burst"—an in-person gathering that happens about twice a year. Since many many people work remotely, we have colleagues from all over the world so these bursts are a great opportunity for everyone to come together and connect face-to-face.
+One of the highlights of my internship was getting to spend a week in New York City for a "burst"—an in-person gathering that happens about twice a year. Since many people work remotely, we have colleagues from all over the world so these bursts are a great opportunity for everyone to come together and connect face-to-face.
 
 ![burst](/img/blog/shopify/burst.webp)
 

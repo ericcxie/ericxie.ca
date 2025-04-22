@@ -10,7 +10,7 @@ date: "04-25-2025"
 
 # Background
 
-As I wrap up my 4 months Software Engineering internship at Shopify, I wanted a chance to reflect on my experience and share some of the things I learned along the way. I worked on the Creative team where our goal was to capture the long-term brand value of Shopify. Some past projects that my team was involved with includes [Shopify Milestones](https://milestones.shopify.com/), [Shopify x MrBeast](https://www.shopify.com/mrbeast), and [BFCM](https://bfcm.shopify.com/) to just name a few. This term, my main project was to rebuild/revamp [shopify.vc](https://shopify.vc/), the main site for Shopify Ventures, our investment division.
+As I wrap up my 4 months Software Engineering internship at Shopify, I wanted a chance to reflect on my experience and share some of the things I learned along the way. I worked on the Creative team where our goal was to capture the long-term brand value of Shopify. Some past projects that my team was involved with includes [Shopify Milestones](https://milestones.shopify.com/), [Shopify x MrBeast](https://www.shopify.com/mrbeast), and [BFCM](https://bfcm.shopify.com/) to just name a few. This term, my main project was to revamp [shopify.vc](https://shopify.vc/), the main site for Shopify Ventures, our investment division.
 
 # Shopify Ventures Rewrite
 
@@ -32,7 +32,7 @@ Once we have this, we can map the grayscale value to a set of ASCII characters. 
 
 `const asciiChars = ' ,:;+*>%S#X';`
 
-Where the characters are ordered from lightest to darkest. We then map the grayscale value to an ASCII character
+Where the characters are ordered from lightest to darkest. We then map the grayscale value to an ASCII character.
 
 `const char = asciiChars[Math.floor((pixel / 255) * (asciiChars.length - 1))];`
 
@@ -56,24 +56,52 @@ Here's another example of where the Image to ASCII function was used.
 
 ![flat earth](/img/blog/shopify/differences.gif)
 
-This one actually contains a transition between two ASCII images by blending the characters together slowly as the user scrolls.
+This one contains a transition between two ASCII images by blending the characters together slowly as the user scrolls.
+
+## Storefront API
+
+This feature is arguably less interesting but very useful. Since this site is built on [Hydrogen](https://hydrogen.shopify.dev/), it's super easy to connect to a Shopify store using the Storefront API. This allows us to effectively treat the store as a Content Management System (CMS).
+
+![burst](/img/blog/shopify/storefront.png)
+
+In the past, whenever the Venture's team needed to make an update to the list of clients or news cards, they'd have to ask a developer to manually make a change in the codebase.
+
+Now, all the metaobjects are stored in the storefront and we retrieve the data by making a simple GraphQL call.
 
 # My Intern Experience
 
+I still remember the sheer awe I felt as my manager and mentor showed me around the Toronto Port office for the first time.
+
 ![office](/img/blog/shopify/office.webp)
+
+Each floor had its own theme ranging from Ski resorts to Toronto parks. The cool thing is that all the furniture and snacks in the office were sourced from local Shopify merchants.
+
+![food](/img/blog/shopify/food.webp)
+
+Can't forget about all the food and matcha! If there's one thing I can walk away from this experience having learned, it's how to make matcha. I think I averaged at least a cup of matcha a day 😅
 
 ## New York City Burst
 
+One of the highlights of my internship was getting to spend a week in New York City for a "burst"—an in-person gathering that happens about twice a year. Since many many people work remotely, we have colleagues from all over the world so these bursts are a great opportunity for everyone to come together and connect face-to-face.
+
 ![burst](/img/blog/shopify/burst.webp)
+
+It was cool seeing the New York office, and I had a lot of fun doing team bonding activities like taking a custom scent-making class.
 
 ## Shopify x Socratica Symposium
 
+I also went to [Socratica Winter 2025 Symposium](https://symposium.socratica.info/) as a Shopify sponsor! I think the best part was having reserved front row seats 😎
+
+I don't think I've ever been that close to so many big cameras before...
+
 ![socratica](/img/blog/shopify/socratica.webp)
+
+I had a lot more fun than I initially expected. It was super inspiring to see all these cool projects that these people have been working on.
 
 # What I learned
 
+- Absorb like a sponge
+- Learning with an open mind
+- Have fun!
+
 # Ending Remarks
-
-And of course... all the amazing food and matcha!
-
-![food](/img/blog/shopify/food.webp)

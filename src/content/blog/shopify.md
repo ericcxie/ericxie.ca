@@ -100,8 +100,12 @@ I had a lot more fun than I initially expected. It was super inspiring to see al
 
 # What I learned
 
-- Absorb like a sponge
-- Learning with an open mind
-- Have fun!
+## Absorb like a sponge
+
+## Learning with an open mind
+
+## Have fun!
 
 # Ending Remarks
+
+![office](/img/blog/shopify/office.png)

@@ -51,6 +51,7 @@ module.exports = {
       fontFamily: {
         akkurat: ["var(--font-akkurat)", "sans-serif"],
         system: ["-apple-system", "sans-serif"],
+        inter: ["var(--font-inter)", "sans-serif"],
       },
       colors: {
         background: {

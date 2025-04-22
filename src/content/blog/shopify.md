@@ -14,7 +14,7 @@ As I wrap up my 4 months Software Engineering internship at Shopify, I wanted a 
 
 # Shopify Ventures Rewrite
 
-My manager came to me one day and told me that he had an exciting project for me to work on where I'd get the chance to take full ownership. The Venture's team had requested some overhaul to the site such as the ability to update content without a developer and more interactivity.
+My manager came to me one day and told me that he had an exciting project for me where I'd get the chance to take full ownership. The Venture's team had requested some overhaul to the site such as the ability to self-serve content update and more interactivity.
 
 For some context, the original site was built by a third-party agency and so naturally the repo contained a lot of technical debt (dependency hell 🥲). So much so that my manager saw this as a good opportunity to start from scratch and build it in-house.
 
@@ -48,10 +48,15 @@ This ASCII function allows us to create some pretty cool stuff. For example, thi
 
 This was done by using a technique called UV mapping where we take a 128x128 sphere with its UV values as a fragment shader and then map a flat Earth image onto it, effectively mapping the 2D surface to a 3D sphere. The UV map contains coordinates that map each pixel on a sphere to a location on the flat Earth image.
 
-![uv earth](/img/blog/shopify/earth-uv.webp)
-![flat earth](/img/blog/shopify/earth.webp)
+![flat earth](/img/blog/shopify/uv_mapping.png)
 
 You can read more about UV mapping [here](https://en.wikipedia.org/wiki/UV_mapping). To simulate the rotation, we adjust the x-coordinate offset, creating a continuous illusion of spinning. For each "rotated" frame of the globe, we convert it to ASCII characters and then draw these onto the canvas.
+
+Here's another example of where the Image to ASCII function was used.
+
+![flat earth](/img/blog/shopify/differences.gif)
+
+This one actually contains a transition between two ASCII images by blending the characters together slowly as the user scrolls.
 
 # My Intern Experience
 

@@ -35,4 +35,12 @@ export const cardItems = [
     image: "/img/projects/pomoduo.webp",
     link: "https://github.com/ericcxie/pomoduo-timer",
   },
+  {
+    title: "Shopify.vc",
+    tag: "Shopify Ventures",
+    description: "A clean and lightweight website for Shopify Ventures",
+    tools: ["Remix", "Hydrogen", "GraphQL", "Tailwind CSS"],
+    image: "/img/projects/ventures5.jpg",
+    link: "https://shopify.vc/",
+  },
 ];

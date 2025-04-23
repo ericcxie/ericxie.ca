@@ -10,11 +10,11 @@ date: "04-25-2025"
 
 # Background
 
-As I wrap up my 4 months Software Engineering internship at Shopify, I wanted a chance to reflect on my experience and share some of the things I learned along the way. I worked on the Creative team where our goal was to capture the long-term brand value of Shopify. Some past projects that my team was involved with includes [Shopify Milestones](https://milestones.shopify.com/), [Shopify x MrBeast](https://www.shopify.com/mrbeast), and [BFCM](https://bfcm.shopify.com/) to just name a few. This term, my main project was to revamp [shopify.vc](https://shopify.vc/), the main site for Shopify Ventures, our investment division.
+As I wrap up my 4-month Software Engineering internship at Shopify, I wanted a chance to reflect on my experience and share some of the things I learned along the way. I worked on the Creative team where our goal was to capture the long-term brand value of Shopify. Some past projects that my team was involved with include [Shopify Milestones](https://milestones.shopify.com/), [Shopify x MrBeast](https://www.shopify.com/mrbeast), and [BFCM](https://bfcm.shopify.com/) to name a few. This term, my main project was to revamp [shopify.vc](https://shopify.vc/), the main site for Shopify Ventures, our investment division.
 
 # Shopify Ventures Rewrite
 
-My manager came to me one day and told me that he had an exciting project for me where I'd get the chance to take full ownership. The Venture's team had requested some overhaul to the site such as the ability to self-serve content update and more interactivity.
+My manager came to me one day and told me that he had an exciting project for me where I'd get the chance to take full ownership.
 
 For some context, the original site was built by a third-party agency and so naturally the repo contained a lot of technical debt (dependency hell 🥲). So much so that my manager saw this as a good opportunity to start from scratch and build it in-house.
 
@@ -22,11 +22,11 @@ For some context, the original site was built by a third-party agency and so nat
 
 In the old site, the ASCII art animation was implemented using a series of images which as you can imagine is a pretty big performance bottleneck.
 
-The way ASCII art is generated is actually pretty simple. An image is comprised of thousands of pixels each composed of three primary colour values: Red (R), Green (G), and Blue (B). These values are typically 8-bit integers that range from 0 to 255, representing the intensity of the colour in the pixel.
+The way ASCII art is generated is actually pretty simple. An image is comprised of pixels each composed of three primary colour values: Red (R), Green (G), and Blue (B). These values are typically 8-bit integers that range from 0 to 255, representing the intensity of the colour in the pixel.
 
 ![pixel RGB](/img/blog/shopify/pixel_rgb.webp)
 
-For each pixel of a given image, we calculate its grayscale value (how light or dark the pixel is) using the formula `0.3 x R + 0.59 x G + 0.11 x B` where R, G, and B represents the red, green and blue colour values.
+For each pixel of a given image, we calculate its grayscale value (how light or dark the pixel is) using the formula `0.3 x R + 0.59 x G + 0.11 x B` where R, G, and B represent the red, green and blue colour values.
 
 Once we have this, we can map the grayscale value to a set of ASCII characters. In my case, I defined it as:
 
@@ -90,7 +90,7 @@ It was cool seeing the New York office, and I had a lot of fun doing team bondin
 
 ## Shopify x Socratica Symposium
 
-I also went to [Socratica Winter 2025 Symposium](https://symposium.socratica.info/) as a Shopify sponsor! I think the best part was having reserved front row seats 😎
+I also went to [Socratica Winter 2025 Symposium](https://symposium.socratica.info/) as a Shopify sponsor! I think the best part was having reserved front-row seats 😎
 
 I don't think I've ever been that close to so many big cameras before...
 
@@ -108,18 +108,16 @@ The biggest mindset shift for me this term was learning how to be comfortable no
 
 ## Learn with an open mind
 
-As engineers, it's often easy to dismiss anything that isn't directly technical or related to your goals. Being surrounded by a team filled with designers, creatives, and marketers, it gave me a better appreciation for the non-technical sides of product development. I honestly never thought I'd work with creative coding ever but at the end of the day—I'm glad I did. When else in my career would I get the chance to animate ASCII art.
+As engineers, it's often easy to dismiss anything that isn't directly technical or related to your goals. Being surrounded by a team filled with designers, creatives, and marketers, gave me a better appreciation for the non-technical sides of product development. I honestly never thought I'd work with creative coding ever but at the end of the day—I'm glad I did. When else in my career would I get the chance to animate ASCII art.
 
-## Have fun!
+## When in doubt, go with the simple solution
 
-And last but not least, have fun in the process. Life is too short, and work can get repetitive, so might as well have fun doing it.
+It's easy to think that a more complex solution must be better. I used to believe that if a library exists, you should use it. But in practice, I've found that it's often better _not_ to. I could've used GSAP or Framer for animations, or an ASCII rendering library, but that would've added extra dependencies, increased the bundle size, and reduced my creative control. That's not to say that you should rebuild everything from scratch. But when the problem is simple enough, building it yourself often results in cleaner, faster, and more maintainable code.
 
 # Ending Remarks
 
-It's kinda surreal that this term has already come to an end. I'd be lying if I said I wouldn't miss the bottomless snacks on the 11th floor or the weekly pair programming session and 1:1 with my mentor in room 6.225° every Wednesday.
+It's kinda surreal that this term has already come to an end. I'd be lying if I said I wouldn't miss the bottomless snacks on the 11th floor or the weekly pair programming session with my mentor in room 6.225° every Wednesday.
 
 ![office](/img/blog/shopify/office.webp)
-
-I may be the first engineering intern on the branding team, but I know I won’t be the last.
 
 I’m incredibly thankful to my team for being so welcoming, and to my manager and mentor for consistently supporting my growth and learning throughout the term.

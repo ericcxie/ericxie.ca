@@ -33,12 +33,12 @@
 }
 
 .post > h1 {
-  @apply text-2xl tracking-tight;
+  @apply font-inter text-2xl tracking-tight;
   @apply font-bold;
 }
 
 .post > h2 {
-  @apply text-xl tracking-tight;
+  @apply font-inter text-xl tracking-tight;
 }
 
 .post a {

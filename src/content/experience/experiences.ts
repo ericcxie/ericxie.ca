@@ -1,16 +1,5 @@
 export const experienceItems = [
   {
-    company: "Shopify",
-    position: "Software Engineer Intern",
-    location: "Toronto, ON",
-    date: "01/2025 - Present",
-    logo: "/img/logos/shopify.svg",
-    color: "#41623B",
-    link: "https://www.shopify.com/",
-    present: true,
-    incoming: false,
-  },
-  {
     company: "Wat Street",
     position: "Backend Developer",
     location: "Waterloo, ON",
@@ -19,6 +8,17 @@ export const experienceItems = [
     color: "#1B1605",
     link: "https://watstreet.netlify.app/",
     present: true,
+    incoming: false,
+  },
+  {
+    company: "Shopify",
+    position: "Software Engineer Intern",
+    location: "Toronto, ON",
+    date: "01/2025 - 04/2025",
+    logo: "/img/logos/shopify.svg",
+    color: "#41623B",
+    link: "https://www.shopify.com/",
+    present: false,
     incoming: false,
   },
   {

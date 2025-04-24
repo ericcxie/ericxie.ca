@@ -40,7 +40,7 @@ export const cardItems = [
     tag: "Shopify Ventures",
     description: "A clean and lightweight website for Shopify Ventures",
     tools: ["Remix", "Hydrogen", "GraphQL", "Tailwind CSS"],
-    image: "/img/projects/ventures5.webp",
+    image: "/img/projects/shopify_ventures.webp",
     link: "https://shopify.vc/",
   },
 ];

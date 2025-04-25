@@ -121,3 +121,5 @@ It's kinda surreal that this term has already come to an end. I'd be lying if I 
 ![office](/img/blog/shopify/office.webp)
 
 I’m incredibly thankful to my team for being so welcoming, and to my manager and mentor for consistently supporting my growth and learning throughout the term.
+
+Although I didn’t get to meet Tobi this term, all the amazing Shopifolk I met along the way more than made up for it.

@@ -5,7 +5,7 @@ export const cardItems = [
     description:
       "An all-in-one investment management platform that allows users to monitor, analyze and rebalance their portfolios.",
     tools: ["TypeScript", "React", "Flask", "PostgreSQL", "Firebase"],
-    image: "/img/projects/optiwealth.jpg",
+    image: "/img/projects/optiwealth.webp",
     link: "https://optiwealth.vercel.app/",
   },
   {
@@ -14,7 +14,7 @@ export const cardItems = [
     description:
       "A web scraper application that captures item search results data from amazon.ca",
     tools: ["Python", "Selenium", "BeautifulSoup4", "Pandas"],
-    image: "/img/projects/amafind.jpg",
+    image: "/img/projects/amafind.webp",
     link: "https://github.com/ericcxie/AmaFind",
   },
   {
@@ -23,7 +23,7 @@ export const cardItems = [
     description:
       "A supply ordering app that helps small businesses cut costs by consolidating orders for bulk purchases",
     tools: ["React", "Flask", "SQLite", "Tailwind CSS"],
-    image: "/img/projects/collaboracart.jpg",
+    image: "/img/projects/collaboracart.webp",
     link: "https://github.com/ericcxie/CollaboraCart",
   },
   {
@@ -32,7 +32,15 @@ export const cardItems = [
     description:
       "A real time study room app. Study together with your friends using the Pomodoro Technique",
     tools: ["Node.js", "Express.js", "Socket.io", "Firebase"],
-    image: "/img/projects/pomoduo.jpg",
+    image: "/img/projects/pomoduo.webp",
     link: "https://github.com/ericcxie/pomoduo-timer",
+  },
+  {
+    title: "Shopify.vc",
+    tag: "Shopify Ventures",
+    description: "A clean and lightweight website for Shopify Ventures",
+    tools: ["Remix", "Hydrogen", "GraphQL", "Tailwind CSS"],
+    image: "/img/projects/shopify_ventures.webp",
+    link: "https://shopify.vc/",
   },
 ];

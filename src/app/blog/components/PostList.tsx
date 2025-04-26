@@ -23,7 +23,7 @@ const PostList = ({ posts }: Props) => {
   }
 
   return (
-    <ul className="animated-list space-y-2">
+    <ul className="animated-list">
       {allPosts.map((post, index) => (
         <li key={index}>
           <Post category={post.category} posts={[post]} key={index} />

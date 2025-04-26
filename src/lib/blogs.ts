@@ -1,12 +1,11 @@
 import fs from "fs";
 import matter from "gray-matter";
-import path from "path";
 import moment from "moment";
+import path from "path";
 import { remark } from "remark";
 import html from "remark-html";
 
 import { PostItem } from "@/types";
-import { m } from "framer-motion";
 
 const postsDirectory = path.join(process.cwd(), "src", "content", "blog");
 
@@ -56,6 +55,14 @@ export const getCategorizedPosts = (): Record<string, PostItem[]> => {
   return categorizedPosts;
 };
 
+// Calculate reading time based on word count
+const calculateReadingTime = (content: string): number => {
+  const wordsPerMinute = 225;
+  const wordCount = content.trim().split(/\s+/).length;
+  const readingTime = Math.ceil(wordCount / wordsPerMinute);
+  return readingTime > 0 ? readingTime : 1;
+};
+
 export const getPostData = async (id: string) => {
   const fullPath = path.join(postsDirectory, `${id}.md`);
 
@@ -68,6 +75,7 @@ export const getPostData = async (id: string) => {
     .process(matterResult.content);
 
   const contentHtml = processedContent.toString();
+  const readingTime = calculateReadingTime(matterResult.content);
 
   return {
     id,
@@ -75,5 +83,6 @@ export const getPostData = async (id: string) => {
     title: matterResult.data.title,
     category: matterResult.data.category,
     date: moment(matterResult.data.date, "MM-DD-YYYY").format("MMMM Do, YYYY"),
+    readingTime,
   };
 };

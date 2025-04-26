@@ -35,4 +35,18 @@ Add the following in the `.env` file and replace with your access token
 NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN="YOUR_ACCESS_TOKEN"
 ```
 
+### Running Image Optimization Script
+
+_This script converts all images in the public folder to WebP format for optimization purposes_
+
+#### Prerequisites
+
+1. `python3 -m venv .venv`
+1. `source .venv/bin/activate`
+1. `pip install -r scripts/requirements.txt`
+
+#### Run the script
+
+`python3 scripts/convert_to_webp.py`
+
 [![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)](https://www.figma.com/design/viQidOk1Ohujendju5nR74/Personal-Website-2.0?node-id=0-1&t=yC1RJkEj4UPZuQ95-1)

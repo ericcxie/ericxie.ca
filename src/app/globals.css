@@ -33,12 +33,12 @@
 }
 
 .post > h1 {
-  @apply text-2xl tracking-tight;
+  @apply font-inter text-2xl tracking-tight;
   @apply font-bold;
 }
 
 .post > h2 {
-  @apply text-xl tracking-tight;
+  @apply font-inter text-xl tracking-tight;
 }
 
 .post a {
@@ -46,7 +46,7 @@
 }
 
 .post > p {
-  @apply text-text-light-headerLight dark:text-text-dark-body;
+  @apply font-inter text-text-light-headerLight dark:text-text-dark-body;
 }
 
 .post code {
@@ -54,7 +54,7 @@
 }
 
 .post > ul {
-  @apply mx-10 flex list-disc flex-col gap-2;
+  @apply font-inter mx-10 flex list-disc flex-col gap-2;
 }
 
 .post > pre {
@@ -66,7 +66,7 @@
 }
 
 .post > blockquote {
-  @apply border-l-2 border-neutral-600 border-opacity-40 pl-5 italic;
+  @apply font-inter border-l-2 border-neutral-600 border-opacity-40 pl-5 italic;
 }
 
 .post > p > img {

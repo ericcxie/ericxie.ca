@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import local from "next/font/local";
+import { Inter } from "next/font/google";
 import Head from "next/head";
 import "./globals.css";
 
@@ -13,6 +14,11 @@ const akkurat = local({
     { path: "../../public/fonts/AkkuratPro-Bold.otf", weight: "700" },
   ],
   variable: "--font-akkurat",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +40,7 @@ export default function RootLayout({
         />
       </Head>
       <body
-        className={`${akkurat.className} flex min-h-screen flex-col bg-background-light dark:bg-background-dark`}
+        className={`${akkurat.className} ${inter.variable} flex min-h-screen flex-col bg-background-light dark:bg-background-dark`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Header />

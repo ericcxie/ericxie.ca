@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useState, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon } from "@heroicons/react/20/solid";
@@ -27,19 +27,51 @@ export default function Header() {
   const pathname = `/${usePathname().split("/")[1]}`;
   const [hoveredPath, setHoveredPath] = useState(pathname);
   const popoverButtonRef = useRef<HTMLButtonElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [disableAnimation, setDisableAnimation] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setHoveredPath(pathname);
+
+    // Disable animation briefly when pathname changes
+    setDisableAnimation(true);
+    const timer = setTimeout(() => {
+      setDisableAnimation(false);
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   const handleLinkClick = () => {
     if (popoverButtonRef.current) {
       popoverButtonRef.current.click();
     }
+    setDisableAnimation(true);
   };
 
   return (
-    <header className="md:mt-6">
+    <header
+      className={`duration-400 sticky top-0 z-50 transition-all md:mt-6${
+        isScrolled
+          ? "bg-background-light/80 backdrop-blur-lg dark:bg-background-dark/80"
+          : ""
+      }`}
+    >
       <nav className="mx-auto flex max-w-[700px] items-center justify-between gap-3 px-4 py-3 md:px-6">
         <Link
           href="/"
           className="ml-2 shrink-0 text-text-light-body dark:text-text-dark-headerDark md:ml-0"
+          onClick={() => setDisableAnimation(true)}
         >
           <h1 className={`${autograf.className} text-3xl`}>Eric</h1>
         </Link>
@@ -57,11 +89,16 @@ export default function Header() {
                 }`}
                 data-active={isActive}
                 href={item.href}
-                onMouseOver={() => setHoveredPath(item.href)}
-                onMouseLeave={() => setHoveredPath(pathname)}
+                onClick={() => setDisableAnimation(true)}
+                onMouseOver={() =>
+                  !disableAnimation && setHoveredPath(item.href)
+                }
+                onMouseLeave={() =>
+                  !disableAnimation && setHoveredPath(pathname)
+                }
               >
                 <span>{item.label}</span>
-                {item.href === hoveredPath && (
+                {item.href === hoveredPath && !disableAnimation && (
                   <motion.div
                     className="absolute bottom-0 left-0 -z-10 h-full rounded-md bg-stone-200 dark:bg-stone-800/80"
                     layoutId="navbar"

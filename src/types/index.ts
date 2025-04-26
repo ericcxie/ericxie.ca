@@ -3,4 +3,5 @@ export type PostItem = {
   title: string;
   date: string;
   category: string;
+  readingTime?: number;
 };

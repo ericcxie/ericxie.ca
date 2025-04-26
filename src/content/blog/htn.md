@@ -6,9 +6,9 @@ category: "Work"
 date: "12-30-2024"
 ---
 
-![hackthenorth](/img/blog/htn/hackthenorth.jpg)
+![hackthenorth](/img/blog/htn/hackthenorth.webp)
 
-# Overview
+# Background
 
 A year ago, I applied as a hacker to Canada's biggest hackathon—Hack the North. It was THE hackathon to attend for any aspiring student looking to pursue a career in tech and like many others, I dreamt of attending it one day. To my dismay, I was rejected.
 
@@ -28,13 +28,13 @@ This was our first project and probably one of the more important ones. Every ye
 
 I developed the hacker testimonial and sponsors section of the website. Check out the completed product [here](https://hackthenorth.com/)!
 
-![landing page](/img/blog/htn/landing.jpg)
+![landing page](/img/blog/htn/landing.webp)
 
 ## Hacker Applications
 
 Similar to how we had to revamp our static site, we also redesigned the hacker application portal to match this year's theme. We try to make the application experience as seamless and interactive as possible. This year, we gave applicants the ability to customize their own car which guides them throughout the entire process.
 
-![customize car](/img/blog/htn/customize_car.png)
+![customize car](/img/blog/htn/customize_car.webp)
 
 I worked on the long answer sections (application and survey).
 
@@ -48,7 +48,7 @@ Previously, each route was represented as its own bus object (e.g. Western → U
 
 Backend made a change that saved bus information into a `BusStops` array as part of the bus object. This meant that we had to update the way we search for buses and assign/remove users from stops.
 
-![travel_tool](/img/blog/htn/travel_tool.png)
+![travel_tool](/img/blog/htn/travel_tool.webp)
 
 ## Volunteer Tool
 
@@ -56,9 +56,9 @@ This project was definitely more difficult as we had to build it from scratch. I
 
 Unfortunately, we were unable to launch the tool on time this year due to hiccups along the way and the tight timeline we had. Nevertheless, I'm proud of the progress we made and it certainly sets the stage for the frontend team next year to take over! I'm looking forward to seeing this tool shipped and used by volunteers for years to come.
 
-![travel_tool](/img/blog/htn/volunteer_dashboard.png)
+![travel_tool](/img/blog/htn/volunteer_dashboard.webp)
 
-![travel_tool](/img/blog/htn/volunteer_database.png)
+![travel_tool](/img/blog/htn/volunteer_database.webp)
 
 # What I learned
 
@@ -74,8 +74,8 @@ Although I won't be returning to the team next year, I'm glad I got the opportun
 
 I'm grateful to have had the chance to work with such a talented group of people and I'm sure HTN 2025 will be even better!
 
-![frontend team](/img/blog/htn/fe_team.jpg)
+![htn team](/img/blog/htn/htn_team.webp)
 
-![htn team](/img/blog/htn/htn_team.jpg)
+![frontend team](/img/blog/htn/fe_team.webp)
 
 Team: [Eugene Zhang](https://www.linkedin.com/in/eugene-ezzhang/), [Roselyn Huynh](https://www.linkedin.com/in/roselynhuynh/), [Dorian Chen](https://www.linkedin.com/in/dorianchen/), [Ishaan Dey](https://www.linkedin.com/in/ishaan1013/), [Megan Wu](https://www.linkedin.com/in/megan-bx-wu/), [Feng Zhang](https://www.linkedin.com/in/fengzhang12/)

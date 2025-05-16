@@ -31,11 +31,8 @@ export default function Home() {
                 University of Waterloo
               </LinkPreview>
             </span>
-            . Previously, I was a Software Engineer Intern at{" "}
-            <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
-              <LinkPreview url="https://www.shopify.com/">Shopify</LinkPreview>
-            </span>
-            .
+            . Currently, I&apos;m looking for F25/W26 SWE internship
+            opportunities.
           </p>
         </div>
         <div className="mt-4 space-y-1">

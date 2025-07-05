@@ -1,27 +1,30 @@
 import { PhotoGallery } from "@/components/ui/PhotoGallery";
 import {
   Balcony,
-  Building,
   ChairArtGallery,
   Corridor,
   DogWaterfront,
   FoodTruck,
   GalleryWall,
+  Kamakura,
   LibraryStairs,
   LibraryStudy,
   MallWalk,
   ManInSuit,
   NYCStarbucks,
   OldCar,
-  Serenity,
+  SevenEleven,
   ShipAirplane,
   Soho,
   SouthBeach,
   Stairs,
   Stairs2,
+  Store,
   StreetArt,
   TakeoutSign,
+  Temple,
   Umbrellas,
+  VendingMachine,
   VintageTV,
   WellCafe,
 } from "../../../public/img";
@@ -58,6 +61,11 @@ export default function Photos() {
 }
 
 const images = [
+  Kamakura,
+  Store,
+  VendingMachine,
+  Temple,
+  SevenEleven,
   NYCStarbucks,
   Soho,
   StreetArt,
@@ -79,7 +87,5 @@ const images = [
   Balcony,
   FoodTruck,
   MallWalk,
-  Building,
   WellCafe,
-  Serenity,
 ];

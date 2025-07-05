@@ -1,12 +1,12 @@
 export const cardItems = [
   {
-    title: "OptiWealth",
-    tag: "Portfolio rebalancer",
+    title: "Glance",
+    tag: "AI Social Cheat Sheet",
     description:
-      "An all-in-one investment management platform that allows users to monitor, analyze and rebalance their portfolios.",
-    tools: ["TypeScript", "React", "Flask", "PostgreSQL", "Firebase"],
-    image: "/img/projects/optiwealth.webp",
-    link: "https://optiwealth.vercel.app/",
+      "An AI-powered tool that summarizes any X user's tweets into a snapshot of their interests, tone, and focus.",
+    tools: ["Next", "OpenAI API", "X API", "Supabase", "Prisma"],
+    image: "/img/projects/glance.webp",
+    link: "https://github.com/ericcxie/glance/tree/main",
   },
   {
     title: "AmaFind",
@@ -42,5 +42,14 @@ export const cardItems = [
     tools: ["Remix", "Hydrogen", "GraphQL", "Tailwind CSS"],
     image: "/img/projects/shopify_ventures.webp",
     link: "https://shopify.vc/",
+  },
+  {
+    title: "OptiWealth",
+    tag: "Portfolio rebalancer",
+    description:
+      "An all-in-one investment management platform that allows users to monitor, analyze and rebalance their portfolios.",
+    tools: ["TypeScript", "React", "Flask", "PostgreSQL", "Firebase"],
+    image: "/img/projects/optiwealth.webp",
+    link: "https://optiwealth.vercel.app/",
   },
 ];

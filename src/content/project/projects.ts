@@ -9,15 +9,6 @@ export const cardItems = [
     link: "https://github.com/ericcxie/glance/tree/main",
   },
   {
-    title: "AmaFind",
-    tag: "Amazon web scraper",
-    description:
-      "A web scraper application that captures item search results data from amazon.ca",
-    tools: ["Python", "Selenium", "BeautifulSoup4", "Pandas"],
-    image: "/img/projects/amafind.webp",
-    link: "https://github.com/ericcxie/AmaFind",
-  },
-  {
     title: "CollaboraCart",
     tag: "Supply Ordering Application",
     description:

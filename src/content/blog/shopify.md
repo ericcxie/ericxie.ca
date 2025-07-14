@@ -68,6 +68,8 @@ In the past, whenever the Venture's team needed to make an update to the list of
 
 Now, all the metaobjects are stored in the storefront and we retrieve the data by making a simple GraphQL call.
 
+You can check out the finished website [here](https://shopify.vc/)!
+
 # My Intern Experience
 
 I still remember the sheer awe I felt as my manager and mentor showed me around the Toronto Port office for the first time.

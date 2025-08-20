@@ -3,11 +3,11 @@ export const experienceItems = [
     company: "Wat Street",
     position: "Backend Developer",
     location: "Waterloo, ON",
-    date: "01/2025 - Present",
+    date: "01/2025 - 08/2025",
     logo: "/img/logos/watstreet.webp",
     color: "#1B1605",
     link: "https://watstreet.netlify.app/",
-    present: true,
+    present: false,
     incoming: false,
   },
   {

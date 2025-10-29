@@ -1,5 +1,16 @@
 export const experienceItems = [
   {
+    company: "Gem",
+    position: "Software Engineer Intern",
+    location: "San Francisco, CA",
+    date: "01/2026 - 04/2026",
+    logo: "/img/logos/gem.webp",
+    color: "#0E61FF",
+    link: "https://www.gem.com/",
+    present: false,
+    incoming: true,
+  },
+  {
     company: "Wat Street",
     position: "Backend Developer",
     location: "Waterloo, ON",

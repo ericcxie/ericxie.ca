@@ -31,7 +31,7 @@ export default function Home() {
                 University of Waterloo
               </LinkPreview>
             </span>
-            . Currently seeking W26/S26 SWE internship opportunities.
+            . Currently seeking Summer 26 SWE internship opportunities.
           </p>
         </div>
         <div className="mt-4 space-y-1">

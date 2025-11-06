@@ -2,7 +2,7 @@
 import { cn } from "@/utils/cn";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 interface PhotoWithLocation {
   image: StaticImageData;
@@ -24,6 +24,9 @@ export const PhotoGallery = ({
     images?.map((img) => ({ image: img, location: "" })) ||
     [];
   const gridRef = useRef<any>(null);
+  const [activeMobilePhoto, setActiveMobilePhoto] = useState<number | null>(
+    null,
+  );
   const { scrollYProgress } = useScroll({
     container: gridRef,
     offset: ["start start", "end start"],
@@ -47,8 +50,38 @@ export const PhotoGallery = ({
       )}
       ref={gridRef}
     >
+      {/* Mobile: Single column in chronological order */}
+      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 md:hidden">
+        {photoData.map((photo, idx) => (
+          <div
+            key={`mobile-${idx}`}
+            className="relative cursor-pointer"
+            onClick={() =>
+              setActiveMobilePhoto(activeMobilePhoto === idx ? null : idx)
+            }
+          >
+            <Image
+              src={photo.image}
+              className={cn(
+                "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500",
+                activeMobilePhoto === idx && "grayscale",
+              )}
+              height="400"
+              width="400"
+              alt="thumbnail"
+            />
+            {photo.location && activeMobilePhoto === idx && (
+              <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white">
+                📍 {photo.location}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: 3-column masonry grid */}
       <div
-        className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-5 md:grid-cols-2 lg:grid-cols-3"
+        className="mx-auto hidden max-w-5xl grid-cols-1 items-start gap-5 md:grid md:grid-cols-2 lg:grid-cols-3"
         ref={gridRef}
       >
         <div className="grid gap-5">

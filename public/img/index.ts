@@ -1,6 +1,5 @@
 export { default as Dscf4105 } from "./photos/DSCF4105.webp";
 export { default as Dscf4288 } from "./photos/DSCF4288.webp";
-export { default as Dscf4238 } from "./photos/DSCF4238.webp";
 export { default as Dscf3953 } from "./photos/DSCF3953.webp";
 export { default as Dscf4292 } from "./photos/DSCF4292.webp";
 export { default as Dscf4269 } from "./photos/DSCF4269.webp";

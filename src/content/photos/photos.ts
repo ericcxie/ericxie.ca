@@ -10,28 +10,10 @@ export interface PhotoData {
 
 export const photosData: PhotoData[] = [
   {
-    filename: "DSCF4105.webp",
-    exportName: "Dscf4105",
-    date: "2025-11-06T20:44:55.061424",
-    location: "Venice, Italy",
-  },
-  {
     filename: "DSCF4288.webp",
     exportName: "Dscf4288",
     date: "2025-11-06T20:44:32.169724",
     location: "Walensee, Switzerland",
-  },
-  {
-    filename: "DSCF4238.webp",
-    exportName: "Dscf4238",
-    date: "2025-11-06T20:44:04.898392",
-    location: "Walensee, Switzerland",
-  },
-  {
-    filename: "DSCF3953.webp",
-    exportName: "Dscf3953",
-    date: "2025-11-06T20:43:37.842229",
-    location: "Venice, Italy",
   },
   {
     filename: "DSCF4292.webp",
@@ -46,6 +28,30 @@ export const photosData: PhotoData[] = [
     location: "Walensee, Switzerland",
   },
   {
+    filename: "DSCF4105.webp",
+    exportName: "Dscf4105",
+    date: "2025-11-03T20:44:55.061424",
+    location: "Venice, Italy",
+  },
+  {
+    filename: "DSCF3953.webp",
+    exportName: "Dscf3953",
+    date: "2025-11-03T20:43:37.842229",
+    location: "Venice, Italy",
+  },
+  {
+    filename: "temple.webp",
+    exportName: "Temple",
+    date: "2025-07-06T00:16:47.466115",
+    location: "Kyoto, Japan",
+  },
+  {
+    filename: "kamakura.webp",
+    exportName: "Kamakura",
+    date: "2025-07-06T00:16:39.057017",
+    location: "Kamakura, Japan",
+  },
+  {
     filename: "seven_eleven.webp",
     exportName: "SevenEleven",
     date: "2025-07-06T00:16:52.179718",
@@ -58,22 +64,10 @@ export const photosData: PhotoData[] = [
     location: "Tokyo, Japan",
   },
   {
-    filename: "temple.webp",
-    exportName: "Temple",
-    date: "2025-07-06T00:16:47.466115",
-    location: "Kyoto, Japan",
-  },
-  {
     filename: "vending_machine.webp",
     exportName: "VendingMachine",
     date: "2025-07-06T00:16:45.282754",
     location: "Tokyo, Japan",
-  },
-  {
-    filename: "kamakura.webp",
-    exportName: "Kamakura",
-    date: "2025-07-06T00:16:39.057017",
-    location: "Kamakura, Japan",
   },
   {
     filename: "well_cafe.webp",
@@ -100,6 +94,30 @@ export const photosData: PhotoData[] = [
     location: "New York City, New York",
   },
   {
+    filename: "soho.webp",
+    exportName: "Soho",
+    date: "2025-05-16T18:29:12.845551",
+    location: "New York City, New York",
+  },
+  {
+    filename: "nyc_starbucks.webp",
+    exportName: "NycStarbucks",
+    date: "2025-05-16T18:29:12.817077",
+    location: "New York City, New York",
+  },
+  {
+    filename: "south_beach.webp",
+    exportName: "SouthBeach",
+    date: "2025-05-16T18:29:12.852392",
+    location: "Miami, Florida",
+  },
+  {
+    filename: "old_car.webp",
+    exportName: "OldCar",
+    date: "2025-05-16T18:29:12.822759",
+    location: "Miami, Florida",
+  },
+  {
     filename: "stairs2.webp",
     exportName: "Stairs2",
     date: "2025-05-16T18:29:12.871325",
@@ -112,39 +130,9 @@ export const photosData: PhotoData[] = [
     location: "Toronto, Canada",
   },
   {
-    filename: "south_beach.webp",
-    exportName: "SouthBeach",
-    date: "2025-05-16T18:29:12.852392",
-    location: "Miami, Florida",
-  },
-  {
-    filename: "soho.webp",
-    exportName: "Soho",
-    date: "2025-05-16T18:29:12.845551",
-    location: "New York City, New York",
-  },
-  {
-    filename: "old_car.webp",
-    exportName: "OldCar",
-    date: "2025-05-16T18:29:12.822759",
-    location: "Miami, Florida",
-  },
-  {
-    filename: "nyc_starbucks.webp",
-    exportName: "NycStarbucks",
-    date: "2025-05-16T18:29:12.817077",
-    location: "New York City, New York",
-  },
-  {
     filename: "library_study.webp",
     exportName: "LibraryStudy",
     date: "2025-05-16T18:29:12.804773",
-    location: "Toronto, Canada",
-  },
-  {
-    filename: "library_stairs.webp",
-    exportName: "LibraryStairs",
-    date: "2025-05-16T18:29:12.800445",
     location: "Toronto, Canada",
   },
   {

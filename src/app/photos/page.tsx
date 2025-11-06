@@ -5,11 +5,11 @@ import * as PhotoImports from "../../../public/img";
 export default function Photos() {
   // Get photos with locations in chronological order (newest first)
   const photosWithLocations = photosData
-    .map(photo => ({
+    .map((photo) => ({
       image: (PhotoImports as any)[photo.exportName],
-      location: photo.location
+      location: photo.location,
     }))
-    .filter(photo => photo.image); // Filter out any missing imports
+    .filter((photo) => photo.image); // Filter out any missing imports
 
   return (
     <main className="flex flex-col gap-4">
@@ -23,7 +23,7 @@ export default function Photos() {
         className="animate-in text-text-light-body dark:text-text-dark-body"
         style={{ "--index": 2 } as React.CSSProperties}
       >
-        📸 Fujifilm XT-30 ii
+        📸 I like to capture the little moments in my life
       </p>
       <div
         className="animate-in"

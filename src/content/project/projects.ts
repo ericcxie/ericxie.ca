@@ -1,12 +1,11 @@
 export const cardItems = [
   {
-    title: "Glance",
-    tag: "AI Social Cheat Sheet",
-    description:
-      "An AI-powered tool that summarizes any X user's tweets into a snapshot of their interests, tone, and focus.",
-    tools: ["Next", "OpenAI API", "X API", "Supabase", "Prisma"],
-    image: "/img/projects/glance.webp",
-    link: "https://github.com/ericcxie/glance/tree/main",
+    title: "Shopify.vc",
+    tag: "Shopify Ventures",
+    description: "A clean and lightweight website for Shopify Ventures",
+    tools: ["Remix", "Hydrogen", "GraphQL", "Tailwind CSS"],
+    image: "/img/projects/shopify_ventures.webp",
+    link: "https://shopify.vc/",
   },
   {
     title: "CollaboraCart",
@@ -27,14 +26,6 @@ export const cardItems = [
     link: "https://github.com/ericcxie/pomoduo-timer",
   },
   {
-    title: "Shopify.vc",
-    tag: "Shopify Ventures",
-    description: "A clean and lightweight website for Shopify Ventures",
-    tools: ["Remix", "Hydrogen", "GraphQL", "Tailwind CSS"],
-    image: "/img/projects/shopify_ventures.webp",
-    link: "https://shopify.vc/",
-  },
-  {
     title: "OptiWealth",
     tag: "Portfolio rebalancer",
     description:
@@ -42,5 +33,14 @@ export const cardItems = [
     tools: ["TypeScript", "React", "Flask", "PostgreSQL", "Firebase"],
     image: "/img/projects/optiwealth.webp",
     link: "https://optiwealth.vercel.app/",
+  },
+  {
+    title: "Glance",
+    tag: "AI Social Cheat Sheet",
+    description:
+      "An AI-powered tool that summarizes any X user's tweets into a snapshot of their interests, tone, and focus.",
+    tools: ["Next", "OpenAI API", "X API", "Supabase", "Prisma"],
+    image: "/img/projects/glance.webp",
+    link: "https://github.com/ericcxie/glance/tree/main",
   },
 ];

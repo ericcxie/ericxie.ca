@@ -7,8 +7,8 @@ export const experienceItems = [
     logo: "/img/logos/gem.webp",
     color: "#0E61FF",
     link: "https://www.gem.com/",
-    present: false,
-    incoming: true,
+    present: true,
+    incoming: false,
   },
   {
     company: "Shopify",

@@ -32,7 +32,10 @@ export default function Home() {
               </LinkPreview>
             </span>
             . Currently, I&apos;m a Software Engineer Intern at{" "}
-            <LinkPreview url="https://www.gem.com/">Gem</LinkPreview>.
+            <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
+              <LinkPreview url="https://www.gem.com/">Gem</LinkPreview>
+            </span>
+            .
           </p>
         </div>
         <div className="mt-4 space-y-1">

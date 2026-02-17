@@ -31,7 +31,8 @@ export default function Home() {
                 University of Waterloo
               </LinkPreview>
             </span>
-            . Currently seeking Summer 26 SWE internship opportunities.
+            . Currently, I&apos;m a Software Engineer Intern at{" "}
+            <LinkPreview url="https://www.gem.com/">Gem</LinkPreview>.
           </p>
         </div>
         <div className="mt-4 space-y-1">

@@ -1,15 +1,15 @@
 export const experienceItems = [
-  // {
-  //   company: "Warp",
-  //   position: "Software Engineer Intern",
-  //   location: "New York, NY",
-  //   date: "05/2026 - 08/2026",
-  //   logo: "/img/logos/warp.png",
-  //   color: "#000000",
-  //   link: "https://www.warp.dev/",
-  //   present: false,
-  //   incoming: true,
-  // },
+  {
+    company: "Warp",
+    position: "Software Engineer Intern",
+    location: "New York, NY",
+    date: "05/2026 - 08/2026",
+    logo: "/img/logos/warp.png",
+    color: "#000000",
+    link: "https://www.warp.dev/",
+    present: false,
+    incoming: true,
+  },
   {
     company: "Gem",
     position: "Software Engineer Intern",

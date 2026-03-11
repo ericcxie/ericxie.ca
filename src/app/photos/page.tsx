@@ -1,15 +1,46 @@
 import { PhotoGallery } from "@/components/ui/PhotoGallery";
 import { photosData } from "@/content/photos/photos";
+import { PhotoMetadata } from "@/app/api/photos/route";
 import * as PhotoImports from "../../../public/img";
 
-export default function Photos() {
-  // Get photos with locations in chronological order (newest first)
-  const photosWithLocations = photosData
+async function getBlobPhotos(): Promise<PhotoMetadata[]> {
+  try {
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/photos`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch {
+    return [];
+  }
+}
+
+export default async function Photos() {
+  const blobPhotos = await getBlobPhotos();
+
+  // Blob photos (from Vercel Blob) - newest first
+  const blobPhotosWithLocations = blobPhotos.map((photo) => ({
+    image: photo.url,
+    location: photo.location,
+    date: photo.date,
+  }));
+
+  // Local photos (from repo) - already sorted newest first
+  const localPhotosWithLocations = photosData
     .map((photo) => ({
       image: (PhotoImports as any)[photo.exportName],
       location: photo.location,
+      date: photo.date,
     }))
-    .filter((photo) => photo.image); // Filter out any missing imports
+    .filter((photo) => photo.image);
+
+  // Combine and sort all photos by date (newest first)
+  const allPhotos = [...blobPhotosWithLocations, ...localPhotosWithLocations]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map(({ image, location }) => ({ image, location }));
 
   return (
     <main className="flex flex-col gap-4">
@@ -29,8 +60,8 @@ export default function Photos() {
         className="animate-in"
         style={{ "--index": 3 } as React.CSSProperties}
       >
-        {photosWithLocations.length > 0 ? (
-          <PhotoGallery photosWithLocations={photosWithLocations} />
+        {allPhotos.length > 0 ? (
+          <PhotoGallery photosWithLocations={allPhotos} />
         ) : (
           <p className="italic text-text-light-body dark:text-text-dark-body">
             Stay tuned!

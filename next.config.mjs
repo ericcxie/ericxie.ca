@@ -11,6 +11,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "api.microlink.io",
       },
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
     ],
   },
 };

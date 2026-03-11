@@ -9,7 +9,8 @@ export default function Current() {
         connect!
       </p>
       <div className="relative">
-        <Map lng={-122.401} lat={37.7946} />
+        {/* TODO: uncomment Map when MAPBOX_TOKEN is available */}
+        {/* <Map lng={-122.401} lat={37.7946} /> */}
         <div className="absolute bottom-4 left-4 flex items-center rounded-lg bg-neutral-100/75 px-4 py-1.5 backdrop-blur dark:bg-neutral-900/75 md:bottom-6 md:left-6">
           <p className="text-primary text-sm font-medium">San Francisco, CA</p>
         </div>

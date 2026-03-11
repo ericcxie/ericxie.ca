@@ -5,8 +5,12 @@ import Image, { StaticImageData } from "next/image";
 import { useRef, useState } from "react";
 
 interface PhotoWithLocation {
-  image: StaticImageData;
+  image: StaticImageData | string;
   location: string;
+}
+
+function getImageSrc(image: StaticImageData | string): string {
+  return typeof image === "string" ? image : image.src;
 }
 
 export const PhotoGallery = ({
@@ -14,7 +18,7 @@ export const PhotoGallery = ({
   photosWithLocations,
   className,
 }: {
-  images?: StaticImageData[];
+  images?: (StaticImageData | string)[];
   photosWithLocations?: PhotoWithLocation[];
   className?: string;
 }) => {
@@ -66,9 +70,10 @@ export const PhotoGallery = ({
                 "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500",
                 activeMobilePhoto === idx && "grayscale",
               )}
-              height="400"
-              width="400"
+              height={400}
+              width={400}
               alt="thumbnail"
+              unoptimized={typeof photo.image === "string"}
             />
             {photo.location && activeMobilePhoto === idx && (
               <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white">
@@ -92,16 +97,17 @@ export const PhotoGallery = ({
               className="group relative"
             >
               <a
-                href={photo.image.src}
+                href={getImageSrc(photo.image)}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image
                   src={photo.image}
                   className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                  height="400"
-                  width="400"
+                  height={400}
+                  width={400}
                   alt="thumbnail"
+                  unoptimized={typeof photo.image === "string"}
                 />
                 {photo.location && (
                   <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
@@ -120,16 +126,17 @@ export const PhotoGallery = ({
               className="group relative"
             >
               <a
-                href={photo.image.src}
+                href={getImageSrc(photo.image)}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image
                   src={photo.image}
                   className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                  height="400"
-                  width="400"
+                  height={400}
+                  width={400}
                   alt="thumbnail"
+                  unoptimized={typeof photo.image === "string"}
                 />
                 {photo.location && (
                   <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
@@ -148,16 +155,17 @@ export const PhotoGallery = ({
               className="group relative"
             >
               <a
-                href={photo.image.src}
+                href={getImageSrc(photo.image)}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Image
                   src={photo.image}
                   className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                  height="400"
-                  width="400"
+                  height={400}
+                  width={400}
                   alt="thumbnail"
+                  unoptimized={typeof photo.image === "string"}
                 />
                 {photo.location && (
                   <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">

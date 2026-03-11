@@ -22,6 +22,8 @@ module.exports = {
         in: "in .6s both",
         "in-reverse": "in-reverse .6s both",
         spotlight: "spotlight 2s ease .75s 1 forwards",
+        "infinite-progress":
+          "infinite-progress 1.5s ease-in-out infinite",
       },
       keyframes: {
         scroll: {
@@ -46,6 +48,11 @@ module.exports = {
             opacity: 1,
             transform: "translate(-50%,-40%) scale(1)",
           },
+        },
+        "infinite-progress": {
+          "0%": { transform: "translateX(-100%)" },
+          "50%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(100%)" },
         },
       },
       fontFamily: {

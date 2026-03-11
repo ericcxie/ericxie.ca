@@ -1,4 +1,5 @@
 import { put, list, del } from "@vercel/blob";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { PhotoMetadata } from "../route";
 
@@ -31,6 +32,38 @@ function isAuthorized(request: NextRequest): boolean {
   return password === process.env.UPLOAD_PASSWORD;
 }
 
+// PATCH: Update metadata for a single photo (by URL)
+export async function PATCH(request: NextRequest) {
+  if (!isAuthorized(request)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const { url, location, date } = await request.json();
+    if (!url) {
+      return NextResponse.json({ error: "URL required" }, { status: 400 });
+    }
+
+    const metadata = await getMetadata();
+    const index = metadata.findIndex((p) => p.url === url);
+    if (index === -1) {
+      return NextResponse.json({ error: "Photo not found" }, { status: 404 });
+    }
+
+    if (location !== undefined) metadata[index].location = location;
+    if (date !== undefined) metadata[index].date = date;
+    await saveMetadata(metadata);
+    revalidatePath("/photos");
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Metadata update error:", error);
+    const message =
+      error instanceof Error ? error.message : "Failed to update metadata";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
 // POST: Save metadata for newly uploaded photos (called once after all uploads finish)
 export async function POST(request: NextRequest) {
   if (!isAuthorized(request)) {
@@ -50,6 +83,7 @@ export async function POST(request: NextRequest) {
     const metadata = await getMetadata();
     metadata.unshift(...newPhotos);
     await saveMetadata(metadata);
+    revalidatePath("/photos");
 
     return NextResponse.json({ success: true });
   } catch (error) {

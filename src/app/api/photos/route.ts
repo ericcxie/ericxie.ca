@@ -1,4 +1,5 @@
 import { list, del, put } from "@vercel/blob";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export interface PhotoMetadata {
@@ -66,6 +67,7 @@ export async function DELETE(request: NextRequest) {
     const metadata = await getMetadata();
     const updated = metadata.filter((p) => p.url !== url);
     await saveMetadata(updated);
+    revalidatePath("/photos");
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json(

@@ -1,65 +1,279 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Dropzone,
-  DropZoneArea,
-  DropzoneDescription,
-  DropzoneFileList,
-  DropzoneFileListItem,
-  DropzoneFileMessage,
-  DropzoneTrigger,
-  DropzoneMessage,
-  DropzoneRemoveFile,
-  InfiniteProgress,
-  useDropzone,
-} from "@/components/ui/dropzone";
+import { useCallback, useRef, useState } from "react";
+import exifr from "exifr";
+
+interface StagedPhoto {
+  id: string;
+  file: File;
+  preview: string;
+  location: string;
+  date: string;
+  locationLoading: boolean;
+  uploading: boolean;
+  uploaded: boolean;
+  error?: string;
+  originalSize?: number;
+  compressedSize?: number;
+}
+
+const WEBP_QUALITY = 0.85;
+
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes}B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)}KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)}MB`;
+}
+
+function compressToWebP(file: File): Promise<File> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) {
+        resolve(file); // fallback to original
+        return;
+      }
+      ctx.drawImage(img, 0, 0);
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            resolve(file);
+            return;
+          }
+          // Replace extension with .webp
+          const name = file.name.replace(/\.[^.]+$/, ".webp");
+          resolve(new File([blob], name, { type: "image/webp" }));
+        },
+        "image/webp",
+        WEBP_QUALITY,
+      );
+    };
+    img.onerror = () => resolve(file); // fallback to original
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+async function reverseGeocode(
+  lat: number,
+  lng: number,
+): Promise<string> {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=10`,
+    );
+    const data = await res.json();
+    const addr = data.address;
+    const city =
+      addr.city || addr.town || addr.village || addr.county || "";
+    const country = addr.country || "";
+    if (city && country) return `${city}, ${country}`;
+    return city || country || "";
+  } catch {
+    return "";
+  }
+}
+
+async function extractMetadata(
+  file: File,
+): Promise<{ location: string; date: string; locationLoading: boolean }> {
+  const today = new Date().toISOString().split("T")[0];
+  try {
+    const exif = await exifr.parse(file, {
+      gps: true,
+      pick: ["DateTimeOriginal", "CreateDate", "latitude", "longitude"],
+    });
+    if (!exif) return { location: "", date: today, locationLoading: false };
+
+    const date = exif.DateTimeOriginal || exif.CreateDate;
+    const dateStr = date
+      ? new Date(date).toISOString().split("T")[0]
+      : today;
+
+    const hasGps =
+      exif.latitude !== undefined && exif.longitude !== undefined;
+
+    return {
+      location: "",
+      date: dateStr,
+      locationLoading: hasGps,
+    };
+  } catch {
+    return { location: "", date: today, locationLoading: false };
+  }
+}
+
+async function extractGpsLocation(file: File): Promise<string> {
+  try {
+    const exif = await exifr.parse(file, {
+      gps: true,
+      pick: ["latitude", "longitude"],
+    });
+    if (!exif || exif.latitude === undefined || exif.longitude === undefined)
+      return "";
+    return reverseGeocode(exif.latitude, exif.longitude);
+  } catch {
+    return "";
+  }
+}
 
 export default function UploadPage() {
   const [password, setPassword] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
-  const [location, setLocation] = useState("");
-  const [date, setDate] = useState(
-    new Date().toISOString().split("T")[0],
-  );
-  const [uploadedPhotos, setUploadedPhotos] = useState<
-    { url: string; filename: string }[]
-  >([]);
+  const [stagedPhotos, setStagedPhotos] = useState<StagedPhoto[]>([]);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [dragActive, setDragActive] = useState(false);
 
-  const dropzone = useDropzone({
-    onDropFile: async (file: File) => {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("location", location);
-      formData.append("date", new Date(date).toISOString());
-
-      const res = await fetch("/api/photos/upload", {
-        method: "POST",
-        headers: { "x-upload-password": password },
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        return { status: "error" as const, error: err.error || "Upload failed" };
+  const addFiles = useCallback(
+    async (files: FileList | File[]) => {
+      const newPhotos: StagedPhoto[] = [];
+      for (const file of Array.from(files)) {
+        if (!file.type.startsWith("image/")) continue;
+        const id = crypto.randomUUID();
+        const preview = URL.createObjectURL(file);
+        const meta = await extractMetadata(file);
+        newPhotos.push({
+          id,
+          file,
+          preview,
+          location: meta.location,
+          date: meta.date,
+          locationLoading: meta.locationLoading,
+          uploading: false,
+          uploaded: false,
+        });
       }
+      setStagedPhotos((prev) => [...prev, ...newPhotos]);
 
-      const photo = await res.json();
-      setUploadedPhotos((prev) => [...prev, photo]);
-      return { status: "success" as const, result: photo.url };
+      // Resolve GPS locations in background
+      for (const photo of newPhotos) {
+        if (photo.locationLoading) {
+          extractGpsLocation(photo.file).then((location) => {
+            setStagedPhotos((prev) =>
+              prev.map((p) =>
+                p.id === photo.id
+                  ? { ...p, location, locationLoading: false }
+                  : p,
+              ),
+            );
+          });
+        }
+      }
     },
-    validation: {
-      accept: { "image/*": [".jpg", ".jpeg", ".png", ".webp", ".heic"] },
-      maxSize: 20 * 1024 * 1024, // 20MB
+    [],
+  );
+
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      setDragActive(false);
+      if (e.dataTransfer.files.length > 0) {
+        addFiles(e.dataTransfer.files);
+      }
     },
-  });
+    [addFiles],
+  );
+
+  const removePhoto = (id: string) => {
+    setStagedPhotos((prev) => {
+      const photo = prev.find((p) => p.id === id);
+      if (photo) URL.revokeObjectURL(photo.preview);
+      return prev.filter((p) => p.id !== id);
+    });
+  };
+
+  const updatePhoto = (id: string, updates: Partial<StagedPhoto>) => {
+    setStagedPhotos((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, ...updates } : p)),
+    );
+  };
+
+  const uploadAll = async () => {
+    const toUpload = stagedPhotos.filter((p) => !p.uploaded);
+    if (toUpload.length === 0) return;
+
+    // Mark all as uploading
+    for (const photo of toUpload) {
+      updatePhoto(photo.id, { uploading: true, error: undefined });
+    }
+
+    // Step 1: Compress and upload all files in parallel
+    const uploadResults = await Promise.allSettled(
+      toUpload.map(async (photo) => {
+        const compressed = await compressToWebP(photo.file);
+        updatePhoto(photo.id, {
+          originalSize: photo.file.size,
+          compressedSize: compressed.size,
+        });
+        const formData = new FormData();
+        formData.append("file", compressed);
+
+        const res = await fetch("/api/photos/upload", {
+          method: "POST",
+          headers: { "x-upload-password": password },
+          body: formData,
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "Upload failed");
+        }
+
+        return { id: photo.id, ...(await res.json()) };
+      }),
+    );
+
+    // Process results and collect successful uploads for metadata
+    const newPhotos: { url: string; filename: string; location: string; date: string }[] = [];
+
+    for (let i = 0; i < toUpload.length; i++) {
+      const result = uploadResults[i];
+      if (result.status === "fulfilled") {
+        updatePhoto(toUpload[i].id, { uploading: false, uploaded: true });
+        newPhotos.push({
+          url: result.value.url,
+          filename: result.value.filename,
+          location: toUpload[i].location,
+          date: new Date(toUpload[i].date).toISOString(),
+        });
+      } else {
+        updatePhoto(toUpload[i].id, {
+          uploading: false,
+          error: result.reason?.message || "Upload failed",
+        });
+      }
+    }
+
+    // Step 2: Save metadata once for all successful uploads
+    if (newPhotos.length > 0) {
+      try {
+        await fetch("/api/photos/metadata", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-upload-password": password,
+          },
+          body: JSON.stringify(newPhotos),
+        });
+      } catch {
+        // Files are uploaded, metadata save failed — log but don't fail the UI
+        console.error("Failed to save metadata");
+      }
+    }
+  };
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password.trim()) {
-      setAuthenticated(true);
-    }
+    if (password.trim()) setAuthenticated(true);
   };
+
+  const pendingCount = stagedPhotos.filter((p) => !p.uploaded).length;
+  const uploadedCount = stagedPhotos.filter((p) => p.uploaded).length;
+  const isUploading = stagedPhotos.some((p) => p.uploading);
 
   if (!authenticated) {
     return (
@@ -107,66 +321,171 @@ export default function UploadPage() {
         className="animate-in flex flex-col gap-4"
         style={{ "--index": 2 } as React.CSSProperties}
       >
-        <div className="flex flex-col gap-3 sm:flex-row">
+        {/* Drop zone */}
+        <div
+          onDragOver={(e) => {
+            e.preventDefault();
+            setDragActive(true);
+          }}
+          onDragLeave={() => setDragActive(false)}
+          onDrop={handleDrop}
+          onClick={() => fileInputRef.current?.click()}
+          className={`flex min-h-[140px] cursor-pointer items-center justify-center rounded-lg border-2 border-dashed transition-colors ${
+            dragActive
+              ? "border-neutral-500 bg-neutral-100 dark:bg-neutral-800"
+              : "border-neutral-300 hover:border-neutral-400 dark:border-neutral-700 dark:hover:border-neutral-600"
+          }`}
+        >
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            Tap to select photos or drag and drop
+          </p>
           <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Location (e.g. Tokyo, Japan)"
-            className="flex-1 rounded-lg border border-neutral-300 bg-transparent px-4 py-2 text-sm outline-none focus:border-neutral-500 dark:border-neutral-700 dark:focus:border-neutral-500"
-          />
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="rounded-lg border border-neutral-300 bg-transparent px-4 py-2 text-sm outline-none focus:border-neutral-500 dark:border-neutral-700 dark:focus:border-neutral-500"
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            className="hidden"
+            onChange={(e) => {
+              if (e.target.files) addFiles(e.target.files);
+              e.target.value = "";
+            }}
           />
         </div>
 
-        <Dropzone {...dropzone}>
-          <DropzoneDescription>
-            Upload photos. JPG, PNG, WebP, HEIC up to 20MB.
-          </DropzoneDescription>
-          <DropzoneMessage />
-          <DropZoneArea className="min-h-[200px] flex-col gap-2 border-dashed">
-            <DropzoneTrigger className="text-center text-sm text-neutral-500 dark:text-neutral-400">
-              Tap to select photos or drag and drop
-            </DropzoneTrigger>
-            <DropzoneFileList>
-              {dropzone.fileStatuses.map((file) => (
-                <DropzoneFileListItem key={file.id} file={file}>
-                  <div className="flex items-center justify-between">
-                    <span className="truncate text-sm">{file.fileName}</span>
-                    <DropzoneRemoveFile
-                      variant="ghost"
-                      className="h-6 w-6 text-xs"
-                    >
-                      x
-                    </DropzoneRemoveFile>
-                  </div>
-                  <DropzoneFileMessage />
-                  <InfiniteProgress status={file.status} />
-                </DropzoneFileListItem>
-              ))}
-            </DropzoneFileList>
-          </DropZoneArea>
-        </Dropzone>
-
-        {uploadedPhotos.length > 0 && (
-          <div className="flex flex-col gap-2">
-            <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-              Uploaded ({uploadedPhotos.length})
-            </p>
-            <div className="grid grid-cols-3 gap-2">
-              {uploadedPhotos.map((photo) => (
+        {/* Staged photos */}
+        {stagedPhotos.length > 0 && (
+          <div className="flex flex-col gap-3">
+            {stagedPhotos.map((photo) => (
+              <div
+                key={photo.id}
+                className={`flex gap-3 rounded-lg border p-3 ${
+                  photo.uploaded
+                    ? "border-green-300 bg-green-50 dark:border-green-800 dark:bg-green-950/30"
+                    : photo.error
+                      ? "border-red-300 dark:border-red-800"
+                      : "border-neutral-200 dark:border-neutral-800"
+                }`}
+              >
+                {/* Thumbnail */}
                 <img
-                  key={photo.url}
-                  src={photo.url}
-                  alt={photo.filename}
-                  className="h-24 w-full rounded-lg object-cover"
+                  src={photo.preview}
+                  alt={photo.file.name}
+                  className="h-20 w-20 flex-shrink-0 rounded-md object-cover"
                 />
-              ))}
-            </div>
+
+                {/* Metadata */}
+                <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="truncate text-sm font-medium">
+                      {photo.file.name}
+                    </span>
+                    {!photo.uploaded && (
+                      <button
+                        onClick={() => removePhoto(photo.id)}
+                        className="ml-2 flex-shrink-0 text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300"
+                      >
+                        Remove
+                      </button>
+                    )}
+                    {photo.uploaded && (
+                      <span className="ml-2 flex-shrink-0 text-xs text-green-600 dark:text-green-400">
+                        Uploaded
+                        {photo.originalSize && photo.compressedSize && (
+                          <span className="ml-1 text-neutral-400">
+                            ({formatBytes(photo.originalSize)} →{" "}
+                            {formatBytes(photo.compressedSize)})
+                          </span>
+                        )}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Location */}
+                  {editingId === photo.id ? (
+                    <div className="flex flex-col gap-1.5">
+                      <input
+                        type="text"
+                        value={photo.location}
+                        onChange={(e) =>
+                          updatePhoto(photo.id, { location: e.target.value })
+                        }
+                        placeholder="City, Country"
+                        className="rounded border border-neutral-300 bg-transparent px-2 py-1 text-xs outline-none focus:border-neutral-500 dark:border-neutral-700 dark:focus:border-neutral-500"
+                        autoFocus
+                      />
+                      <input
+                        type="date"
+                        value={photo.date}
+                        onChange={(e) =>
+                          updatePhoto(photo.id, { date: e.target.value })
+                        }
+                        className="rounded border border-neutral-300 bg-transparent px-2 py-1 text-xs outline-none focus:border-neutral-500 dark:border-neutral-700 dark:focus:border-neutral-500"
+                      />
+                      <button
+                        onClick={() => setEditingId(null)}
+                        className="self-start text-xs text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+                      >
+                        Done
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        !photo.uploaded && setEditingId(photo.id)
+                      }
+                      className="self-start text-left text-xs text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-300"
+                    >
+                      {photo.locationLoading ? (
+                        <span className="italic">Detecting location...</span>
+                      ) : (
+                        <>
+                          <span>
+                            {photo.location || "No location"} &middot;{" "}
+                            {photo.date}
+                          </span>
+                          {!photo.uploaded && (
+                            <span className="ml-1.5 text-neutral-400">
+                              (edit)
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </button>
+                  )}
+
+                  {/* Error */}
+                  {photo.error && (
+                    <p className="text-xs text-red-500">{photo.error}</p>
+                  )}
+
+                  {/* Uploading indicator */}
+                  {photo.uploading && (
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700">
+                      <div className="h-full w-full animate-infinite-progress rounded-full bg-neutral-800 dark:bg-neutral-200" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+
+            {/* Upload button */}
+            {pendingCount > 0 && (
+              <button
+                onClick={uploadAll}
+                disabled={isUploading}
+                className="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:opacity-50 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
+              >
+                {isUploading
+                  ? "Uploading..."
+                  : `Upload ${pendingCount} photo${pendingCount !== 1 ? "s" : ""}`}
+              </button>
+            )}
+
+            {uploadedCount > 0 && pendingCount === 0 && (
+              <p className="text-center text-sm text-green-600 dark:text-green-400">
+                All photos uploaded!
+              </p>
+            )}
           </div>
         )}
       </div>

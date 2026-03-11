@@ -60,8 +60,8 @@ export async function DELETE(request: NextRequest) {
 
   try {
     const { url } = await request.json();
-    // Delete the blob
-    await del(url);
+    // Delete the blob (ignore errors if already deleted)
+    try { await del(url); } catch {}
     // Update metadata
     const metadata = await getMetadata();
     const updated = metadata.filter((p) => p.url !== url);

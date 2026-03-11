@@ -1,16 +1,16 @@
 import { PhotoGallery } from "@/components/ui/PhotoGallery";
 import { photosData } from "@/content/photos/photos";
 import { PhotoMetadata } from "@/app/api/photos/route";
+import { list } from "@vercel/blob";
 import * as PhotoImports from "../../../public/img";
+
+const METADATA_KEY = "photos-metadata.json";
 
 async function getBlobPhotos(): Promise<PhotoMetadata[]> {
   try {
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/photos`, {
-      next: { revalidate: 60 },
-    });
+    const { blobs } = await list({ prefix: METADATA_KEY });
+    if (blobs.length === 0) return [];
+    const res = await fetch(blobs[0].url, { next: { revalidate: 60 } });
     if (!res.ok) return [];
     return await res.json();
   } catch {

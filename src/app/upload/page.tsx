@@ -271,9 +271,14 @@ export default function UploadPage() {
     if (password.trim()) setAuthenticated(true);
   };
 
-  const pendingCount = stagedPhotos.filter((p) => !p.uploaded).length;
+  const pending = stagedPhotos.filter((p) => !p.uploaded);
+  const pendingCount = pending.length;
   const uploadedCount = stagedPhotos.filter((p) => p.uploaded).length;
   const isUploading = stagedPhotos.some((p) => p.uploading);
+  const missingInfo = pending.some(
+    (p) => !p.location.trim() || !p.date,
+  );
+  const isLocationLoading = pending.some((p) => p.locationLoading);
 
   if (!authenticated) {
     return (
@@ -470,15 +475,24 @@ export default function UploadPage() {
 
             {/* Upload button */}
             {pendingCount > 0 && (
-              <button
-                onClick={uploadAll}
-                disabled={isUploading}
-                className="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:opacity-50 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
-              >
-                {isUploading
-                  ? "Uploading..."
-                  : `Upload ${pendingCount} photo${pendingCount !== 1 ? "s" : ""}`}
-              </button>
+              <>
+                {missingInfo && !isLocationLoading && (
+                  <p className="text-xs text-red-500">
+                    All photos need a location and date before uploading.
+                  </p>
+                )}
+                <button
+                  onClick={uploadAll}
+                  disabled={isUploading || missingInfo || isLocationLoading}
+                  className="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:opacity-50 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
+                >
+                  {isUploading
+                    ? "Uploading..."
+                    : isLocationLoading
+                      ? "Detecting locations..."
+                      : `Upload ${pendingCount} photo${pendingCount !== 1 ? "s" : ""}`}
+                </button>
+              </>
             )}
 
             {uploadedCount > 0 && pendingCount === 0 && (

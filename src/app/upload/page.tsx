@@ -18,7 +18,8 @@ interface StagedPhoto {
   compressedSize?: number;
 }
 
-const WEBP_QUALITY = 0.85;
+const COMPRESS_QUALITY = 0.85;
+const MAX_DIMENSION = 4096;
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes}B`;
@@ -26,34 +27,55 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)}MB`;
 }
 
-function compressToWebP(file: File): Promise<File> {
+function compressImage(file: File): Promise<File> {
   return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => {
+      // Resize if needed to stay within canvas limits (especially iOS Safari)
+      let { naturalWidth: w, naturalHeight: h } = img;
+      if (w > MAX_DIMENSION || h > MAX_DIMENSION) {
+        const scale = MAX_DIMENSION / Math.max(w, h);
+        w = Math.round(w * scale);
+        h = Math.round(h * scale);
+      }
+
       const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+      canvas.width = w;
+      canvas.height = h;
       const ctx = canvas.getContext("2d");
       if (!ctx) {
-        resolve(file); // fallback to original
+        resolve(file);
         return;
       }
-      ctx.drawImage(img, 0, 0);
+      ctx.drawImage(img, 0, 0, w, h);
+
+      // Try WebP first, fall back to JPEG if unsupported (Safari iOS)
       canvas.toBlob(
-        (blob) => {
-          if (!blob) {
-            resolve(file);
+        (webpBlob) => {
+          if (webpBlob && webpBlob.type === "image/webp") {
+            const name = file.name.replace(/\.[^.]+$/, ".webp");
+            resolve(new File([webpBlob], name, { type: "image/webp" }));
             return;
           }
-          // Replace extension with .webp
-          const name = file.name.replace(/\.[^.]+$/, ".webp");
-          resolve(new File([blob], name, { type: "image/webp" }));
+          // WebP not supported — fall back to JPEG
+          canvas.toBlob(
+            (jpegBlob) => {
+              if (!jpegBlob) {
+                resolve(file);
+                return;
+              }
+              const name = file.name.replace(/\.[^.]+$/, ".jpg");
+              resolve(new File([jpegBlob], name, { type: "image/jpeg" }));
+            },
+            "image/jpeg",
+            COMPRESS_QUALITY,
+          );
         },
         "image/webp",
-        WEBP_QUALITY,
+        COMPRESS_QUALITY,
       );
     };
-    img.onerror = () => resolve(file); // fallback to original
+    img.onerror = () => resolve(file);
     img.src = URL.createObjectURL(file);
   });
 }
@@ -205,7 +227,7 @@ export default function UploadPage() {
     // Step 1: Compress and upload all files in parallel (client-side upload to blob)
     const uploadResults = await Promise.allSettled(
       toUpload.map(async (photo) => {
-        const compressed = await compressToWebP(photo.file);
+        const compressed = await compressImage(photo.file);
         updatePhoto(photo.id, {
           originalSize: photo.file.size,
           compressedSize: compressed.size,

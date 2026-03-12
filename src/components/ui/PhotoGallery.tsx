@@ -23,7 +23,7 @@ function PhotoImage({
       <Image
         src={photo.image}
         className={cn(
-          "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0",
+          "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500",
           className,
         )}
         height={400}

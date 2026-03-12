@@ -1,8 +1,6 @@
 import { PhotoGallery } from "@/components/ui/PhotoGallery";
-import { photosData } from "@/content/photos/photos";
 import { PhotoMetadata } from "@/app/api/photos/route";
 import { list } from "@vercel/blob";
-import * as PhotoImports from "../../../public/img";
 
 const METADATA_KEY = "photos-metadata.json";
 
@@ -21,26 +19,12 @@ async function getBlobPhotos(): Promise<PhotoMetadata[]> {
 export default async function Photos() {
   const blobPhotos = await getBlobPhotos();
 
-  // Blob photos (from Vercel Blob) - newest first
-  const blobPhotosWithLocations = blobPhotos.map((photo) => ({
-    image: photo.url,
-    location: photo.location,
-    date: photo.date,
-  }));
-
-  // Local photos (from repo) - already sorted newest first
-  const localPhotosWithLocations = photosData
-    .map((photo) => ({
-      image: (PhotoImports as any)[photo.exportName],
-      location: photo.location,
-      date: photo.date,
-    }))
-    .filter((photo) => photo.image);
-
-  // Combine and sort all photos by date (newest first)
-  const allPhotos = [...blobPhotosWithLocations, ...localPhotosWithLocations]
+  const allPhotos = blobPhotos
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(({ image, location }) => ({ image, location }));
+    .map((photo) => ({
+      image: photo.url,
+      location: photo.location,
+    }));
 
   return (
     <main className="flex flex-col gap-4">

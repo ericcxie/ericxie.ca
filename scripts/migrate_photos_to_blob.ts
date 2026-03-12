@@ -14,10 +14,18 @@
 import { put, list, del } from "@vercel/blob";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { config } from "dotenv";
 
-// Load .env.local
-config({ path: join(process.cwd(), ".env.local") });
+// Load .env.local manually
+const envFile = readFileSync(join(process.cwd(), ".env.local"), "utf-8");
+for (const line of envFile.split("\n")) {
+  const trimmed = line.trim();
+  if (!trimmed || trimmed.startsWith("#")) continue;
+  const idx = trimmed.indexOf("=");
+  if (idx === -1) continue;
+  const key = trimmed.slice(0, idx).trim();
+  const val = trimmed.slice(idx + 1).trim().replace(/^["']|["']$/g, "");
+  if (!process.env[key]) process.env[key] = val;
+}
 
 interface PhotoMetadata {
   url: string;

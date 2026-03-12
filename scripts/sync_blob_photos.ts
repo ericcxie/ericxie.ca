@@ -8,7 +8,7 @@
  *   BLOB_READ_WRITE_TOKEN=xxx npx tsx scripts/sync_blob_photos.ts
  */
 
-import { list, del } from "@vercel/blob";
+import { list, del, put } from "@vercel/blob";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 
@@ -63,9 +63,7 @@ async function sync() {
   }
 
   // Find new photos (in blob but not in local)
-  const newPhotos = blobMetadata.filter(
-    (b) => !localFilenames.has(b.filename),
-  );
+  const newPhotos = blobMetadata.filter((b) => !localFilenames.has(b.filename));
 
   if (newPhotos.length === 0) {
     console.log("All blob photos already synced locally.");
@@ -88,7 +86,7 @@ async function sync() {
         console.error(`Failed to download ${photo.filename}: ${res.status}`);
         continue;
       }
-      const buffer = Buffer.from(await res.arrayBuffer());
+      const buffer = new Uint8Array(await res.arrayBuffer());
       const destPath = join(PHOTOS_DIR, photo.filename);
       writeFileSync(destPath, buffer);
       console.log(`Downloaded: ${photo.filename}`);
@@ -133,7 +131,6 @@ async function sync() {
   }
 
   if (remainingBlob.length > 0) {
-    const { put } = await import("@vercel/blob");
     await put(METADATA_KEY, JSON.stringify(remainingBlob), {
       access: "public",
       contentType: "application/json",

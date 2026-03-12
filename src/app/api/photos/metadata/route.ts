@@ -6,8 +6,11 @@ const GITHUB_REPO = "ericcxie/ericxie.ca";
 
 async function triggerSync() {
   const token = process.env.GITHUB_TOKEN;
-  if (!token) return;
-  await fetch(
+  if (!token) {
+    console.error("triggerSync: GITHUB_TOKEN is not set");
+    return;
+  }
+  const res = await fetch(
     `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/sync-photos.yml/dispatches`,
     {
       method: "POST",
@@ -18,6 +21,10 @@ async function triggerSync() {
       body: JSON.stringify({ ref: "main" }),
     },
   );
+  if (!res.ok) {
+    const body = await res.text();
+    console.error(`triggerSync failed: ${res.status} ${res.statusText}`, body);
+  }
 }
 
 const METADATA_KEY = "photos-metadata.json";
@@ -101,9 +108,11 @@ export async function POST(request: NextRequest) {
     await saveMetadata(metadata);
 
     // Trigger GitHub Action to sync photos to repo
-    triggerSync().catch((err) =>
-      console.error("Failed to trigger sync:", err),
-    );
+    try {
+      await triggerSync();
+    } catch (err) {
+      console.error("Failed to trigger sync:", err);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

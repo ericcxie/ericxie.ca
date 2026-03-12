@@ -2,7 +2,7 @@
 import { cn } from "@/utils/cn";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState } from "react";
 
 interface PhotoWithLocation {
   image: string;
@@ -18,25 +18,17 @@ function PhotoImage({
   className?: string;
   onClick?: () => void;
 }) {
-  const [loaded, setLoaded] = useState(false);
-
   return (
     <div className="relative" onClick={onClick}>
-      {!loaded && (
-        <div className="h-70 w-full animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-800" />
-      )}
       <Image
         src={photo.image}
         className={cn(
-          "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500",
-          !loaded && "absolute inset-0 opacity-0",
+          "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0",
           className,
         )}
         height={400}
         width={400}
         alt="thumbnail"
-        unoptimized
-        onLoad={() => setLoaded(true)}
       />
     </div>
   );

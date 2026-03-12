@@ -1,34 +1,36 @@
-import { put } from "@vercel/blob";
+import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextRequest, NextResponse } from "next/server";
 
-function isAuthorized(request: NextRequest): boolean {
-  const password = request.headers.get("x-upload-password");
-  return password === process.env.UPLOAD_PASSWORD;
-}
-
-// Upload a single file to Vercel Blob (no metadata — that's handled by /api/photos/metadata)
+// Client upload handler — generates a token for the browser to upload directly to blob
 export async function POST(request: NextRequest) {
-  if (!isAuthorized(request)) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const body = (await request.json()) as HandleUploadBody;
 
   try {
-    const formData = await request.formData();
-    const file = formData.get("file") as File;
+    const jsonResponse = await handleUpload({
+      body,
+      request,
+      onBeforeGenerateToken: async (_pathname, clientPayload) => {
+        // Verify password from client payload
+        const { password } = JSON.parse(clientPayload || "{}");
+        if (password !== process.env.UPLOAD_PASSWORD) {
+          throw new Error("Unauthorized");
+        }
 
-    if (!file) {
-      return NextResponse.json({ error: "No file provided" }, { status: 400 });
-    }
-
-    const blob = await put(`photos/${file.name}`, file, {
-      access: "public",
+        return {
+          allowedContentTypes: ["image/webp", "image/jpeg", "image/png", "image/heic"],
+          maximumSizeInBytes: 20 * 1024 * 1024, // 20MB
+          tokenPayload: JSON.stringify({}),
+        };
+      },
+      onUploadCompleted: async () => {
+        // No-op: metadata is handled separately
+      },
     });
 
-    return NextResponse.json({ url: blob.url, filename: file.name });
+    return NextResponse.json(jsonResponse);
   } catch (error) {
-    console.error("Upload error:", error);
     const message =
       error instanceof Error ? error.message : "Upload failed";
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }

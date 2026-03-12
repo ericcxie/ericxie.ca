@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { upload } from "@vercel/blob/client";
 import exifr from "exifr";
 
 interface StagedPhoto {
@@ -201,7 +202,7 @@ export default function UploadPage() {
       updatePhoto(photo.id, { uploading: true, error: undefined });
     }
 
-    // Step 1: Compress and upload all files in parallel
+    // Step 1: Compress and upload all files in parallel (client-side upload to blob)
     const uploadResults = await Promise.allSettled(
       toUpload.map(async (photo) => {
         const compressed = await compressToWebP(photo.file);
@@ -209,21 +210,14 @@ export default function UploadPage() {
           originalSize: photo.file.size,
           compressedSize: compressed.size,
         });
-        const formData = new FormData();
-        formData.append("file", compressed);
 
-        const res = await fetch("/api/photos/upload", {
-          method: "POST",
-          headers: { "x-upload-password": password },
-          body: formData,
+        const blob = await upload(`photos/${compressed.name}`, compressed, {
+          access: "public",
+          handleUploadUrl: "/api/photos/upload",
+          clientPayload: JSON.stringify({ password }),
         });
 
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || "Upload failed");
-        }
-
-        return { id: photo.id, ...(await res.json()) };
+        return { id: photo.id, url: blob.url, filename: compressed.name };
       }),
     );
 

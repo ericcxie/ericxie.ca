@@ -1,7 +1,24 @@
 import { put, list, del } from "@vercel/blob";
-import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { PhotoMetadata } from "../route";
+
+const GITHUB_REPO = "ericcxie/ericxie.ca";
+
+async function triggerSync() {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return;
+  await fetch(
+    `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/sync-photos.yml/dispatches`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github.v3+json",
+      },
+      body: JSON.stringify({ ref: "main" }),
+    },
+  );
+}
 
 const METADATA_KEY = "photos-metadata.json";
 
@@ -53,7 +70,6 @@ export async function PATCH(request: NextRequest) {
     if (location !== undefined) metadata[index].location = location;
     if (date !== undefined) metadata[index].date = date;
     await saveMetadata(metadata);
-    revalidatePath("/photos");
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -83,7 +99,11 @@ export async function POST(request: NextRequest) {
     const metadata = await getMetadata();
     metadata.unshift(...newPhotos);
     await saveMetadata(metadata);
-    revalidatePath("/photos");
+
+    // Trigger GitHub Action to sync photos to repo
+    triggerSync().catch((err) =>
+      console.error("Failed to trigger sync:", err),
+    );
 
     return NextResponse.json({ success: true });
   } catch (error) {

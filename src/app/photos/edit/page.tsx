@@ -148,7 +148,7 @@ export default function PhotosEditPage() {
         )}
 
         {!loading && photos.length === 0 && (
-          <p className="text-sm text-neutral-500">No blob photos to edit.</p>
+          <p className="text-sm text-neutral-500">No staged photos to edit. Upload photos first.</p>
         )}
 
         {photos.map((photo) => (

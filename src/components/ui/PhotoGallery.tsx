@@ -1,28 +1,46 @@
 "use client";
 import { cn } from "@/utils/cn";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 interface PhotoWithLocation {
-  image: StaticImageData;
+  image: string;
   location: string;
 }
 
+function PhotoImage({
+  photo,
+  className,
+  onClick,
+}: {
+  photo: PhotoWithLocation;
+  className?: string;
+  onClick?: () => void;
+}) {
+  return (
+    <div className="relative" onClick={onClick}>
+      <Image
+        src={photo.image}
+        className={cn(
+          "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500",
+          className,
+        )}
+        height={400}
+        width={400}
+        alt="thumbnail"
+      />
+    </div>
+  );
+}
+
 export const PhotoGallery = ({
-  images,
   photosWithLocations,
   className,
 }: {
-  images?: StaticImageData[];
-  photosWithLocations?: PhotoWithLocation[];
+  photosWithLocations: PhotoWithLocation[];
   className?: string;
 }) => {
-  // Support both old format (just images) and new format (photos with locations)
-  const photoData =
-    photosWithLocations ||
-    images?.map((img) => ({ image: img, location: "" })) ||
-    [];
   const gridRef = useRef<any>(null);
   const [activeMobilePhoto, setActiveMobilePhoto] = useState<number | null>(
     null,
@@ -37,7 +55,7 @@ export const PhotoGallery = ({
   const translateThird = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   const columns: PhotoWithLocation[][] = [[], [], []];
-  photoData.forEach((photo, index) => {
+  photosWithLocations.forEach((photo, index) => {
     const col = index % 3;
     columns[col].push(photo);
   });
@@ -52,23 +70,17 @@ export const PhotoGallery = ({
     >
       {/* Mobile: Single column in chronological order */}
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 md:hidden">
-        {photoData.map((photo, idx) => (
+        {photosWithLocations.map((photo, idx) => (
           <div
             key={`mobile-${idx}`}
             className="relative cursor-pointer"
-            onClick={() =>
-              setActiveMobilePhoto(activeMobilePhoto === idx ? null : idx)
-            }
           >
-            <Image
-              src={photo.image}
-              className={cn(
-                "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500",
-                activeMobilePhoto === idx && "grayscale",
-              )}
-              height="400"
-              width="400"
-              alt="thumbnail"
+            <PhotoImage
+              photo={photo}
+              className={activeMobilePhoto === idx ? "grayscale" : undefined}
+              onClick={() =>
+                setActiveMobilePhoto(activeMobilePhoto === idx ? null : idx)
+              }
             />
             {photo.location && activeMobilePhoto === idx && (
               <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white">
@@ -84,90 +96,36 @@ export const PhotoGallery = ({
         className="mx-auto hidden max-w-5xl grid-cols-1 items-start gap-5 md:grid md:grid-cols-2 lg:grid-cols-3"
         ref={gridRef}
       >
-        <div className="grid gap-5">
-          {columns[0].map((photo, idx) => (
-            <motion.div
-              style={{ y: translateFirst }}
-              key={"grid-1" + idx}
-              className="group relative"
-            >
-              <a
-                href={photo.image.src}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={photo.image}
-                  className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                  height="400"
-                  width="400"
-                  alt="thumbnail"
-                />
-                {photo.location && (
-                  <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
-                    📍 {photo.location}
-                  </div>
-                )}
-              </a>
-            </motion.div>
-          ))}
-        </div>
-        <div className="grid gap-5">
-          {columns[1].map((photo, idx) => (
-            <motion.div
-              style={{ y: translateSecond }}
-              key={"grid-2" + idx}
-              className="group relative"
-            >
-              <a
-                href={photo.image.src}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={photo.image}
-                  className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                  height="400"
-                  width="400"
-                  alt="thumbnail"
-                />
-                {photo.location && (
-                  <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
-                    📍 {photo.location}
-                  </div>
-                )}
-              </a>
-            </motion.div>
-          ))}
-        </div>
-        <div className="grid gap-5">
-          {columns[2].map((photo, idx) => (
-            <motion.div
-              style={{ y: translateThird }}
-              key={"grid-3" + idx}
-              className="group relative"
-            >
-              <a
-                href={photo.image.src}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src={photo.image}
-                  className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                  height="400"
-                  width="400"
-                  alt="thumbnail"
-                />
-                {photo.location && (
-                  <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
-                    📍 {photo.location}
-                  </div>
-                )}
-              </a>
-            </motion.div>
-          ))}
-        </div>
+        {columns.map((column, colIdx) => {
+          const translate = [translateFirst, translateSecond, translateThird][colIdx];
+          return (
+            <div key={colIdx} className="grid gap-5">
+              {column.map((photo, idx) => (
+                <motion.div
+                  style={{ y: translate }}
+                  key={`grid-${colIdx}-${idx}`}
+                  className="group relative"
+                >
+                  <a
+                    href={photo.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <PhotoImage
+                      photo={photo}
+                      className="hover:grayscale"
+                    />
+                    {photo.location && (
+                      <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">
+                        📍 {photo.location}
+                      </div>
+                    )}
+                  </a>
+                </motion.div>
+              ))}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

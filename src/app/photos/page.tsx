@@ -1,15 +1,13 @@
 import { PhotoGallery } from "@/components/ui/PhotoGallery";
-import { photosData } from "@/content/photos/photos";
-import * as PhotoImports from "../../../public/img";
+import photosData from "@/content/photos/photos.json";
 
 export default function Photos() {
-  // Get photos with locations in chronological order (newest first)
-  const photosWithLocations = photosData
+  const allPhotos = photosData
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .map((photo) => ({
-      image: (PhotoImports as any)[photo.exportName],
+      image: `/img/photos/${photo.filename}`,
       location: photo.location,
-    }))
-    .filter((photo) => photo.image); // Filter out any missing imports
+    }));
 
   return (
     <main className="flex flex-col gap-4">
@@ -29,8 +27,8 @@ export default function Photos() {
         className="animate-in"
         style={{ "--index": 3 } as React.CSSProperties}
       >
-        {photosWithLocations.length > 0 ? (
-          <PhotoGallery photosWithLocations={photosWithLocations} />
+        {allPhotos.length > 0 ? (
+          <PhotoGallery photosWithLocations={allPhotos} />
         ) : (
           <p className="italic text-text-light-body dark:text-text-dark-body">
             Stay tuned!

@@ -81,7 +81,7 @@ export const communityItems = [
   },
   {
     company: "Hack the North",
-    position: "Frontend Developer",
+    position: "Organizer",
     location: "Waterloo, ON",
     date: "03/2024 - 10/2024",
     logo: "/img/logos/hackthenorth.webp",

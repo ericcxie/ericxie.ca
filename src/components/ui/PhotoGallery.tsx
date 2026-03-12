@@ -2,11 +2,44 @@
 import { cn } from "@/utils/cn";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 
 interface PhotoWithLocation {
   image: string;
   location: string;
+}
+
+function PhotoImage({
+  photo,
+  className,
+  onClick,
+}: {
+  photo: PhotoWithLocation;
+  className?: string;
+  onClick?: () => void;
+}) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className="relative" onClick={onClick}>
+      {!loaded && (
+        <div className="h-70 w-full animate-pulse rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+      )}
+      <Image
+        src={photo.image}
+        className={cn(
+          "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500",
+          !loaded && "absolute inset-0 opacity-0",
+          className,
+        )}
+        height={400}
+        width={400}
+        alt="thumbnail"
+        unoptimized
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  );
 }
 
 export const PhotoGallery = ({
@@ -49,20 +82,13 @@ export const PhotoGallery = ({
           <div
             key={`mobile-${idx}`}
             className="relative cursor-pointer"
-            onClick={() =>
-              setActiveMobilePhoto(activeMobilePhoto === idx ? null : idx)
-            }
           >
-            <Image
-              src={photo.image}
-              className={cn(
-                "h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500",
-                activeMobilePhoto === idx && "grayscale",
-              )}
-              height={400}
-              width={400}
-              alt="thumbnail"
-              unoptimized
+            <PhotoImage
+              photo={photo}
+              className={activeMobilePhoto === idx ? "grayscale" : undefined}
+              onClick={() =>
+                setActiveMobilePhoto(activeMobilePhoto === idx ? null : idx)
+              }
             />
             {photo.location && activeMobilePhoto === idx && (
               <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white">
@@ -93,13 +119,9 @@ export const PhotoGallery = ({
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Image
-                      src={photo.image}
-                      className="h-70 !m-0 w-full gap-5 rounded-lg object-cover object-left-top !p-0 transition duration-500 hover:grayscale"
-                      height={400}
-                      width={400}
-                      alt="thumbnail"
-                      unoptimized
+                    <PhotoImage
+                      photo={photo}
+                      className="hover:grayscale"
                     />
                     {photo.location && (
                       <div className="absolute bottom-2 left-2 rounded bg-black/70 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100">

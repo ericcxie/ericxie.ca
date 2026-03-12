@@ -476,11 +476,6 @@ export default function UploadPage() {
             {/* Upload button */}
             {pendingCount > 0 && (
               <>
-                {missingInfo && !isLocationLoading && (
-                  <p className="text-xs text-red-500">
-                    All photos need a location and date before uploading.
-                  </p>
-                )}
                 <button
                   onClick={uploadAll}
                   disabled={isUploading || missingInfo || isLocationLoading}

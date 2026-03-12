@@ -282,9 +282,25 @@ export default function UploadPage() {
     }
   };
 
-  const handleLogin = (e: React.FormEvent) => {
+  const [loginError, setLoginError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password.trim()) setAuthenticated(true);
+    setLoginError("");
+    if (!password.trim()) return;
+    try {
+      const res = await fetch("/api/photos/auth", {
+        method: "POST",
+        headers: { "x-upload-password": password },
+      });
+      if (res.ok) {
+        setAuthenticated(true);
+      } else {
+        setLoginError("Wrong password");
+      }
+    } catch {
+      setLoginError("Failed to verify password");
+    }
   };
 
   const pending = stagedPhotos.filter((p) => !p.uploaded);
@@ -318,6 +334,9 @@ export default function UploadPage() {
             className="rounded-lg border border-neutral-300 bg-transparent px-4 py-2 text-sm outline-none focus:border-neutral-500 dark:border-neutral-700 dark:focus:border-neutral-500"
             autoFocus
           />
+          {loginError && (
+            <p className="text-sm text-red-500">{loginError}</p>
+          )}
           <button
             type="submit"
             className="rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"

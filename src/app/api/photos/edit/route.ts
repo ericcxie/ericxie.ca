@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { readFile } from "fs/promises";
+import path from "path";
 
 const GITHUB_REPO = "ericcxie/ericxie.ca";
 const PHOTOS_JSON_PATH = "src/content/photos/photos.json";
@@ -19,40 +21,15 @@ function isAuthorized(request: NextRequest): boolean {
   return password === process.env.UPLOAD_PASSWORD;
 }
 
-// GET: Return current photos.json
+// GET: Return current photos.json from local filesystem
 export async function GET() {
   try {
-    const token = process.env.GITHUB_TOKEN;
-    if (!token) {
-      return NextResponse.json(
-        { error: "GitHub token not configured" },
-        { status: 500 },
-      );
-    }
-
-    const res = await fetch(
-      `https://api.github.com/repos/${GITHUB_REPO}/contents/${PHOTOS_JSON_PATH}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/vnd.github.v3+json",
-        },
-      },
-    );
-
-    if (!res.ok) {
-      return NextResponse.json(
-        { error: "Failed to fetch photos" },
-        { status: 500 },
-      );
-    }
-
-    const data = await res.json();
-    const content = Buffer.from(data.content, "base64").toString("utf-8");
+    const filePath = path.join(process.cwd(), PHOTOS_JSON_PATH);
+    const content = await readFile(filePath, "utf-8");
     return NextResponse.json(JSON.parse(content));
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch photos" },
+      { error: "Failed to read photos.json" },
       { status: 500 },
     );
   }

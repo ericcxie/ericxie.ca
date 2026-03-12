@@ -21,8 +21,6 @@ export default function PhotosEditPage() {
   const [deletedFilenames, setDeletedFilenames] = useState<Set<string>>(
     new Set(),
   );
-  const [syncing, setSyncing] = useState(false);
-
   const fetchPhotos = useCallback(async () => {
     setLoading(true);
     try {
@@ -112,25 +110,6 @@ export default function PhotosEditPage() {
     setSaving(false);
   };
 
-  const triggerSync = async () => {
-    setSyncing(true);
-    try {
-      const res = await fetch("/api/photos/sync", {
-        method: "POST",
-        headers: { "x-upload-password": password },
-      });
-      if (res.ok) {
-        alert("Sync triggered! The GitHub Action will run shortly.");
-      } else {
-        const err = await res.json();
-        alert(`Sync failed: ${err.error}${err.detail ? `\n${err.detail}` : ""}`);
-      }
-    } catch {
-      alert("Failed to trigger sync");
-    }
-    setSyncing(false);
-  };
-
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (password.trim()) setAuthenticated(true);
@@ -178,24 +157,15 @@ export default function PhotosEditPage() {
         >
           Edit Photos
         </h1>
-        <div className="flex gap-2">
+        {hasChanges() && (
           <button
-            onClick={triggerSync}
-            disabled={syncing}
-            className="animate-in rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium transition-colors hover:bg-neutral-100 disabled:opacity-50 dark:border-neutral-700 dark:hover:bg-neutral-800"
+            onClick={saveAll}
+            disabled={saving}
+            className="animate-in rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:opacity-50 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
           >
-            {syncing ? "Syncing..." : "Sync to Repo"}
+            {saving ? "Saving..." : "Save Changes"}
           </button>
-          {hasChanges() && (
-            <button
-              onClick={saveAll}
-              disabled={saving}
-              className="animate-in rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:opacity-50 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200"
-            >
-              {saving ? "Saving..." : "Save Changes"}
-            </button>
-          )}
-        </div>
+        )}
       </div>
 
       <div

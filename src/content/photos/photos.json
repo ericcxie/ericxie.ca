@@ -35,11 +35,6 @@
     "location": "Venice, Italy"
   },
   {
-    "filename": "seven_eleven.webp",
-    "date": "2025-07-06T00:16:52.179718",
-    "location": "Tokyo, Japan"
-  },
-  {
     "filename": "store.webp",
     "date": "2025-07-06T00:16:50.043696",
     "location": "Tokyo, Japan"
@@ -60,16 +55,6 @@
     "location": "Kamakura, Japan"
   },
   {
-    "filename": "well_cafe.webp",
-    "date": "2025-05-16T18:29:12.957759",
-    "location": "Toronto, Canada"
-  },
-  {
-    "filename": "vintage_tv.webp",
-    "date": "2025-05-16T18:29:12.936118",
-    "location": "Toronto, Canada"
-  },
-  {
     "filename": "umbrellas.webp",
     "date": "2025-05-16T18:29:12.915298",
     "location": "Nassau, Bahamas"
@@ -78,16 +63,6 @@
     "filename": "street_art.webp",
     "date": "2025-05-16T18:29:12.878564",
     "location": "New York City, New York"
-  },
-  {
-    "filename": "stairs2.webp",
-    "date": "2025-05-16T18:29:12.871325",
-    "location": "Toronto, Canada"
-  },
-  {
-    "filename": "stairs.webp",
-    "date": "2025-05-16T18:29:12.862098",
-    "location": "Toronto, Canada"
   },
   {
     "filename": "south_beach.webp",
@@ -108,15 +83,5 @@
     "filename": "nyc_starbucks.webp",
     "date": "2025-05-16T18:29:12.817077",
     "location": "New York City, New York"
-  },
-  {
-    "filename": "library_study.webp",
-    "date": "2025-05-16T18:29:12.804773",
-    "location": "Toronto, Canada"
-  },
-  {
-    "filename": "gallery_wall.webp",
-    "date": "2025-05-16T18:29:12.796359",
-    "location": "Toronto, Canada"
   }
 ]

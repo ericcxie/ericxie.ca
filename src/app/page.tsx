@@ -5,8 +5,29 @@ import Projects from "@/components/Sections/Projects";
 import { LinkPreview } from "@/components/ui/LinkPreview";
 
 import { Spotlight } from "@/components/ui/Spotlight";
+import { readFile } from "fs/promises";
+import path from "path";
 
-export default function Home() {
+interface AboutData {
+  intro: {
+    role: string;
+    school: { name: string; url: string };
+    company: { name: string; url: string; role: string };
+    bio: string;
+    linkedin: string;
+    email: string;
+  };
+}
+
+async function getAboutData(): Promise<AboutData> {
+  const filePath = path.join(process.cwd(), "src/content/about.json");
+  const content = await readFile(filePath, "utf-8");
+  return JSON.parse(content);
+}
+
+export default async function Home() {
+  const { intro } = await getAboutData();
+
   return (
     <main className="flex flex-col gap-10">
       <div>
@@ -25,15 +46,17 @@ export default function Home() {
             className="max-w-2xl animate-in text-sm text-text-light-body dark:text-text-dark-body md:text-base"
             style={{ "--index": 2 } as React.CSSProperties}
           >
-            I&apos;m a Computer Engineering student at the{" "}
+            I&apos;m a {intro.role} at the{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
-              <LinkPreview url="https://uwaterloo.ca/engineering/">
-                University of Waterloo
+              <LinkPreview url={intro.school.url}>
+                {intro.school.name}
               </LinkPreview>
             </span>
-            . Currently, I&apos;m a Software Engineer Intern at{" "}
+            . Currently, I&apos;m a {intro.company.role} at{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
-              <LinkPreview url="https://www.gem.com/">Gem</LinkPreview>
+              <LinkPreview url={intro.company.url}>
+                {intro.company.name}
+              </LinkPreview>
             </span>
             .
           </p>
@@ -43,9 +66,7 @@ export default function Home() {
             className="max-w-xl animate-in text-sm text-text-light-body dark:text-text-dark-body md:text-base"
             style={{ "--index": 3 } as React.CSSProperties}
           >
-            I believe in creating software that is not only functional but also
-            clean, beautiful, and enjoyable to use. Let&apos;s build something
-            together that inspires.
+            {intro.bio}
           </p>
         </div>
         <div className="mt-4 space-y-1">
@@ -56,7 +77,7 @@ export default function Home() {
             You can reach me on{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
               <a
-                href="https://www.linkedin.com/in/ericcxie/"
+                href={intro.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -66,10 +87,10 @@ export default function Home() {
             or at{" "}
             <span className="border-b-[2px] border-neutral-600">
               <a
-                href="mailto:pexie@uwaterloo.ca"
+                href={`mailto:${intro.email}`}
                 className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500"
               >
-                pexie@uwaterloo.ca
+                {intro.email}
               </a>
             </span>
             .

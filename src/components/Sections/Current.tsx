@@ -1,22 +1,41 @@
 import Map from "@/components/ui/Map";
+import { readFile } from "fs/promises";
+import path from "path";
 
-export default function Current() {
+interface AboutData {
+  current: {
+    description: string;
+    location: { name: string; lng: number; lat: number };
+    interests: { title: string; content: string }[];
+  };
+}
+
+async function getAboutData(): Promise<AboutData> {
+  const filePath = path.join(process.cwd(), "src/content/about.json");
+  const content = await readFile(filePath, "utf-8");
+  return JSON.parse(content);
+}
+
+export default async function Current() {
+  const { current } = await getAboutData();
+
   return (
     <>
       <h1 className="mb-1 text-xl font-bold">Current</h1>
       <p className="mb-3 text-sm text-text-light-body dark:text-text-dark-body md:text-base">
-        I’m currently on a co-op term in San Francisco. If you’re around, let’s
-        connect!
+        {current.description}
       </p>
       <div className="relative">
-        <Map lng={-122.401} lat={37.7946} />
+        <Map lng={current.location.lng} lat={current.location.lat} />
         <div className="absolute bottom-4 left-4 flex items-center rounded-lg bg-neutral-100/75 px-4 py-1.5 backdrop-blur dark:bg-neutral-900/75 md:bottom-6 md:left-6">
-          <p className="text-primary text-sm font-medium">San Francisco, CA</p>
+          <p className="text-primary text-sm font-medium">
+            {current.location.name}
+          </p>
         </div>
       </div>
 
       <div className="space-y-2 rounded-lg py-4">
-        {interestsData.map((interest) => (
+        {current.interests.map((interest) => (
           <div
             className="flex items-start sm:items-center"
             key={interest.title}
@@ -34,18 +53,3 @@ export default function Current() {
     </>
   );
 }
-
-const interestsData = [
-  {
-    title: "Interests",
-    content: "Photography, investing, personal finance",
-  },
-  {
-    title: "Learning",
-    content: "Snowboarding, open banking, design",
-  },
-  {
-    title: "Listening",
-    content: "The Design of Everyday Things, Motley Fool Money, Acquired",
-  },
-];

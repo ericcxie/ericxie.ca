@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useAuth } from "@/lib/useAuth";
 
 interface PhotoEntry {
   filename: string;
@@ -9,8 +10,7 @@ interface PhotoEntry {
 }
 
 export default function PhotosEditPage() {
-  const [password, setPassword] = useState("");
-  const [authenticated, setAuthenticated] = useState(false);
+  const { password, setPassword, authenticated, loginError, handleLogin, checking } = useAuth();
   const [photos, setPhotos] = useState<PhotoEntry[]>([]);
   const [original, setOriginal] = useState<PhotoEntry[]>([]);
   const [loading, setLoading] = useState(false);
@@ -110,26 +110,16 @@ export default function PhotosEditPage() {
     setSaving(false);
   };
 
-  const [loginError, setLoginError] = useState("");
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginError("");
-    if (!password.trim()) return;
-    try {
-      const res = await fetch("/api/photos/auth", {
-        method: "POST",
-        headers: { "x-upload-password": password },
-      });
-      if (res.ok) {
-        setAuthenticated(true);
-      } else {
-        setLoginError("Wrong password");
-      }
-    } catch {
-      setLoginError("Failed to verify password");
-    }
-  };
+  if (checking) {
+    return (
+      <main className="flex flex-col gap-4">
+        <h1 className="animate-in font-system text-3xl font-bold" style={{ "--index": 1 } as React.CSSProperties}>
+          Edit Photos
+        </h1>
+        <p className="animate-in text-sm text-neutral-500" style={{ "--index": 2 } as React.CSSProperties}>Loading...</p>
+      </main>
+    );
+  }
 
   if (!authenticated) {
     return (

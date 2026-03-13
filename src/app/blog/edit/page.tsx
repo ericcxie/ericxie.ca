@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useAuth } from "@/lib/useAuth";
 import { remark } from "remark";
 import html from "remark-html";
 import {
@@ -42,9 +43,7 @@ interface PendingImage {
 type View = "list" | "editor";
 
 export default function BlogEditPage() {
-  const [password, setPassword] = useState("");
-  const [authenticated, setAuthenticated] = useState(false);
-  const [loginError, setLoginError] = useState("");
+  const { password, setPassword, authenticated, loginError, handleLogin, checking } = useAuth();
 
   const [view, setView] = useState<View>("list");
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -110,25 +109,6 @@ export default function BlogEditPage() {
         });
     }
   }, [editorTab, content, pendingImages, slug]);
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginError("");
-    if (!password.trim()) return;
-    try {
-      const res = await fetch("/api/photos/auth", {
-        method: "POST",
-        headers: { "x-upload-password": password },
-      });
-      if (res.ok) {
-        setAuthenticated(true);
-      } else {
-        setLoginError("Wrong password");
-      }
-    } catch {
-      setLoginError("Failed to verify password");
-    }
-  };
 
   const openEditor = async (post?: BlogPost) => {
     setPendingImages([]);
@@ -384,6 +364,18 @@ export default function BlogEditPage() {
     "rounded-lg bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:opacity-50 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-200";
   const toolbarBtnClass =
     "rounded px-2 py-1 text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-200 dark:text-neutral-300 dark:hover:bg-neutral-700";
+
+  // Loading saved auth
+  if (checking) {
+    return (
+      <main className="flex flex-col gap-4">
+        <h1 className="animate-in font-system text-3xl font-bold" style={{ "--index": 1 } as React.CSSProperties}>
+          Edit Blog
+        </h1>
+        <p className="animate-in text-sm text-neutral-500" style={{ "--index": 2 } as React.CSSProperties}>Loading...</p>
+      </main>
+    );
+  }
 
   // Login screen
   if (!authenticated) {

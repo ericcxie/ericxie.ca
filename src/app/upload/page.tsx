@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import { upload } from "@vercel/blob/client";
 import exifr from "exifr";
+import { useAuth } from "@/lib/useAuth";
 
 interface StagedPhoto {
   id: string;
@@ -144,8 +145,7 @@ async function extractGpsLocation(file: File): Promise<string> {
 }
 
 export default function UploadPage() {
-  const [password, setPassword] = useState("");
-  const [authenticated, setAuthenticated] = useState(false);
+  const { password, setPassword, authenticated, loginError, handleLogin, checking } = useAuth();
   const [stagedPhotos, setStagedPhotos] = useState<StagedPhoto[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -282,27 +282,6 @@ export default function UploadPage() {
     }
   };
 
-  const [loginError, setLoginError] = useState("");
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginError("");
-    if (!password.trim()) return;
-    try {
-      const res = await fetch("/api/photos/auth", {
-        method: "POST",
-        headers: { "x-upload-password": password },
-      });
-      if (res.ok) {
-        setAuthenticated(true);
-      } else {
-        setLoginError("Wrong password");
-      }
-    } catch {
-      setLoginError("Failed to verify password");
-    }
-  };
-
   const pending = stagedPhotos.filter((p) => !p.uploaded);
   const pendingCount = pending.length;
   const uploadedCount = stagedPhotos.filter((p) => p.uploaded).length;
@@ -311,6 +290,20 @@ export default function UploadPage() {
     (p) => !p.location.trim() || !p.date,
   );
   const isLocationLoading = pending.some((p) => p.locationLoading);
+
+  if (checking) {
+    return (
+      <main className="flex flex-col gap-4">
+        <h1
+          className="animate-in font-system text-3xl font-bold"
+          style={{ "--index": 1 } as React.CSSProperties}
+        >
+          Upload
+        </h1>
+        <p className="animate-in text-sm text-neutral-500" style={{ "--index": 2 } as React.CSSProperties}>Loading...</p>
+      </main>
+    );
+  }
 
   if (!authenticated) {
     return (

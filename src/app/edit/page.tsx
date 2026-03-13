@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useAuth } from "@/lib/useAuth";
 
 interface AboutData {
   intro: {
@@ -19,13 +20,11 @@ interface AboutData {
 }
 
 export default function EditPage() {
-  const [password, setPassword] = useState("");
-  const [authenticated, setAuthenticated] = useState(false);
+  const { password, setPassword, authenticated, loginError, handleLogin, checking } = useAuth();
   const [data, setData] = useState<AboutData | null>(null);
   const [original, setOriginal] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [loginError, setLoginError] = useState("");
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -74,24 +73,6 @@ export default function EditPage() {
     setSaving(false);
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoginError("");
-    if (!password.trim()) return;
-    try {
-      const res = await fetch("/api/photos/auth", {
-        method: "POST",
-        headers: { "x-upload-password": password },
-      });
-      if (res.ok) {
-        setAuthenticated(true);
-      } else {
-        setLoginError("Wrong password");
-      }
-    } catch {
-      setLoginError("Failed to verify password");
-    }
-  };
 
   const updateIntro = (field: string, value: string) => {
     if (!data) return;
@@ -142,6 +123,17 @@ export default function EditPage() {
     interests[index] = { ...interests[index], content: value };
     setData({ ...data, current: { ...data.current, interests } });
   };
+
+  if (checking) {
+    return (
+      <main className="flex flex-col gap-4">
+        <h1 className="animate-in font-system text-3xl font-bold" style={{ "--index": 1 } as React.CSSProperties}>
+          Edit About
+        </h1>
+        <p className="animate-in text-sm text-neutral-500" style={{ "--index": 2 } as React.CSSProperties}>Loading...</p>
+      </main>
+    );
+  }
 
   if (!authenticated) {
     return (

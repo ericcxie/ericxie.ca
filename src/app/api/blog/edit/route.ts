@@ -71,7 +71,8 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { slug, title, category, date, content } = await request.json();
+    const { slug, title, category, date, content, images } =
+      await request.json();
 
     if (!slug || !title || !category || !date || content === undefined) {
       return NextResponse.json(
@@ -113,20 +114,51 @@ export async function POST(request: NextRequest) {
     });
     const blob = await blobRes.json();
 
+    // 3b. Create blobs for any images
+    const treeEntries: {
+      path: string;
+      mode: string;
+      type: string;
+      sha: string;
+    }[] = [
+      {
+        path: filePath,
+        mode: "100644",
+        type: "blob",
+        sha: blob.sha,
+      },
+    ];
+
+    if (images && Array.isArray(images)) {
+      for (const img of images as {
+        filename: string;
+        base64: string;
+      }[]) {
+        const imgBlobRes = await fetch(`${apiBase}/git/blobs`, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({
+            content: img.base64,
+            encoding: "base64",
+          }),
+        });
+        const imgBlob = await imgBlobRes.json();
+        treeEntries.push({
+          path: `public/img/blog/${slug}/${img.filename}`,
+          mode: "100644",
+          type: "blob",
+          sha: imgBlob.sha,
+        });
+      }
+    }
+
     // 4. Create the new tree
     const treeRes = await fetch(`${apiBase}/git/trees`, {
       method: "POST",
       headers,
       body: JSON.stringify({
         base_tree: baseTreeSha,
-        tree: [
-          {
-            path: filePath,
-            mode: "100644",
-            type: "blob",
-            sha: blob.sha,
-          },
-        ],
+        tree: treeEntries,
       }),
     });
     const treeData = await treeRes.json();

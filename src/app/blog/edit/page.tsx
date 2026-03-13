@@ -34,6 +34,11 @@ interface BlogPost {
   content?: string;
 }
 
+interface PendingImage {
+  filename: string;
+  base64: string; // base64 data (no prefix)
+}
+
 type View = "list" | "editor";
 
 export default function BlogEditPage() {
@@ -56,6 +61,7 @@ export default function BlogEditPage() {
   const [original, setOriginal] = useState("");
   const [editorTab, setEditorTab] = useState<"write" | "preview">("write");
   const [previewHtml, setPreviewHtml] = useState("");
+  const [pendingImages, setPendingImages] = useState<PendingImage[]>([]);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -77,9 +83,33 @@ export default function BlogEditPage() {
       remark()
         .use(html)
         .process(content)
-        .then((result) => setPreviewHtml(String(result)));
+        .then((result) => {
+          let rendered = String(result);
+          // Replace pending image paths with inline base64 data URIs
+          for (const img of pendingImages) {
+            const imgPath = `/img/blog/${slug}/${img.filename}`;
+            // Detect content type from filename extension
+            const ext = img.filename.split(".").pop()?.toLowerCase();
+            const mime =
+              ext === "png"
+                ? "image/png"
+                : ext === "gif"
+                  ? "image/gif"
+                  : ext === "svg"
+                    ? "image/svg+xml"
+                    : ext === "webp"
+                      ? "image/webp"
+                      : "image/jpeg";
+            const dataUri = `data:${mime};base64,${img.base64}`;
+            rendered = rendered.replaceAll(
+              `src="${imgPath}"`,
+              `src="${dataUri}"`,
+            );
+          }
+          setPreviewHtml(rendered);
+        });
     }
-  }, [editorTab, content]);
+  }, [editorTab, content, pendingImages, slug]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,6 +131,8 @@ export default function BlogEditPage() {
   };
 
   const openEditor = async (post?: BlogPost) => {
+    setPendingImages([]);
+    setEditorTab("write");
     if (post) {
       // Edit existing post
       setLoading(true);
@@ -145,7 +177,7 @@ export default function BlogEditPage() {
 
   const hasChanges = () => {
     const current = JSON.stringify({ slug, title, category, date, content });
-    return current !== original;
+    return current !== original || pendingImages.length > 0;
   };
 
   const savePost = async () => {
@@ -161,12 +193,20 @@ export default function BlogEditPage() {
           "Content-Type": "application/json",
           "x-upload-password": password,
         },
-        body: JSON.stringify({ slug, title, category, date, content }),
+        body: JSON.stringify({
+          slug,
+          title,
+          category,
+          date,
+          content,
+          images: pendingImages,
+        }),
       });
       if (res.ok) {
         setOriginal(
           JSON.stringify({ slug, title, category, date, content }),
         );
+        setPendingImages([]);
         setIsNew(false);
         alert("Blog post saved and deployed!");
         await fetchPosts();
@@ -278,6 +318,61 @@ export default function BlogEditPage() {
         ta.selectionStart = start + selected.length + 3;
         ta.selectionEnd = start + selected.length + 6;
       });
+    }
+  };
+
+  // Process dropped/pasted image files
+  const handleImageFiles = (files: FileList | File[]) => {
+    if (!slug.trim()) {
+      alert("Please set a slug before adding images");
+      return;
+    }
+    Array.from(files).forEach((file) => {
+      if (!file.type.startsWith("image/")) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        // Strip the data:image/...;base64, prefix
+        const base64 = result.split(",")[1];
+        const ext = file.name.split(".").pop()?.toLowerCase() || "webp";
+        const filename = file.name.replace(/\s+/g, "-").toLowerCase();
+        const safeName = filename.includes(".")
+          ? filename
+          : `${filename}.${ext}`;
+
+        setPendingImages((prev) => {
+          // Avoid duplicates
+          if (prev.some((img) => img.filename === safeName)) return prev;
+          return [...prev, { filename: safeName, base64 }];
+        });
+
+        // Insert markdown image reference at cursor
+        const imgPath = `/img/blog/${slug}/${safeName}`;
+        insertAtCursor(`![${safeName}](${imgPath})`);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    if (e.dataTransfer.files.length > 0) {
+      handleImageFiles(e.dataTransfer.files);
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const items = e.clipboardData.items;
+    const imageFiles: File[] = [];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith("image/")) {
+        const file = items[i].getAsFile();
+        if (file) imageFiles.push(file);
+      }
+    }
+    if (imageFiles.length > 0) {
+      e.preventDefault();
+      handleImageFiles(imageFiles);
     }
   };
 
@@ -639,9 +734,38 @@ export default function BlogEditPage() {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 onKeyDown={handleKeyDown}
+                onDrop={handleDrop}
+                onDragOver={(e) => e.preventDefault()}
+                onPaste={handlePaste}
                 className="min-h-[500px] w-full resize-y rounded-b-lg border border-t-0 border-neutral-200 bg-transparent px-3 py-2 font-mono text-sm leading-relaxed outline-none focus:border-neutral-500 dark:border-neutral-800 dark:focus:border-neutral-500"
                 placeholder="Write your blog post in markdown..."
               />
+              {pendingImages.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {pendingImages.map((img) => (
+                    <div
+                      key={img.filename}
+                      className="flex items-center gap-1.5 rounded-md border border-neutral-200 px-2 py-1 text-xs dark:border-neutral-800"
+                    >
+                      <Image className="size-3 text-neutral-500" />
+                      <span className="text-neutral-600 dark:text-neutral-400">
+                        {img.filename}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setPendingImages((prev) =>
+                            prev.filter((p) => p.filename !== img.filename),
+                          )
+                        }
+                        className="ml-1 text-neutral-400 hover:text-red-500"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </>
           ) : (
             <div className="min-h-[500px] rounded-b-lg border border-t-0 border-neutral-200 p-4 dark:border-neutral-800">

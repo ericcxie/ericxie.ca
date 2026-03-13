@@ -35,4 +35,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/img/photos/ src/content/photos/photos.json
           git commit -m "sync photos from blob upload"
+          git pull --rebase
           git push

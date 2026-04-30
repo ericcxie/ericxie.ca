@@ -31,9 +31,11 @@ export default function Home() {
                 University of Waterloo
               </LinkPreview>
             </span>
-            . Currently, I&apos;m a Software Engineer Intern at{" "}
+            . Currently, I&apos;m an incoming Software Engineer Intern at{" "}
             <span className="border-b-[2px] border-neutral-600 transition duration-500 hover:border-neutral-800 dark:hover:border-neutral-500">
-              <LinkPreview url="https://www.gem.com/">Gem</LinkPreview>
+              <LinkPreview url="https://www.aboutamazon.com/">
+                Amazon
+              </LinkPreview>
             </span>
             .
           </p>

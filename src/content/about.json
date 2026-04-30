@@ -6,8 +6,8 @@
       "url": "https://uwaterloo.ca/engineering/"
     },
     "company": {
-      "name": "Gem",
-      "url": "https://www.gem.com/",
+      "name": "Amazon",
+      "url": "https://www.aboutamazon.com/",
       "role": "Software Engineer Intern"
     },
     "bio": "I believe in creating software that is not only functional but also clean, beautiful, and enjoyable to use. Let's build something together that inspires.",
@@ -26,10 +26,7 @@
         "title": "Interests",
         "content": "Photography, investing, personal finance"
       },
-      {
-        "title": "Learning",
-        "content": "Snowboarding, open banking, design"
-      },
+      { "title": "Learning", "content": "Snowboarding, open banking, design" },
       {
         "title": "Listening",
         "content": "The Design of Everyday Things, Motley Fool Money, Acquired"

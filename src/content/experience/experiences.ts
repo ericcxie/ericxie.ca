@@ -6,7 +6,7 @@ export const experienceItems = [
     date: "05/2026 - 08/2026",
     logo: "/img/logos/amazon.png",
     color: "#FF6200",
-    link: "https://www.amazon.com/",
+    link: "https://www.aboutamazon.com/",
     present: false,
     incoming: true,
   },
@@ -18,7 +18,7 @@ export const experienceItems = [
     logo: "/img/logos/gem.webp",
     color: "#0E61FF",
     link: "https://www.gem.com/",
-    present: true,
+    present: false,
     incoming: false,
   },
   {

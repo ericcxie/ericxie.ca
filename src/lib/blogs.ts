@@ -2,9 +2,7 @@ import fs from "fs";
 import matter from "gray-matter";
 import moment from "moment";
 import path from "path";
-import { remark } from "remark";
-import html from "remark-html";
-
+import { renderBlogMarkdown } from "@/lib/blog-markdown-html";
 import { PostItem } from "@/types";
 
 const postsDirectory = path.join(process.cwd(), "src", "content", "blog");
@@ -70,11 +68,7 @@ export const getPostData = async (id: string) => {
 
   const matterResult = matter(fileContents);
 
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-
-  const contentHtml = processedContent.toString();
+  const contentHtml = await renderBlogMarkdown(matterResult.content);
   const readingTime = calculateReadingTime(matterResult.content);
 
   return {

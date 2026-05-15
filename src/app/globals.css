@@ -33,12 +33,12 @@
 }
 
 .post > h1 {
-  @apply font-inter text-2xl tracking-tight;
+  @apply font-akkurat text-2xl tracking-tight;
   @apply font-bold;
 }
 
 .post > h2 {
-  @apply font-inter text-xl tracking-tight;
+  @apply font-akkurat text-xl tracking-tight;
 }
 
 .post a {
@@ -46,7 +46,7 @@
 }
 
 .post > p {
-  @apply font-inter text-text-light-headerLight dark:text-text-dark-body;
+  @apply font-akkurat text-text-light-headerLight dark:text-text-dark-body;
 }
 
 .post code {
@@ -54,7 +54,7 @@
 }
 
 .post > ul {
-  @apply font-inter mx-10 flex list-disc flex-col gap-2;
+  @apply mx-10 flex list-disc flex-col gap-2 font-akkurat;
 }
 
 .post > pre {
@@ -66,11 +66,18 @@
 }
 
 .post > blockquote {
-  @apply font-inter border-l-2 border-neutral-600 border-opacity-40 pl-5 italic;
+  @apply border-l-2 border-neutral-600 border-opacity-40 pl-5 font-akkurat italic;
 }
 
 .post > p > img {
   @apply mx-auto;
+}
+
+/* YouTube (and only YouTube) iframes are allowed by the markdown sanitizer */
+.post iframe {
+  @apply block w-full max-w-full rounded-2xl border-0;
+  aspect-ratio: 16 / 9;
+  height: auto;
 }
 
 .mapboxgl-control-container {
@@ -96,6 +103,5 @@
   scrollbar-width: none; /* Firefox */
 }
 
-
-
-@layer base {}
+@layer base {
+}

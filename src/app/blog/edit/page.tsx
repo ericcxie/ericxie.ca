@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "@/lib/useAuth";
-import { remark } from "remark";
-import html from "remark-html";
+import { renderBlogMarkdown } from "@/lib/blog-markdown-html";
 import {
   Bold,
   Italic,
@@ -79,11 +78,8 @@ export default function BlogEditPage() {
 
   useEffect(() => {
     if (editorTab === "preview") {
-      remark()
-        .use(html)
-        .process(content)
-        .then((result) => {
-          let rendered = String(result);
+      renderBlogMarkdown(content).then((html) => {
+          let rendered = html;
           // Replace pending image paths with inline base64 data URIs
           for (const img of pendingImages) {
             const imgPath = `/img/blog/${slug}/${img.filename}`;

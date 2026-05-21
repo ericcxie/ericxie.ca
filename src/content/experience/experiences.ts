@@ -8,7 +8,7 @@ export const experienceItems = [
     color: "#FF6200",
     link: "https://www.aboutamazon.com/",
     present: false,
-    incoming: true,
+    incoming: false,
   },
   {
     company: "Gem",
